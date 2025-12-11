@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+import "Protos/entities.proto";
+import "Protos/user_requests.proto";
+
+option csharp_namespace = "GrpcServer";
+
+service ScimUserConnector {
+  rpc CreateUser (CreateUserRequest) returns (UserDto);
+}

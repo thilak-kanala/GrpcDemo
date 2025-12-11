@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcServer";
+
+message ConnectionParametersAPI {
+  string baseUrl = 1;
+  string username = 2;
+  string password = 3;
+}
