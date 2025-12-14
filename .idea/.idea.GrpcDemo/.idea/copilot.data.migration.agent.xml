@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AgentMigrationStateService">
+    <option name="migrationStatus" value="IN_PROGRESS" />
+    <pendingTurns>
+      <entry key="43959cc2-b9d0-4bd1-adfa-ac897d039e6b" />
+    </pendingTurns>
+    <pendingWorkingSetItems>
+      <entry key="43959cc2-b9d0-4bd1-adfa-ac897d039e6b" />
+    </pendingWorkingSetItems>
+  </component>
+</project>
