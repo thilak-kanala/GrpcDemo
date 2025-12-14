@@ -1,0 +1,1 @@
+GRPC localhost:5185/greet.Greeter/SayHello
