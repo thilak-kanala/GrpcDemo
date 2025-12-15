@@ -6,12 +6,75 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1f7adc3-5d58-4e06-9035-12df0221d91c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/GrpcServer/Documentation/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Documentation/MULTI_CONTROLLER_IMPLEMENTATION.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/ABC/AbcGroupsController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/ABC/AbcUserGroupRelationsController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/ABC/AbcUsersController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/INM/InmGroupsController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/INM/InmUserGroupRelationsController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/INM/InmUsersController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Enum/AppCode.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Mappers/ABC/AbcGroupMapper.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Mappers/ABC/AbcUserMapper.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Mappers/INM/InmGroupMapper.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Mappers/INM/InmUserMapper.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/ABC/AbcGroup.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/ABC/AbcUser.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/ABC/DTO/AbcGroupRequestDto.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/ABC/DTO/AbcGroupResponseDto.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/ABC/DTO/AbcUserRequestDto.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/ABC/DTO/AbcUserResponseDto.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/INM/DTO/InmGroupRequestDto.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/INM/DTO/InmGroupResponseDto.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/INM/DTO/InmUserRequestDto.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/INM/DTO/InmUserResponseDto.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/INM/InmGroup.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/INM/InmUser.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/ABC/AbcGroupRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/ABC/AbcUserGroupRelationRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/ABC/AbcUserRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/Generic/IGroupRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/Generic/IUserGroupRelationRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/Generic/IUserRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/INM/InmGroupRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/INM/InmUserGroupRelationRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/INM/InmUserRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/ABC/AbcGroupService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/ABC/AbcUserGroupRelationService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/ABC/AbcUserService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/Generic/IGroupService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/Generic/IUserService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/INM/InmGroupService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/INM/InmUserGroupRelationService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/INM/InmUserService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GrpcDemo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GrpcDemo/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GrpcDemo.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcDemo.sln.DotSettings.user" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GrpcServer/GrpcServer.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/GrpcServer.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/GroupsController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/UserGroupRelationsController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/UsersController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/DTOs/GroupDtos.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/DTOs/RelationDtos.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/Generic/RelationDtos.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/DTOs/UserDtos.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Mappers/GroupMapper.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Mappers/UserMapper.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/Group.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/IGroup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/Generic/IBaseGroup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/IUser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/Generic/IBaseUser.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/User.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/GroupRepository.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/IGroupRepository.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/IUserRepository.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/UserRepository.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/GroupService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/IUserGroupRelationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/Generic/IUserGroupRelationService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/UserGroupRelationService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/UserService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Validators/GroupValidator.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Validators/UserValidator.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/GrpcServer/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/openapi.yaml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,39 +100,55 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2c50feed06d34008a21934ead0382f3db400/3b/a97e5d37/Dictionary`2.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/2a8a5156343c6853864d9956214644e750ec73ec2d90f1d3748e8a765eec/ActionResultOfT.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/68b06b8592b1287fd78f3ee68566d6a38d6e2f45b9a9e6ebd4d0e9972f7c29/Object.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9224799b43de77d9ab196dc778093ac19e4a56246da6c08ab9f33765adfa5e/PolicyServiceCollectionExtensions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/a1486c8dbbbc2d8a8acfa6de27abf918d3f654c3e71f3a10c2c369f1c76f6b6/MvcServiceCollectionExtensions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/a382c6eb2b402eed6e6719bb247a6b58e6c462a5c36ca70996a4bff09c1147/AuthorizationAppBuilderExtensions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/a6d7c3abd4bb25b143ddc7a36ea5f74afd9a85471a3df5ea5d0653fea102b/ControllerEndpointRouteBuilderExtensions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b554263068268a64c5ebaa4448fe16ec181c44dc3296c06241546c765ad8187b/MvcCoreMvcCoreBuilderExtensions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f0c16cda8a141e194c9151fd8f6acd0f93ef39e54a2a250baf2e5b2fa1fac6/WebApplication.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrpcServer/Controllers/GroupsController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrpcServer/Controllers/UserGroupRelationsController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrpcServer/Controllers/UsersController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrpcServer/DTOs/GroupDtos.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrpcServer/DTOs/RelationDtos.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrpcServer/DTOs/UserDtos.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrpcServer/Mappers/GroupMapper.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrpcServer/Mappers/Models/Group.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrpcServer/Mappers/Models/User.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrpcServer/Mappers/UserMapper.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Users/thilakkanala/RiderProjects/GrpcDemo/GrpcServer/Models/User.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Users/thilakkanala/RiderProjects/GrpcDemo/GrpcServer/Program.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Users/thilakkanala/RiderProjects/GrpcDemo/GrpcServer/Program.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Users/thilakkanala/RiderProjects/GrpcDemo/GrpcServer/Program.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrpcServer/Repositories/GroupRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrpcServer/Repositories/IGroupRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrpcServer/Repositories/IUserRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrpcServer/Repositories/InMemory/InMemoryGroupRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrpcServer/Repositories/InMemory/InMemoryUserRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrpcServer/Repositories/MckGroupRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrpcServer/Repositories/MckUserRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrpcServer/Repositories/UserRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrpcServer/Services/GroupService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrpcServer/Services/IUserGroupRelationService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrpcServer/Services/UserGroupRelationService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrpcServer/Services/UserService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrpcServer/Validators/GroupValidator.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrpcServer/Validators/UserValidator.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/scratches/MapperRegistry.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/ABC/AbcGroupsController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/ABC/AbcUserGroupRelationsController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/ABC/AbcUsersController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/InMemory/InmGroupsController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/InMemory/InmUserGroupRelationsController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/InMemory/InmUsersController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Enum/AppCode.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Mappers/ABC/AbcGroupMapper.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Mappers/ABC/AbcUserMapper.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Mappers/INM/InmGroupMapper.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Mappers/INM/InmUserMapper.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Models/ABC/AbcUser.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Models/ABC/DTO/AbcGroupRequestDto.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Models/ABC/DTO/AbcGroupResponseDto.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Models/ABC/DTO/AbcUserRequestDto.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Models/ABC/DTO/AbcUserResponseDto.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Models/Generic/RelationDtos.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Models/INM/DTO/InmGroupRequestDto.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Models/INM/DTO/InmGroupResponseDto.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Models/INM/DTO/InmUserRequestDto.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Models/INM/DTO/InmUserResponseDto.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Models/INM/InmUser.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/ABC/AbcGroupRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/ABC/AbcUserGroupRelationRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/ABC/AbcUserRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/Generic/IGroupRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/Generic/IUserGroupRelationRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/Generic/IUserRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/INM/InmGroupRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/INM/InmUserGroupRelationRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/INM/InmUserRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Services/ABC/AbcGroupService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Services/ABC/AbcUserGroupRelationService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Services/ABC/AbcUserService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Services/Generic/IUserGroupRelationService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Services/INM/InmGroupService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Services/INM/InmUserGroupRelationService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Services/INM/InmUserService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://InMemoryUserRepository.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="HttpClientOnboardingState">{
   &quot;isOnboardingCommentShown&quot;: true
@@ -90,6 +169,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     ".NET Launch Settings Profile.GrpcServer: http.executor": "Run",
+    ".NET Launch Settings Profile.GrpcServer: https.executor": "Run",
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "HTTP Request.generated-requests | #1.executor": "Run",
     "HTTP Request.generated-requests | #2.executor": "Run",
@@ -100,7 +180,7 @@
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "git-widget-placeholder": "main",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.keymap",
+    "settings.editor.selected.configurable": "preferences.editor",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -123,7 +203,7 @@
       </map>
     </option>
   </component>
-  <component name="RunManager" selected=".NET Launch Settings Profile.GrpcServer: http">
+  <component name="RunManager" selected=".NET Launch Settings Profile.GrpcServer: https">
     <configuration name="generated-requests | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#1" runType="Run single request">
       <method v="2" />
     </configuration>
@@ -180,7 +260,7 @@
       <workItem from="1765547985844" duration="4966000" />
       <workItem from="1765744745316" duration="33000" />
       <workItem from="1765744809933" duration="7386000" />
-      <workItem from="1765752231613" duration="494000" />
+      <workItem from="1765752231613" duration="28554000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit, contains partial implmentation of create user workflow">
       <option name="closed" value="true" />
@@ -198,7 +278,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765745739950</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="checkpoint - decent structure">
+      <option name="closed" value="true" />
+      <created>1765752836760</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1765752836760</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -210,7 +298,8 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="initial commit, contains partial implmentation of create user workflow" />
     <MESSAGE value="back 2 scratch" />
-    <option name="LAST_COMMIT_MESSAGE" value="back 2 scratch" />
+    <MESSAGE value="checkpoint - decent structure" />
+    <option name="LAST_COMMIT_MESSAGE" value="checkpoint - decent structure" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
