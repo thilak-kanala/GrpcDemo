@@ -1,0 +1,6 @@
+﻿services:
+  grpcserver:
+    image: grpcserver
+    build:
+      context: .
+      dockerfile: GrpcServer/Dockerfile

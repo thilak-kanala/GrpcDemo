@@ -5,64 +5,7 @@
     <projectFile profileName="https">GrpcServer/GrpcServer.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d1f7adc3-5d58-4e06-9035-12df0221d91c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GrpcServer/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GrpcServer/Documentation/COMPLETE_REDUNDANCY_REMOVAL_SUMMARY.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GrpcServer/Documentation/DI_MAPPER_VALIDATOR_IMPLEMENTATION.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GrpcServer/Documentation/DI_REGISTRATION_GUIDE.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GrpcServer/Documentation/REDUNDANT_METHOD_REMOVAL.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Mappers/ABC/AbcMapper.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Mappers/Common/IMapper.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Mappers/INM/InmMapper.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Validators/ABC/AbcGroupValidator.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Validators/ABC/AbcUserValidator.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Validators/Common/IValidator.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Validators/INM/InmGroupValidator.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Validators/INM/InmUserValidator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.GrpcDemo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GrpcDemo/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/GrpcServer.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/GrpcServer.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/ABC/AbcGroupsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/ABC/AbcGroupsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/ABC/AbcUserGroupRelationsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/ABC/AbcUserGroupRelationsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/ABC/AbcUsersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/ABC/AbcUsersController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/INM/InmGroupsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/INM/InmGroupsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/INM/InmUserGroupRelationsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/INM/InmUserGroupRelationsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/INM/InmUsersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/INM/InmUsersController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Enum/AppCode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Enum/AppCode.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Mappers/ABC/AbcGroupMapper.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Mappers/ABC/AbcUserMapper.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Mappers/INM/InmGroupMapper.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Mappers/INM/InmUserMapper.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/ABC/AbcGroup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/ABC/AbcGroup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/ABC/AbcUser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/ABC/AbcUser.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/Generic/IBaseGroup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/Common/IBaseGroup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/Generic/IBaseUser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/Common/IBaseUser.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/Generic/RelationDtos.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/Common/RelationDtos.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/INM/InmGroup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/INM/InmGroup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/INM/InmUser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/INM/InmUser.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/ABC/AbcGroupRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/ABC/AbcGroupRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/ABC/AbcUserGroupRelationRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/ABC/AbcUserGroupRelationRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/ABC/AbcUserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/ABC/AbcUserRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/Generic/IGroupRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/Common/IGroupRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/Generic/IUserGroupRelationRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/Common/IUserGroupRelationRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/Generic/IUserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/Common/IUserRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/INM/InmGroupRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/INM/InmGroupRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/INM/InmUserGroupRelationRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/INM/InmUserGroupRelationRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/INM/InmUserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/INM/InmUserRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/ABC/AbcGroupService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/ABC/AbcGroupService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/ABC/AbcUserGroupRelationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/ABC/AbcUserGroupRelationService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/ABC/AbcUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/ABC/AbcUserService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/Generic/IGroupService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/Common/IGroupService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/Generic/IUserGroupRelationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/Common/IUserGroupRelationService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/Generic/IUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/Common/IUserService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/INM/InmGroupService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/INM/InmGroupService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/INM/InmUserGroupRelationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/INM/InmUserGroupRelationService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/INM/InmUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/INM/InmUserService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Settings/appsettings.Development.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Settings/appsettings.json" afterDir="false" />
-    </list>
+    <list default="true" id="d1f7adc3-5d58-4e06-9035-12df0221d91c" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -193,7 +136,7 @@
       </map>
     </option>
   </component>
-  <component name="RunManager" selected=".NET Launch Settings Profile.GrpcServer: https">
+  <component name="RunManager" selected="Docker.GrpcServer/Dockerfile final">
     <configuration name="generated-requests | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#1" runType="Run single request">
       <method v="2" />
     </configuration>
@@ -232,6 +175,19 @@
         <option name="Build" />
       </method>
     </configuration>
+    <configuration name="GrpcServer/Dockerfile final" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="imageTag" value="base_final" />
+          <option name="buildCliOptions" value="--target final" />
+          <option name="buildOnly" value="true" />
+          <option name="contextFolderPath" value="$PROJECT_DIR$" />
+          <option name="sourceFilePath" value="GrpcServer/Dockerfile" />
+        </settings>
+      </deployment>
+      <EXTENSION ID="com.jetbrains.rider.docker.debug" isFastModeEnabled="true" isSslEnabled="false" />
+      <method v="2" />
+    </configuration>
     <configuration name="GrpcServer/Dockerfile" type="docker-deploy" factoryName="dockerfile" server-name="Docker">
       <deployment type="dockerfile">
         <settings>
@@ -248,6 +204,27 @@
             </list>
           </option>
           <option name="sourceFilePath" value="GrpcServer/Dockerfile" />
+        </settings>
+      </deployment>
+      <EXTENSION ID="com.jetbrains.rider.docker.debug" isFastModeEnabled="true" isSslEnabled="false" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TstTargetApplication/Dockerfile" type="docker-deploy" factoryName="dockerfile" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="imageTag" value="tsttargetapplication" />
+          <option name="containerName" value="tsttargetapplication" />
+          <option name="contextFolderPath" value="$PROJECT_DIR$" />
+          <option name="portBindings">
+            <list>
+              <DockerPortBindingImpl>
+                <option name="containerPort" value="8080" />
+                <option name="hostIp" value="127.0.0.1" />
+                <option name="hostPort" value="8080" />
+              </DockerPortBindingImpl>
+            </list>
+          </option>
+          <option name="sourceFilePath" value="TstTargetApplication/Dockerfile" />
         </settings>
       </deployment>
       <EXTENSION ID="com.jetbrains.rider.docker.debug" isFastModeEnabled="true" isSslEnabled="false" />
@@ -272,6 +249,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Docker.GrpcServer/Dockerfile final" />
         <item itemvalue="HTTP Request.generated-requests | #2" />
         <item itemvalue="HTTP Request.generated-requests | #1" />
       </list>
@@ -291,7 +269,7 @@
       <workItem from="1765752231613" duration="34971000" />
       <workItem from="1765894803389" duration="16983000" />
       <workItem from="1765982706088" duration="5760000" />
-      <workItem from="1766006664530" duration="2465000" />
+      <workItem from="1766006664530" duration="2552000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit, contains partial implmentation of create user workflow">
       <option name="closed" value="true" />
@@ -325,7 +303,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765831101390</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="refactor: rename generic models and update namespaces to common structure; add mappers and validators for ABC and INM">
+      <option name="closed" value="true" />
+      <created>1766021787882</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1766021787882</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -339,7 +325,8 @@
     <MESSAGE value="back 2 scratch" />
     <MESSAGE value="checkpoint - decent structure" />
     <MESSAGE value="add DTOs, mappers, and services for ABC and INM user/group management" />
-    <option name="LAST_COMMIT_MESSAGE" value="add DTOs, mappers, and services for ABC and INM user/group management" />
+    <MESSAGE value="refactor: rename generic models and update namespaces to common structure; add mappers and validators for ABC and INM" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: rename generic models and update namespaces to common structure; add mappers and validators for ABC and INM" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
