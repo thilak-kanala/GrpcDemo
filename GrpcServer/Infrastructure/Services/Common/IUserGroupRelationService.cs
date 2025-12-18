@@ -1,7 +1,7 @@
 using GrpcServer.Infrastructure.Enum;
-using GrpcServer.Infrastructure.Models.Generic;
+using GrpcServer.Infrastructure.Models.Common;
 
-namespace GrpcServer.Infrastructure.Services.Generic;
+namespace GrpcServer.Infrastructure.Services.Common;
 
 public interface IUserGroupRelationService
 {
@@ -11,6 +11,5 @@ public interface IUserGroupRelationService
     Task RemoveUserFromGroupAsync(int userId, int groupId);
     Task<IEnumerable<IBaseUser>> GetGroupUsersAsync(int groupId);
     Task AddUsersToGroupAsync(int groupId, List<int> userIds);
-    Task RemoveUserFromGroupInGroupContextAsync(int groupId, int userId);
 }
 

@@ -1,6 +1,6 @@
-using GrpcServer.Infrastructure.Models.Generic;
-using GrpcServer.Infrastructure.Repositories.Generic;
 using GrpcServer.Infrastructure.Models.ABC;
+using GrpcServer.Infrastructure.Models.Common;
+using GrpcServer.Infrastructure.Repositories.Common;
 
 namespace GrpcServer.Infrastructure.Repositories.ABC;
 

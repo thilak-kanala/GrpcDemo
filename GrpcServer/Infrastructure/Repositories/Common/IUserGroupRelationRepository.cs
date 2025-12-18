@@ -1,4 +1,4 @@
-namespace GrpcServer.Infrastructure.Repositories.Generic;
+namespace GrpcServer.Infrastructure.Repositories.Common;
 
 public interface IUserGroupRelationRepository
 {

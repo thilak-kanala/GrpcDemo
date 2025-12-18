@@ -1,7 +1,7 @@
 using GrpcServer.Infrastructure.Enum;
-using GrpcServer.Infrastructure.Models.Generic;
-using GrpcServer.Infrastructure.Repositories.Generic;
-using GrpcServer.Infrastructure.Services.Generic;
+using GrpcServer.Infrastructure.Models.Common;
+using GrpcServer.Infrastructure.Repositories.Common;
+using GrpcServer.Infrastructure.Services.Common;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GrpcServer.Infrastructure.Services.ABC;

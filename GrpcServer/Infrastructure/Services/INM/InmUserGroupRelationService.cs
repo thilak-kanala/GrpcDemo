@@ -1,7 +1,7 @@
 using GrpcServer.Infrastructure.Enum;
-using GrpcServer.Infrastructure.Models.Generic;
-using GrpcServer.Infrastructure.Repositories.Generic;
-using GrpcServer.Infrastructure.Services.Generic;
+using GrpcServer.Infrastructure.Models.Common;
+using GrpcServer.Infrastructure.Repositories.Common;
+using GrpcServer.Infrastructure.Services.Common;
 
 namespace GrpcServer.Infrastructure.Services.INM;
 
@@ -127,25 +127,6 @@ public class InmUserGroupRelationService(
 
             await relationRepository.AddUserToGroupAsync(userId, groupId);
         }
-    }
-
-    public async Task RemoveUserFromGroupInGroupContextAsync(int groupId, int userId)
-    {
-        // Verify group exists
-        var group = await groupRepository.GetByIdAsync(groupId);
-        if (group == null)
-        {
-            throw new InvalidOperationException($"Group with ID {groupId} not found");
-        }
-
-        // Verify user exists
-        var user = await userRepository.GetByIdAsync(userId);
-        if (user == null)
-        {
-            throw new InvalidOperationException($"User with ID {userId} not found");
-        }
-
-        await relationRepository.RemoveUserFromGroupAsync(userId, groupId);
     }
 }
 

@@ -1,6 +1,6 @@
-using GrpcServer.Infrastructure.Models.Generic;
+using GrpcServer.Infrastructure.Models.Common;
 
-namespace GrpcServer.Infrastructure.Repositories.Generic;
+namespace GrpcServer.Infrastructure.Repositories.Common;
 
 public interface IGroupRepository
 {

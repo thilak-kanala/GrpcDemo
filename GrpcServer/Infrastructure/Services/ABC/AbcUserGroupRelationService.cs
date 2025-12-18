@@ -1,7 +1,7 @@
 using GrpcServer.Infrastructure.Enum;
-using GrpcServer.Infrastructure.Models.Generic;
-using GrpcServer.Infrastructure.Repositories.Generic;
-using GrpcServer.Infrastructure.Services.Generic;
+using GrpcServer.Infrastructure.Models.Common;
+using GrpcServer.Infrastructure.Repositories.Common;
+using GrpcServer.Infrastructure.Services.Common;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GrpcServer.Infrastructure.Services.ABC;
@@ -138,25 +138,6 @@ public class AbcUserGroupRelationService : IUserGroupRelationService
 
             await _relationRepository.AddUserToGroupAsync(userId, groupId);
         }
-    }
-
-    public async Task RemoveUserFromGroupInGroupContextAsync(int groupId, int userId)
-    {
-        // Verify group exists
-        var group = await _groupRepository.GetByIdAsync(groupId);
-        if (group == null)
-        {
-            throw new InvalidOperationException($"Group with ID {groupId} not found");
-        }
-
-        // Verify user exists
-        var user = await _userRepository.GetByIdAsync(userId);
-        if (user == null)
-        {
-            throw new InvalidOperationException($"User with ID {userId} not found");
-        }
-
-        await _relationRepository.RemoveUserFromGroupAsync(userId, groupId);
     }
 }
 

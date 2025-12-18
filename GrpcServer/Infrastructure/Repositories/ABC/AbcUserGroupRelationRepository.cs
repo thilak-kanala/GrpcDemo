@@ -1,4 +1,4 @@
-using GrpcServer.Infrastructure.Repositories.Generic;
+using GrpcServer.Infrastructure.Repositories.Common;
 
 namespace GrpcServer.Infrastructure.Repositories.ABC;
 

@@ -1,8 +1,9 @@
 using GrpcServer.Infrastructure.Enum;
-using GrpcServer.Infrastructure.Mappers.ABC;
+using GrpcServer.Infrastructure.Mappers.Common;
 using GrpcServer.Infrastructure.Models.ABC;
 using GrpcServer.Infrastructure.Models.ABC.DTO;
-using GrpcServer.Infrastructure.Services.Generic;
+using GrpcServer.Infrastructure.Services.Common;
+using GrpcServer.Infrastructure.Validators.Common;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GrpcServer.Infrastructure.Controllers.ABC;
@@ -13,10 +14,17 @@ namespace GrpcServer.Infrastructure.Controllers.ABC;
 public class AbcUsersController : ControllerBase
 {
     private readonly IUserService _userService;
+    private readonly IMapper<AbcUser, AbcUserRequestDto, AbcUserResponseDto> _mapper;
+    private readonly IUserValidator _validator;
 
-    public AbcUsersController([FromKeyedServices(AppCode.ABC)] IUserService userService)
+    public AbcUsersController(
+        [FromKeyedServices(AppCode.ABC)] IUserService userService,
+        [FromKeyedServices(AppCode.ABC)] IMapper<AbcUser, AbcUserRequestDto, AbcUserResponseDto> mapper,
+        [FromKeyedServices(AppCode.ABC)] IUserValidator validator)
     {
         _userService = userService;
+        _mapper = mapper;
+        _validator = validator;
     }
 
     /// <summary>
@@ -27,7 +35,7 @@ public class AbcUsersController : ControllerBase
     public async Task<ActionResult<IEnumerable<AbcUserResponseDto>>> GetUsers()
     {
         var users = await _userService.GetAllAsync();
-        return Ok(users.Cast<AbcUser>().Select(AbcUserMapper.ToResponseDto));
+        return Ok(users.Cast<AbcUser>().Select(_mapper.ToResponseDto));
     }
 
     /// <summary>
@@ -43,7 +51,7 @@ public class AbcUsersController : ControllerBase
         if (user == null)
             return NotFound(new { message = $"User with ID {userId} not found" });
 
-        return Ok(AbcUserMapper.ToResponseDto((AbcUser)user));
+        return Ok(_mapper.ToResponseDto((AbcUser)user));
     }
 
     /// <summary>
@@ -54,10 +62,14 @@ public class AbcUsersController : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<AbcUserResponseDto>> CreateUser([FromBody] AbcUserRequestDto dto)
     {
-        var user = AbcUserMapper.FromRequestDto(dto);
+        var user = _mapper.FromRequestDto(dto);
+        
+        if (!_validator.IsValid(user))
+            return BadRequest(new { message = "Invalid user data" });
+        
         await _userService.AddAsync(user);
 
-        return CreatedAtAction(nameof(GetUser), new { userId = user.Id }, AbcUserMapper.ToResponseDto(user));
+        return CreatedAtAction(nameof(GetUser), new { userId = user.Id }, _mapper.ToResponseDto(user));
     }
 
     /// <summary>
@@ -66,17 +78,22 @@ public class AbcUsersController : ControllerBase
     [HttpPut("{userId}")]
     [ProducesResponseType(typeof(AbcUserResponseDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<AbcUserResponseDto>> ReplaceUser(int userId, [FromBody] AbcUserRequestDto dto)
     {
         var existingUser = await _userService.GetByIdAsync(userId);
         if (existingUser == null)
             return NotFound(new { message = $"User with ID {userId} not found" });
 
-        var user = AbcUserMapper.FromRequestDto(dto);
+        var user = _mapper.FromRequestDto(dto);
         user.Id = userId;
+        
+        if (!_validator.IsValid(user))
+            return BadRequest(new { message = "Invalid user data" });
+        
         await _userService.UpdateAsync(user);
 
-        return Ok(AbcUserMapper.ToResponseDto(user));
+        return Ok(_mapper.ToResponseDto(user));
     }
 
     /// <summary>
@@ -85,16 +102,21 @@ public class AbcUsersController : ControllerBase
     [HttpPatch("{userId}")]
     [ProducesResponseType(typeof(AbcUserResponseDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<AbcUserResponseDto>> PatchUser(int userId, [FromBody] AbcUserRequestDto dto)
     {
         var user = await _userService.GetByIdAsync(userId);
         if (user == null)
             return NotFound(new { message = $"User with ID {userId} not found" });
 
-        AbcUserMapper.ApplyPatch((AbcUser)user, dto);
+        _mapper.ApplyPatch((AbcUser)user, dto);
+        
+        if (!_validator.IsValid(user))
+            return BadRequest(new { message = "Invalid user data" });
+        
         await _userService.UpdateAsync(user);
 
-        return Ok(AbcUserMapper.ToResponseDto((AbcUser)user));
+        return Ok(_mapper.ToResponseDto((AbcUser)user));
     }
 
     /// <summary>

@@ -1,9 +1,9 @@
 using GrpcServer.Infrastructure.Enum;
-using GrpcServer.Infrastructure.Mappers.INM;
-using GrpcServer.Infrastructure.Models.Generic;
+using GrpcServer.Infrastructure.Mappers.Common;
+using GrpcServer.Infrastructure.Models.Common;
 using GrpcServer.Infrastructure.Models.INM;
 using GrpcServer.Infrastructure.Models.INM.DTO;
-using GrpcServer.Infrastructure.Services.Generic;
+using GrpcServer.Infrastructure.Services.Common;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GrpcServer.Infrastructure.Controllers.INM;
@@ -14,10 +14,17 @@ namespace GrpcServer.Infrastructure.Controllers.INM;
 public class InmUserGroupRelationsController : ControllerBase
 {
     private readonly IUserGroupRelationService _relationService;
+    private readonly IMapper<InmUser, InmUserRequestDto, InmUserResponseDto> _userMapper;
+    private readonly IMapper<InmGroup, InmGroupRequestDto, InmGroupResponseDto> _groupMapper;
 
-    public InmUserGroupRelationsController([FromKeyedServices(AppCode.INM)] IUserGroupRelationService relationService)
+    public InmUserGroupRelationsController(
+        [FromKeyedServices(AppCode.INM)] IUserGroupRelationService relationService,
+        [FromKeyedServices(AppCode.INM)] IMapper<InmUser, InmUserRequestDto, InmUserResponseDto> userMapper,
+        [FromKeyedServices(AppCode.INM)] IMapper<InmGroup, InmGroupRequestDto, InmGroupResponseDto> groupMapper)
     {
         _relationService = relationService;
+        _userMapper = userMapper;
+        _groupMapper = groupMapper;
     }
 
     /// <summary>
@@ -31,7 +38,7 @@ public class InmUserGroupRelationsController : ControllerBase
         try
         {
             var groups = await _relationService.GetUserGroupsAsync(userId);
-            return Ok(groups.Cast<InmGroup>().Select(InmGroupMapper.ToResponseDto));
+            return Ok(groups.Cast<InmGroup>().Select(_groupMapper.ToResponseDto));
         }
         catch (InvalidOperationException ex)
         {
@@ -88,7 +95,7 @@ public class InmUserGroupRelationsController : ControllerBase
         try
         {
             var users = await _relationService.GetGroupUsersAsync(groupId);
-            return Ok(users.Cast<InmUser>().Select(InmUserMapper.ToResponseDto));
+            return Ok(users.Cast<InmUser>().Select(_userMapper.ToResponseDto));
         }
         catch (InvalidOperationException ex)
         {
@@ -107,25 +114,6 @@ public class InmUserGroupRelationsController : ControllerBase
         try
         {
             await _relationService.AddUsersToGroupAsync(groupId, dto.UserIds);
-            return NoContent();
-        }
-        catch (InvalidOperationException ex)
-        {
-            return NotFound(new { message = ex.Message });
-        }
-    }
-
-    /// <summary>
-    /// Remove an INM user from a group (group context)
-    /// </summary>
-    [HttpDelete("groups/{groupId}/users/{userId}")]
-    [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult> RemoveUserFromGroupInGroupContext(int groupId, int userId)
-    {
-        try
-        {
-            await _relationService.RemoveUserFromGroupInGroupContextAsync(groupId, userId);
             return NoContent();
         }
         catch (InvalidOperationException ex)
