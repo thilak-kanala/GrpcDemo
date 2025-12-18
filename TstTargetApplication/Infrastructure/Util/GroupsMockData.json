@@ -1,0 +1,26 @@
+[
+  {
+    "Id": 1,
+    "Name": "Admins",
+    "Description": "System administrators with full access",
+    "Priority": "High"
+  },
+  {
+    "Id": 2,
+    "Name": "Users",
+    "Description": "Regular users with limited access",
+    "Priority": "Medium"
+  },
+  {
+    "Id": 3,
+    "Name": "Editors",
+    "Description": "Content editors with publishing rights",
+    "Priority": "Medium"
+  },
+  {
+    "Id": 4,
+    "Name": "Guests",
+    "Description": "Guest users with read-only access",
+    "Priority": "Low"
+  }
+]

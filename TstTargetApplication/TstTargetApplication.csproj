@@ -17,4 +17,10 @@
       </Content>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Infrastructure\Controllers\" />
+      <Folder Include="Infrastructure\Mappers\" />
+      <Folder Include="Infrastructure\Validators\" />
+    </ItemGroup>
+
 </Project>
