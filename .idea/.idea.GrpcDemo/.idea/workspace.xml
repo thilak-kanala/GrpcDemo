@@ -8,72 +8,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1f7adc3-5d58-4e06-9035-12df0221d91c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Mappers/TST/TstMapper.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Models/TST/DTO/TstGroupRequestDto.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Models/TST/DTO/TstGroupResponseDto.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Models/TST/DTO/TstUserRequestDto.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Models/TST/DTO/TstUserResponseDto.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Models/TST/TstGroup.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Models/TST/TstUser.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Repositories/TST/TstGroupRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Repositories/TST/TstUserGroupRelationRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Repositories/TST/TstUserRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Repositories/TST/TstGroupRepositoryTests.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Repositories/TST/TstUserGroupRelationRepositoryTests.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Repositories/TST/TstUserRepositoryTests.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SOLUTION_UPDATE.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GrpcDemo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GrpcDemo/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcDemo.sln" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcDemo.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcDemo.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcDemo.sln.DotSettings.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/GrpcServer.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/GrpcServer.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/ABC/AbcGroupsController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/ABC/AbcUserGroupRelationsController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/ABC/AbcUsersController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/INM/InmGroupsController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/INM/InmUserGroupRelationsController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/INM/InmUsersController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Enum/AppCode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Enum/AppCode.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Mappers/ABC/AbcMapper.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Mappers/INM/InmMapper.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/ABC/AbcGroup.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/ABC/AbcUser.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/ABC/DTO/AbcGroupRequestDto.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/ABC/DTO/AbcGroupResponseDto.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/ABC/DTO/AbcUserRequestDto.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/ABC/DTO/AbcUserResponseDto.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/Common/IBaseGroup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/Common/IBaseGroup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/Common/IBaseUser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/Common/IBaseUser.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/Common/RelationDtos.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/Common/RelationDtos.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/INM/DTO/InmGroupRequestDto.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/INM/DTO/InmGroupResponseDto.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/INM/DTO/InmUserRequestDto.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/INM/DTO/InmUserResponseDto.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/INM/InmGroup.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Models/INM/InmUser.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/ABC/AbcGroupRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/ABC/AbcUserGroupRelationRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/ABC/AbcUserRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/Common/IGroupRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/Common/IGroupRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/Common/IUserGroupRelationRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/Common/IUserGroupRelationRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/Common/IUserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/Common/IUserRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/INM/InmGroupRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/INM/InmUserGroupRelationRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/INM/InmUserRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/ABC/AbcGroupService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/ABC/AbcUserGroupRelationService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/ABC/AbcUserService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/Common/IGroupService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/Common/IGroupService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/Common/IUserGroupRelationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/Common/IUserGroupRelationService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/Common/IUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/Common/IUserService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/INM/InmGroupService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/INM/InmUserGroupRelationService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/INM/InmUserService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Validators/ABC/AbcGroupValidator.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Validators/ABC/AbcUserValidator.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Validators/Common/IValidator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Validators/Common/IValidator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Validators/INM/InmGroupValidator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Validators/TST/TstGroupValidator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Validators/INM/InmUserValidator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Validators/TST/TstUserValidator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Repositories/TST/TstGroupRepositoryTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Repositories/TST/TstGroupRepositoryTests.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -377,7 +313,7 @@
       <workItem from="1767013671353" duration="5561000" />
       <workItem from="1767101947886" duration="2973000" />
       <workItem from="1767202945583" duration="1384000" />
-      <workItem from="1767570497422" duration="7958000" />
+      <workItem from="1767570497422" duration="8124000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit, contains partial implmentation of create user workflow">
       <option name="closed" value="true" />
@@ -435,7 +371,23 @@
       <option name="project" value="LOCAL" />
       <updated>1766066444075</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="feat: update user and group models to use string IDs; add TST DTOs and repositories">
+      <option name="closed" value="true" />
+      <created>1767582804133</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1767582804133</updated>
+    </task>
+    <task id="LOCAL-00009" summary="feat: update user and group interfaces to use string IDs; add TST DTOs and repositories">
+      <option name="closed" value="true" />
+      <created>1767582813483</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1767582813483</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -463,7 +415,9 @@
     <MESSAGE value="refactor: rename generic models and update namespaces to common structure; add mappers and validators for ABC and INM" />
     <MESSAGE value="feat: add initial project structure with configuration files, Docker setup, and a sample WeatherForecast API" />
     <MESSAGE value="feat: implement user and group repositories with CRUD operations and mock data" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: implement user and group repositories with CRUD operations and mock data" />
+    <MESSAGE value="feat: update user and group models to use string IDs; add TST DTOs and repositories" />
+    <MESSAGE value="feat: update user and group interfaces to use string IDs; add TST DTOs and repositories" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: update user and group interfaces to use string IDs; add TST DTOs and repositories" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

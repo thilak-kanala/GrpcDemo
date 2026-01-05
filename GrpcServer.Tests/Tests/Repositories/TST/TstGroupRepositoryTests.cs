@@ -1,6 +1,5 @@
 using GrpcServer.Tests.Infrastructure.Models.TST;
 using GrpcServer.Tests.Infrastructure.Repositories.TST;
-using Xunit;
 
 namespace GrpcServer.Tests.Tests.Repositories.TST;
 
