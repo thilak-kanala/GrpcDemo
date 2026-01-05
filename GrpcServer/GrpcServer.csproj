@@ -20,4 +20,8 @@
       </Content>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Infrastructure\Controllers\" />
+    </ItemGroup>
+
 </Project>

@@ -7,5 +7,6 @@ public interface IValidator<T>
     bool IsValid(T entity);
 }
 
-public interface IUserValidator : IValidator<IBaseUser> { }
-public interface IGroupValidator : IValidator<IBaseGroup> { }
+public interface IUserValidator : IValidator<IBaseUser>;
+
+public interface IGroupValidator : IValidator<IBaseGroup>;

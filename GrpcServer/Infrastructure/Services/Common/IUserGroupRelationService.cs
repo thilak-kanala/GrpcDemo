@@ -6,10 +6,10 @@ namespace GrpcServer.Infrastructure.Services.Common;
 public interface IUserGroupRelationService
 {
     Task<AppCode> GetServiceAppCodeAsync();
-    Task<IEnumerable<IBaseGroup>> GetUserGroupsAsync(int userId);
-    Task AddUserToGroupsAsync(int userId, List<int> groupIds);
-    Task RemoveUserFromGroupAsync(int userId, int groupId);
-    Task<IEnumerable<IBaseUser>> GetGroupUsersAsync(int groupId);
-    Task AddUsersToGroupAsync(int groupId, List<int> userIds);
+    Task<IEnumerable<IBaseGroup>> GetUserGroupsAsync(string userId);
+    Task AddUserToGroupsAsync(string userId, List<string> groupIds);
+    Task RemoveUserFromGroupAsync(string userId, string groupId);
+    Task<IEnumerable<IBaseUser>> GetGroupUsersAsync(string groupId);
+    Task AddUsersToGroupAsync(string groupId, List<string> userIds);
 }
 
