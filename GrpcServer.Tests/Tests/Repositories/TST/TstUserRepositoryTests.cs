@@ -1,3 +1,4 @@
+using GrpcServer.Infrastructure.Models.Common;
 using GrpcServer.Tests.Infrastructure.Repositories.TST;
 using GrpcServer.Tests.Infrastructure.Models.TST;
 
@@ -31,6 +32,39 @@ public class TstUserRepositoryTests
         Assert.Equal("john@example.com", tstUser.Email);
         Assert.Equal("CustomValue1", tstUser.TstUserExtension1);
         Assert.Equal("CustomValue2", tstUser.TstUserExtension2);
+    }
+
+    [Fact]
+    public async Task AddAsync_WithNonTstUser_ThrowsArgumentException()
+    {
+        // Arrange
+        var repository = new TstUserRepository();
+        var mockUser = new MockUser { Id = "user1", UserName = "mock.user", Email = "mock@example.com" };
+
+        // Act & Assert
+        var exception = await Assert.ThrowsAsync<ArgumentException>(async () => await repository.AddAsync(mockUser));
+        Assert.Contains("Only TstUser instances are supported", exception.Message);
+        Assert.Equal("baseUser", exception.ParamName);
+    }
+
+    [Fact]
+    public async Task AddAsync_ThrowsException_WhenUserAlreadyExists()
+    {
+        // Arrange
+        var repository = new TstUserRepository();
+        var user = new TstUser
+        {
+            Id = "user1",
+            UserName = "john.doe",
+            Email = "john@example.com",
+            TstUserExtension1 = "Ext1",
+            TstUserExtension2 = "Ext2"
+        };
+        await repository.AddAsync(user);
+
+        // Act & Assert
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () => await repository.AddAsync(user));
+        Assert.Contains("User with ID 'user1' already exists", exception.Message);
     }
 
     [Fact]
@@ -70,6 +104,64 @@ public class TstUserRepositoryTests
     }
 
     [Fact]
+    public async Task UpdateAsync_WithNonTstUser_ThrowsArgumentException()
+    {
+        // Arrange
+        var repository = new TstUserRepository();
+        var mockUser = new MockUser { Id = "user1", UserName = "mock.user", Email = "mock@example.com" };
+
+        // Act & Assert
+        var exception = await Assert.ThrowsAsync<ArgumentException>(async () => await repository.UpdateAsync(mockUser));
+        Assert.Contains("Only TstUser instances are supported", exception.Message);
+        Assert.Equal("baseUser", exception.ParamName);
+    }
+
+    [Fact]
+    public async Task UpdateAsync_WithNonExistentId_ThrowsInvalidOperationException()
+    {
+        // Arrange
+        var repository = new TstUserRepository();
+        var user = new TstUser
+        {
+            Id = "nonexistent",
+            UserName = "nonexistent.user",
+            Email = "nonexistent@example.com",
+            TstUserExtension1 = "Ext1",
+            TstUserExtension2 = "Ext2"
+        };
+
+        // Act & Assert
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () => await repository.UpdateAsync(user));
+        Assert.Contains("User with ID 'nonexistent' not found", exception.Message);
+    }
+
+    [Fact]
+    public async Task GetByIdAsync_WithNonExistentId_ReturnsNull()
+    {
+        // Arrange
+        var repository = new TstUserRepository();
+
+        // Act
+        var result = await repository.GetByIdAsync("nonexistent");
+
+        // Assert
+        Assert.Null(result);
+    }
+
+    [Fact]
+    public async Task GetAllAsync_WithEmptyRepository_ReturnsEmptyCollection()
+    {
+        // Arrange
+        var repository = new TstUserRepository();
+
+        // Act
+        var usersList = (await repository.GetAllAsync()).ToList();
+
+        // Assert
+        Assert.Empty(usersList);
+    }
+
+    [Fact]
     public async Task GetAllAsync_ReturnsTstUsers()
     {
         // Arrange
@@ -102,7 +194,7 @@ public class TstUserRepositoryTests
     }
 
     [Fact]
-    public async Task AddAsync_ThrowsException_WhenUserAlreadyExists()
+    public async Task DeleteAsync_RemovesUser()
     {
         // Arrange
         var repository = new TstUserRepository();
@@ -116,7 +208,30 @@ public class TstUserRepositoryTests
         };
         await repository.AddAsync(user);
 
+        // Act
+        await repository.DeleteAsync("user1");
+        var retrieved = await repository.GetByIdAsync("user1");
+
+        // Assert
+        Assert.Null(retrieved);
+    }
+
+    [Fact]
+    public async Task DeleteAsync_WithNonExistentId_ThrowsInvalidOperationException()
+    {
+        // Arrange
+        var repository = new TstUserRepository();
+
         // Act & Assert
-        await Assert.ThrowsAsync<InvalidOperationException>(async () => await repository.AddAsync(user));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () => await repository.DeleteAsync("nonexistent"));
+        Assert.Contains("User with ID 'nonexistent' not found", exception.Message);
+    }
+
+    // Mock class for testing non-TstUser scenarios
+    private class MockUser : IBaseUser
+    {
+        public required string Id { get; set; }
+        public required string UserName { get; set; }
+        public required string Email { get; set; }
     }
 }

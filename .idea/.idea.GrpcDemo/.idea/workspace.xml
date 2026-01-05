@@ -9,7 +9,11 @@
   <component name="ChangeListManager">
     <list default="true" id="d1f7adc3-5d58-4e06-9035-12df0221d91c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GrpcDemo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GrpcDemo/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcDemo.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcDemo.sln.DotSettings.user" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Repositories/TST/TstUserGroupRelationRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Repositories/TST/TstUserGroupRelationRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Repositories/TST/TstGroupRepositoryTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Repositories/TST/TstGroupRepositoryTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Repositories/TST/TstUserGroupRelationRepositoryTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Repositories/TST/TstUserGroupRelationRepositoryTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Repositories/TST/TstUserRepositoryTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Repositories/TST/TstUserRepositoryTests.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,6 +93,9 @@
   &quot;isMigrated&quot;: true
 }</component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
@@ -100,7 +107,8 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     ".NET Launch Settings Profile.GrpcServer: http.executor": "Run",
-    ".NET Launch Settings Profile.GrpcServer: https.executor": "Run",
+    ".NET Launch Settings Profile.GrpcServer: https.executor": "Debug",
+    "2fa62e94-19a3-42dc-8576-b007770b8f15.executor": "Debug",
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Docker.GrpcServer/Dockerfile final.executor": "Run",
     "HTTP Request.generated-requests | #1.executor": "Run",
@@ -313,7 +321,7 @@
       <workItem from="1767013671353" duration="5561000" />
       <workItem from="1767101947886" duration="2973000" />
       <workItem from="1767202945583" duration="1384000" />
-      <workItem from="1767570497422" duration="8124000" />
+      <workItem from="1767570497422" duration="10951000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit, contains partial implmentation of create user workflow">
       <option name="closed" value="true" />
@@ -387,7 +395,15 @@
       <option name="project" value="LOCAL" />
       <updated>1767582813483</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="refactor: remove unused Xunit reference from TstGroupRepositoryTests">
+      <option name="closed" value="true" />
+      <created>1767582906963</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1767582906963</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -417,7 +433,8 @@
     <MESSAGE value="feat: implement user and group repositories with CRUD operations and mock data" />
     <MESSAGE value="feat: update user and group models to use string IDs; add TST DTOs and repositories" />
     <MESSAGE value="feat: update user and group interfaces to use string IDs; add TST DTOs and repositories" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: update user and group interfaces to use string IDs; add TST DTOs and repositories" />
+    <MESSAGE value="refactor: remove unused Xunit reference from TstGroupRepositoryTests" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: remove unused Xunit reference from TstGroupRepositoryTests" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -1,3 +1,4 @@
+using GrpcServer.Infrastructure.Models.Common;
 using GrpcServer.Tests.Infrastructure.Models.TST;
 using GrpcServer.Tests.Infrastructure.Repositories.TST;
 
@@ -29,6 +30,45 @@ public class TstGroupRepositoryTests
         Assert.Equal("Test Group", tstGroup.DisplayName);
         Assert.Equal("CustomGroupValue1", tstGroup.TstGroupExtension1);
         Assert.Equal("CustomGroupValue2", tstGroup.TstGroupExtension2);
+    }
+
+    [Fact]
+    public async Task AddAsync_WithNonTstGroup_ThrowsArgumentException()
+    {
+        // Arrange
+        var repository = new TstGroupRepository();
+        var mockGroup = new MockGroup { Id = "group1", DisplayName = "Mock Group" };
+
+        // Act & Assert
+        var exception = await Assert.ThrowsAsync<ArgumentException>(async () => await repository.AddAsync(mockGroup));
+        Assert.Contains("Only TstGroup instances are supported", exception.Message);
+        Assert.Equal("baseGroup", exception.ParamName);
+    }
+
+    [Fact]
+    public async Task AddAsync_WithDuplicateId_ThrowsInvalidOperationException()
+    {
+        // Arrange
+        var repository = new TstGroupRepository();
+        var group1 = new TstGroup
+        {
+            Id = "group1",
+            DisplayName = "First Group",
+            TstGroupExtension1 = "Ext1",
+            TstGroupExtension2 = "Ext2"
+        };
+        var group2 = new TstGroup
+        {
+            Id = "group1",
+            DisplayName = "Duplicate Group",
+            TstGroupExtension1 = "Ext3",
+            TstGroupExtension2 = "Ext4"
+        };
+        await repository.AddAsync(group1);
+
+        // Act & Assert
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () => await repository.AddAsync(group2));
+        Assert.Contains("Group with ID 'group1' already exists", exception.Message);
     }
 
     [Fact]
@@ -65,6 +105,63 @@ public class TstGroupRepositoryTests
     }
 
     [Fact]
+    public async Task UpdateAsync_WithNonTstGroup_ThrowsArgumentException()
+    {
+        // Arrange
+        var repository = new TstGroupRepository();
+        var mockGroup = new MockGroup { Id = "group1", DisplayName = "Mock Group" };
+
+        // Act & Assert
+        var exception = await Assert.ThrowsAsync<ArgumentException>(async () => await repository.UpdateAsync(mockGroup));
+        Assert.Contains("Only TstGroup instances are supported", exception.Message);
+        Assert.Equal("baseGroup", exception.ParamName);
+    }
+
+    [Fact]
+    public async Task UpdateAsync_WithNonExistentId_ThrowsInvalidOperationException()
+    {
+        // Arrange
+        var repository = new TstGroupRepository();
+        var group = new TstGroup
+        {
+            Id = "nonexistent",
+            DisplayName = "Non-existent Group",
+            TstGroupExtension1 = "Ext1",
+            TstGroupExtension2 = "Ext2"
+        };
+
+        // Act & Assert
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () => await repository.UpdateAsync(group));
+        Assert.Contains("Group with ID 'nonexistent' not found", exception.Message);
+    }
+
+    [Fact]
+    public async Task GetByIdAsync_WithNonExistentId_ReturnsNull()
+    {
+        // Arrange
+        var repository = new TstGroupRepository();
+
+        // Act
+        var result = await repository.GetByIdAsync("nonexistent");
+
+        // Assert
+        Assert.Null(result);
+    }
+
+    [Fact]
+    public async Task GetAllAsync_WithEmptyRepository_ReturnsEmptyCollection()
+    {
+        // Arrange
+        var repository = new TstGroupRepository();
+
+        // Act
+        var groups = (await repository.GetAllAsync()).ToList();
+
+        // Assert
+        Assert.Empty(groups);
+    }
+
+    [Fact]
     public async Task GetAllAsync_ReturnsTstGroups()
     {
         // Arrange
@@ -87,10 +184,10 @@ public class TstGroupRepositoryTests
         await repository.AddAsync(group2);
 
         // Act
-        var groups = await repository.GetAllAsync();
+        var groups = (await repository.GetAllAsync()).ToList();
 
         // Assert
-        Assert.Equal(2, groups.Count());
+        Assert.Equal(2, groups.Count);
         Assert.All(groups, g => Assert.IsType<TstGroup>(g));
     }
 
@@ -114,6 +211,24 @@ public class TstGroupRepositoryTests
 
         // Assert
         Assert.Null(retrieved);
+    }
+
+    [Fact]
+    public async Task DeleteAsync_WithNonExistentId_ThrowsInvalidOperationException()
+    {
+        // Arrange
+        var repository = new TstGroupRepository();
+
+        // Act & Assert
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () => await repository.DeleteAsync("nonexistent"));
+        Assert.Contains("Group with ID 'nonexistent' not found", exception.Message);
+    }
+
+    // Mock class for testing non-TstGroup scenarios
+    private class MockGroup : IBaseGroup
+    {
+        public required string Id { get; set; }
+        public required string DisplayName { get; set; }
     }
 }
 

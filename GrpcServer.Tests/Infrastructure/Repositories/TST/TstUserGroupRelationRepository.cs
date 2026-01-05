@@ -4,7 +4,7 @@ namespace GrpcServer.Tests.Infrastructure.Repositories.TST;
 
 public class TstUserGroupRelationRepository : IUserGroupRelationRepository
 {
-    private readonly HashSet<(string UserId, string GroupId)> _relations = new();
+    private readonly HashSet<(string UserId, string GroupId)> _relations = new(); // In-memory database for testing
 
     public Task<IEnumerable<string>> GetGroupIdsByUserIdAsync(string userId)
     {
