@@ -8,12 +8,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1f7adc3-5d58-4e06-9035-12df0221d91c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/TstTargetApplication/Documentation/TODO.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GrpcDemo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GrpcDemo/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TstTargetApplication/Infrastructure/Util/GroupsMockData.json" beforeDir="false" afterPath="$PROJECT_DIR$/TstTargetApplication/Resources/GroupsMockData.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TstTargetApplication/Infrastructure/Util/UsersMockData.json" beforeDir="false" afterPath="$PROJECT_DIR$/TstTargetApplication/Resources/UsersMockData.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TstTargetApplication/TstTargetApplication.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TstTargetApplication/TstTargetApplication.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TstTargetApplication/WeatherForecast.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcDemo.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcDemo.sln.DotSettings.user" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Documentation/COMPREHENSIVE_README.md" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Documentation/COMPREHENSIVE_README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/Common/IGroupService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/Common/IGroupService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/Common/IUserGroupRelationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/Common/IUserGroupRelationService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/Common/IUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/Common/IUserService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -325,7 +325,7 @@
       <workItem from="1767570497422" duration="14427000" />
       <workItem from="1767620756040" duration="6746000" />
       <workItem from="1767880102262" duration="9945000" />
-      <workItem from="1767900810919" duration="930000" />
+      <workItem from="1767900810919" duration="4219000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit, contains partial implmentation of create user workflow">
       <option name="closed" value="true" />
@@ -423,7 +423,23 @@
       <option name="project" value="LOCAL" />
       <updated>1767897949507</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="feat: add TODO file for upcoming tasks; rename mock data files for consistency">
+      <option name="closed" value="true" />
+      <created>1767903667129</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1767903667129</updated>
+    </task>
+    <task id="LOCAL-00014" summary="chore: rename README file for consistency">
+      <option name="closed" value="true" />
+      <created>1767903712104</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1767903712104</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -456,7 +472,9 @@
     <MESSAGE value="refactor: remove unused Xunit reference from TstGroupRepositoryTests" />
     <MESSAGE value="feat: add unit tests for TstGroupRepository and TstUserRepository; include validation for non-Tst instances and duplicate entries" />
     <MESSAGE value="feat: implement TST-specific services and validators for user and group management; add AppCode enum entry" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: implement TST-specific services and validators for user and group management; add AppCode enum entry" />
+    <MESSAGE value="feat: add TODO file for upcoming tasks; rename mock data files for consistency" />
+    <MESSAGE value="chore: rename README file for consistency" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: rename README file for consistency" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

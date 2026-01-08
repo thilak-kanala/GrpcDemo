@@ -1,90 +1,208 @@
 # GrpcServer - User & Group Management API
 
-A comprehensive .NET 9.0 RESTful API for managing Users and Groups across multiple backend systems with full CRUD operations and many-to-many relationship support.
+A .NET 9.0 RESTful API for managing users and groups across multiple backend systems with full CRUD operations and many-to-many relationships.
 
 ## 📋 Table of Contents
 
-- [Overview](#overview)
-- [Features](#features)
-- [Architecture](#architecture)
-- [Project Structure](#project-structure)
-- [Getting Started](#getting-started)
-- [API Endpoints](#api-endpoints)
-- [Configuration](#configuration)
-- [Dependency Injection](#dependency-injection)
-- [Development](#development)
-- [Docker Support](#docker-support)
-- [Testing](#testing)
+- [Overview](#-overview)
+- [Quick Start](#-quick-start)
+- [API Endpoints](#-api-endpoints)
+- [Architecture](#-architecture)
+- [Project Structure](#-project-structure)
+- [Configuration](#-configuration)
+- [Development Guide](#-development-guide)
+- [Testing](#-testing)
+- [Docker Deployment](#-docker-deployment)
 
 ---
 
 ## 🎯 Overview
 
-GrpcServer is a multi-tenant API gateway that provides a unified interface for managing users and groups across different backend systems. It supports multiple application codes (ABC, INM, TST) with pluggable validators, mappers, and repositories.
+GrpcServer is a multi-tenant API gateway that manages users and groups across different backend systems (ABC, INM, TST). Each system can have its own validation rules, data mappings, and repositories while sharing a common API interface.
 
-**Technology Stack:**
-- **.NET 9.0** - Target framework
-- **ASP.NET Core** - Web framework
-- **gRPC** - High-performance RPC framework (configured)
-- **Swagger/OpenAPI** - API documentation and testing
-- **Dependency Injection** - Keyed services pattern
+**Key Technologies:**
+- **.NET 9.0** - Modern C# framework
+- **ASP.NET Core** - Web API framework
+- **Swagger/OpenAPI** - Interactive API documentation
+- **Keyed Dependency Injection** - Multi-system support
+- **Docker** - Container deployment
+
+**What You Can Do:**
+- Create, read, update, and delete users and groups
+- Manage user-group relationships (add/remove users to/from groups)
+- Support multiple backend systems with different business rules
+- Test all endpoints interactively via Swagger UI
 
 ---
 
-## ✨ Features
+## 🚀 Quick Start
 
-- ✅ **Full CRUD Operations** for Users and Groups
-- ✅ **Many-to-Many Relationships** between Users and Groups
-- ✅ **Multi-System Support** with application-specific implementations (ABC, INM, TST)
-- ✅ **RESTful API Design** with proper HTTP verbs and status codes
-- ✅ **Keyed Dependency Injection** for system-specific services
-- ✅ **Request/Response DTOs** for clean API contracts
-- ✅ **Input Validation** with pluggable validators
-- ✅ **Entity-DTO Mapping** with automatic conversions
-- ✅ **OpenAPI/Swagger Documentation** with interactive UI
-- ✅ **Partial Updates** via PATCH operations
-- ✅ **Docker Support** for containerized deployments
-- ✅ **Extensible Architecture** for adding new systems
+### Prerequisites
+
+- .NET 9.0 SDK or later ([download here](https://dotnet.microsoft.com/download/dotnet/9.0))
+- (Optional) Docker for containerized deployment
+
+### Run Locally in 3 Steps
+
+1. **Navigate to the project directory:**
+   ```bash
+   cd GrpcDemo/GrpcServer
+   ```
+
+2. **Restore and run:**
+   ```bash
+   dotnet restore
+   dotnet run
+   ```
+
+3. **Open Swagger UI in your browser:**
+   - Navigate to `http://localhost:5185`
+   - Start testing endpoints immediately!
+
+The API will run on:
+- **HTTP:** `http://localhost:5185`
+- **HTTPS:** `https://localhost:7017`
+
+### First API Call
+
+Try creating a user:
+```bash
+curl -X POST http://localhost:5185/users \
+  -H "Content-Type: application/json" \
+  -d '{"userName": "johndoe", "email": "john@example.com"}'
+```
+
+---
+
+## 🔌 API Endpoints
+
+The API provides **18 RESTful endpoints** organized into three categories.
+
+### 👥 Users (6 endpoints)
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/users` | List all users |
+| POST | `/users` | Create a new user |
+| GET | `/users/{userId}` | Get user by ID |
+| PUT | `/users/{userId}` | Update entire user |
+| PATCH | `/users/{userId}` | Update specific fields |
+| DELETE | `/users/{userId}` | Delete user |
+
+**Example - Create User:**
+```bash
+POST /users
+{
+  "userName": "johndoe",
+  "email": "john@example.com"
+}
+# Response: 201 Created
+```
+
+**Example - Partial Update:**
+```bash
+PATCH /users/1234
+{
+  "email": "newemail@example.com"
+}
+# Response: 200 OK
+```
+
+### 👪 Groups (6 endpoints)
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/groups` | List all groups |
+| POST | `/groups` | Create a new group |
+| GET | `/groups/{groupId}` | Get group by ID |
+| PUT | `/groups/{groupId}` | Update entire group |
+| PATCH | `/groups/{groupId}` | Update specific fields |
+| DELETE | `/groups/{groupId}` | Delete group |
+
+**Example - Create Group:**
+```bash
+POST /groups
+{
+  "displayName": "Developers"
+}
+# Response: 201 Created
+```
+
+### 🔗 User-Group Relations (6 endpoints)
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/users/{userId}/groups` | Get all groups for a user |
+| POST | `/users/{userId}/groups` | Add user to multiple groups |
+| DELETE | `/users/{userId}/groups/{groupId}` | Remove user from group |
+| GET | `/groups/{groupId}/users` | Get all users in a group |
+| POST | `/groups/{groupId}/users` | Add multiple users to group |
+| DELETE | `/groups/{groupId}/users/{userId}` | Remove user from group |
+
+**Example - Add User to Groups:**
+```bash
+POST /users/1234/groups
+{
+  "groupIds": [5678, 5679, 5680]
+}
+# Response: 204 No Content
+```
+
+### HTTP Response Codes
+
+- **200 OK** - Successful GET, PUT, PATCH
+- **201 Created** - Successful POST (new resource)
+- **204 No Content** - Successful DELETE or relation change
+- **400 Bad Request** - Validation failed
+- **404 Not Found** - Resource doesn't exist
+- **500 Internal Server Error** - Server error
 
 ---
 
 ## 🏗️ Architecture
 
-The project follows a **clean, layered architecture** with clear separation of concerns:
+The project follows a **layered architecture** with clear separation of concerns:
 
 ```
-┌─────────────────────────────────────────────┐
-│   Controllers (HTTP Endpoints)              │
-│   - Route definitions                       │
-│   - Request/Response handling               │
-├─────────────────────────────────────────────┤
-│   DTOs + Validators + Mappers               │
-│   - Data contracts                          │
-│   - Validation rules                        │
-│   - Entity transformations                  │
-├─────────────────────────────────────────────┤
-│   Services (Business Logic)                 │
-│   - User service                            │
-│   - Group service                           │
-│   - Relation service                        │
-├─────────────────────────────────────────────┤
-│   Repositories (Data Access)                │
-│   - Abstract interfaces                     │
-│   - System-specific implementations         │
-├─────────────────────────────────────────────┤
-│   Models (Domain Entities)                  │
-│   - IBaseUser / IBaseGroup interfaces       │
-│   - System-specific models                  │
-└─────────────────────────────────────────────┘
+HTTP Request
+     ↓
+┌─────────────────────────────────┐
+│  Controllers                    │  Handle HTTP requests/responses
+│  - UsersController              │  Route to appropriate services
+│  - GroupsController             │
+│  - UserGroupRelationsController │
+└─────────────────────────────────┘
+     ↓
+┌─────────────────────────────────┐
+│  Services                       │  Business logic
+│  - IUserService                 │  Coordinate operations
+│  - IGroupService                │  Validate & process
+│  - IUserGroupRelationService    │
+└─────────────────────────────────┘
+     ↓
+┌─────────────────────────────────┐
+│  Repositories                   │  Data access
+│  - IUserRepository              │  CRUD operations
+│  - IGroupRepository             │  External system calls
+│  - IUserGroupRelationRepository │
+└─────────────────────────────────┘
+     ↓
+Backend Systems (ABC, INM, TST)
 ```
 
-### Core Design Patterns
+**Supporting Components:**
 
-1. **Repository Pattern** - Data access abstraction
-2. **Dependency Injection** - Keyed services for multi-system support
-3. **DTO Pattern** - Separation of API contracts from domain models
-4. **Mapper Pattern** - Clean entity-DTO transformations
-5. **Strategy Pattern** - Pluggable validators and mappers per system
+- **DTOs** - Define API request/response contracts
+- **Validators** - Enforce business rules per system
+- **Mappers** - Convert between entities and DTOs
+- **Models** - Domain entities (IBaseUser, IBaseGroup)
+
+### Design Patterns
+
+- **Repository Pattern** - Abstract data access
+- **Strategy Pattern** - Pluggable validators/mappers per backend
+- **Dependency Injection** - Keyed services for multi-system support
+- **DTO Pattern** - Separate API contracts from domain models
 
 ---
 
@@ -92,193 +210,54 @@ The project follows a **clean, layered architecture** with clear separation of c
 
 ```
 GrpcServer/
-├── Program.cs                      # Application entry point & DI configuration
-├── GrpcServer.csproj              # Project file with dependencies
-├── Dockerfile                     # Container configuration
-├── Properties/
-│   └── launchSettings.json        # Development launch profiles
+├── Program.cs                              # Application entry point & DI setup
+├── GrpcServer.csproj                       # Project dependencies
+├── Dockerfile                              # Container configuration
 │
-├── Infrastructure/                # Core application code
-│   ├── Controllers/               # API endpoints (REST controllers)
+├── Infrastructure/
+│   ├── Controllers/                        # API endpoints
 │   │   ├── UsersController.cs
 │   │   ├── GroupsController.cs
 │   │   └── UserGroupRelationsController.cs
 │   │
+│   ├── Services/Common/                    # Business logic interfaces
+│   │   ├── IUserService.cs
+│   │   ├── IGroupService.cs
+│   │   └── IUserGroupRelationService.cs
+│   │
+│   ├── Repositories/Common/                # Data access interfaces
+│   │   ├── IUserRepository.cs
+│   │   ├── IGroupRepository.cs
+│   │   └── IUserGroupRelationRepository.cs
+│   │
+│   ├── Models/Common/                      # Domain entities
+│   │   ├── IBaseUser.cs                   # User interface
+│   │   ├── IBaseGroup.cs                  # Group interface
+│   │   └── RelationDtos.cs                # Relationship DTOs
+│   │
+│   ├── Validators/Common/                  # Input validation
+│   ├── Mappers/Common/                     # Entity-DTO mapping
+│   │   └── IMapper.cs
+│   │
 │   ├── Enum/
-│   │   └── AppCode.cs            # System identifiers (Inm, Abc, Tst)
+│   │   └── AppCode.cs                     # System codes (Inm, Abc, Tst)
 │   │
-│   ├── Models/
-│   │   └── Common/
-│   │       ├── IBaseUser.cs      # User interface (Id, UserName, Email)
-│   │       ├── IBaseGroup.cs     # Group interface (Id, DisplayName)
-│   │       └── RelationDtos.cs   # Relationship DTOs
-│   │
-│   ├── Repositories/
-│   │   └── Common/
-│   │       ├── IUserRepository.cs           # User data access interface
-│   │       ├── IGroupRepository.cs          # Group data access interface
-│   │       └── IUserGroupRelationRepository.cs
-│   │
-│   ├── Services/
-│   │   └── Common/
-│   │       ├── IUserService.cs              # User business logic interface
-│   │       ├── IGroupService.cs             # Group business logic interface
-│   │       └── IUserGroupRelationService.cs # Relation management
-│   │
-│   ├── Validators/                # Input validation (keyed by AppCode)
-│   │   └── Common/
-│   │
-│   ├── Mappers/                   # Entity-DTO mapping (keyed by AppCode)
-│   │   └── Common/
-│   │       └── IMapper.cs        # Generic mapper interface
-│   │
-│   └── Settings/                  # Configuration models
+│   └── Settings/                           # Configuration files
+│       ├── appsettings.json
+│       └── appsettings.Development.json
 │
-└── Documentation/                 # Project documentation
-    ├── API_README.md             # API usage guide
-    ├── QUICKSTART.md             # Quick start guide
-    ├── IMPLEMENTATION_SUMMARY.md  # Implementation details
-    ├── DI_REGISTRATION_GUIDE.md   # DI patterns and examples
-    └── *.md                       # Additional documentation
+└── Documentation/                          # Project docs
+    └── COMPREHENSIVE_README.md             # This file
 ```
 
----
+### Key Files
 
-## 🚀 Getting Started
-
-### Prerequisites
-
-- **.NET 9.0 SDK** or later
-- **Docker** (optional, for containerized deployment)
-
-### Installation
-
-1. **Clone the repository:**
-   ```bash
-   git clone <repository-url>
-   cd GrpcDemo/GrpcServer
-   ```
-
-2. **Restore dependencies:**
-   ```bash
-   dotnet restore
-   ```
-
-3. **Build the project:**
-   ```bash
-   dotnet build
-   ```
-
-### Running the Application
-
-#### Development Mode
-
-```bash
-dotnet run
-```
-
-The API will be available at:
-- **HTTP:** `http://localhost:5185`
-- **HTTPS:** `https://localhost:7017`
-
-#### Docker
-
-```bash
-# Build image
-docker build -t grpcserver:latest .
-
-# Run container
-docker run -p 8080:8080 -p 8081:8081 grpcserver:latest
-```
-
-### Accessing Swagger UI
-
-Once running, open your browser to:
-- **Swagger UI:** `http://localhost:5185` (or configured port)
-
-The interactive Swagger UI allows you to:
-- Browse all 18 API endpoints
-- Test endpoints directly in the browser
-- View request/response schemas
-- See validation requirements
-
----
-
-## 🔌 API Endpoints
-
-### Total: 18 Endpoints (6 Users + 6 Groups + 6 Relations)
-
-### 👥 Users API
-
-| Method | Endpoint | Description | Request Body | Response |
-|--------|----------|-------------|--------------|----------|
-| GET | `/users` | List all users | - | Array of UserDto |
-| POST | `/users` | Create user | CreateUserDto | UserDto (201) |
-| GET | `/users/{userId}` | Get user by ID | - | UserDto |
-| PUT | `/users/{userId}` | Replace user | UpdateUserDto | UserDto |
-| PATCH | `/users/{userId}` | Partial update | PatchUserDto | UserDto |
-| DELETE | `/users/{userId}` | Delete user | - | 204 No Content |
-
-### 👪 Groups API
-
-| Method | Endpoint | Description | Request Body | Response |
-|--------|----------|-------------|--------------|----------|
-| GET | `/groups` | List all groups | - | Array of GroupDto |
-| POST | `/groups` | Create group | CreateGroupDto | GroupDto (201) |
-| GET | `/groups/{groupId}` | Get group by ID | - | GroupDto |
-| PUT | `/groups/{groupId}` | Replace group | UpdateGroupDto | GroupDto |
-| PATCH | `/groups/{groupId}` | Partial update | PatchGroupDto | GroupDto |
-| DELETE | `/groups/{groupId}` | Delete group | - | 204 No Content |
-
-### 🔗 User-Group Relations API
-
-| Method | Endpoint | Description | Request Body | Response |
-|--------|----------|-------------|--------------|----------|
-| GET | `/users/{userId}/groups` | Get user's groups | - | Array of GroupDto |
-| POST | `/users/{userId}/groups` | Add user to groups | AddUserToGroupsDto | 204 No Content |
-| DELETE | `/users/{userId}/groups/{groupId}` | Remove user from group | - | 204 No Content |
-| GET | `/groups/{groupId}/users` | Get group's users | - | Array of UserDto |
-| POST | `/groups/{groupId}/users` | Add users to group | AddUsersToGroupDto | 204 No Content |
-| DELETE | `/groups/{groupId}/users/{userId}` | Remove user from group | - | 204 No Content |
-
-### Example Requests
-
-#### Create a User
-```bash
-curl -X POST http://localhost:5185/users \
-  -H "Content-Type: application/json" \
-  -d '{
-    "userName": "johndoe",
-    "email": "john@example.com"
-  }'
-```
-
-#### Add User to Multiple Groups
-```bash
-curl -X POST http://localhost:5185/users/1234/groups \
-  -H "Content-Type: application/json" \
-  -d '{
-    "groupIds": [5678, 5679]
-  }'
-```
-
-#### Partial Update (PATCH)
-```bash
-curl -X PATCH http://localhost:5185/users/1234 \
-  -H "Content-Type: application/json" \
-  -d '{
-    "email": "newemail@example.com"
-  }'
-```
-
-### Response Codes
-
-- **200 OK** - Successful GET, PUT, or PATCH
-- **201 Created** - Successful POST (resource created)
-- **204 No Content** - Successful DELETE or relation operation
-- **400 Bad Request** - Validation error or malformed request
-- **404 Not Found** - Resource not found
-- **501 Not Implemented** - Operation not yet supported
+- **Program.cs** - Configures services, middleware, and DI
+- **AppCode.cs** - Enum defining backend systems (Inm, Abc, Tst)
+- **Controllers/** - RESTful API endpoints with routing
+- **Services/** - Business logic layer
+- **Repositories/** - Data access abstractions
+- **Models/** - Domain entity interfaces
 
 ---
 
@@ -297,9 +276,15 @@ public enum AppCode
 }
 ```
 
-### Launch Settings
+Each system can have its own:
+- Validation rules
+- Data mappings
+- Repository implementations
+- Business logic
 
-Configure in `Properties/launchSettings.json`:
+### Port Configuration
+
+Edit `Properties/launchSettings.json` to change ports:
 
 ```json
 {
@@ -314,122 +299,137 @@ Configure in `Properties/launchSettings.json`:
 }
 ```
 
-### NuGet Dependencies
+### Environment Variables
 
-```xml
-<PackageReference Include="Grpc.AspNetCore" Version="2.64.0"/>
-<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0"/>
-```
+- `ASPNETCORE_ENVIRONMENT` - Set to `Development`, `Staging`, or `Production`
+- `ASPNETCORE_URLS` - Override default URLs
+
+### Dependencies
+
+Key NuGet packages:
+- `Grpc.AspNetCore` (2.64.0) - gRPC support
+- `Swashbuckle.AspNetCore` (6.5.0) - Swagger/OpenAPI
 
 ---
 
-## 🔧 Dependency Injection
+## 🔧 Development Guide
+
+### Dependency Injection Pattern
 
 The project uses **keyed dependency injection** to support multiple backend systems with different implementations.
 
-### Keyed Services Pattern
+#### Registering Services
 
-Each `AppCode` has its own registered services:
+Each `AppCode` gets its own services in `Program.cs`:
 
 ```csharp
-// Registering system-specific mappers
-builder.Services.AddKeyedSingleton<IMapper<AbcUser, AbcUserRequestDto, AbcUserResponseDto>>(
+// Register system-specific mapper
+builder.Services.AddKeyedSingleton<IMapper<AbcUser, AbcUserDto>>(
     AppCode.Abc, 
     new AbcMapper()
 );
 
-// Registering system-specific validators
+// Register system-specific validator
 builder.Services.AddKeyedSingleton<IUserValidator>(
     AppCode.Abc,
     new AbcUserValidator()
 );
 ```
 
-### Using Keyed Services in Controllers
+#### Using Keyed Services
+
+Inject services by key in controllers:
 
 ```csharp
 [ApiController]
 [Route("/api/v1/abc/users")]
 public class AbcUsersController : ControllerBase
 {
-    private readonly IMapper<AbcUser, AbcUserRequestDto, AbcUserResponseDto> _mapper;
+    private readonly IMapper<AbcUser, AbcUserDto> _mapper;
     private readonly IUserValidator _validator;
 
     public AbcUsersController(
-        [FromKeyedServices(AppCode.Abc)] IMapper<AbcUser, AbcUserRequestDto, AbcUserResponseDto> mapper,
+        [FromKeyedServices(AppCode.Abc)] IMapper<AbcUser, AbcUserDto> mapper,
         [FromKeyedServices(AppCode.Abc)] IUserValidator validator)
     {
         _mapper = mapper;
         _validator = validator;
     }
-    
-    // Controller actions...
 }
 ```
 
-### Benefits
-
-1. **Type Safety** - Each system gets its own implementation
-2. **Clear Separation** - Different validation/mapping logic per system
-3. **Easy Testing** - Mock specific implementations by key
-4. **Scalability** - Add new systems without conflicts
-
----
-
-## 💻 Development
-
 ### Adding a New Backend System
 
-1. **Add AppCode enum value:**
-   ```csharp
-   public enum AppCode
-   {
-       Inm, Abc, Tst,
-       Xyz  // New system
-   }
-   ```
+Follow these 5 steps:
 
-2. **Create system-specific models:**
-   ```csharp
-   public class XyzUser : IBaseUser { /* ... */ }
-   public class XyzGroup : IBaseGroup { /* ... */ }
-   ```
-
-3. **Implement mappers and validators:**
-   ```csharp
-   public class XyzMapper : IMapper<XyzUser, XyzUserRequestDto, XyzUserResponseDto> { }
-   public class XyzUserValidator : IUserValidator { }
-   ```
-
-4. **Register in Program.cs:**
-   ```csharp
-   builder.Services.AddKeyedSingleton<IMapper<...>>(AppCode.Xyz, new XyzMapper());
-   builder.Services.AddKeyedSingleton<IUserValidator>(AppCode.Xyz, new XyzUserValidator());
-   ```
-
-5. **Create controller:**
-   ```csharp
-   [ApiController]
-   [Route("/api/v1/xyz/users")]
-   public class XyzUsersController : ControllerBase { }
-   ```
-
-### Validation Rules
-
-Validators implement `IValidator<T>` and define business rules:
-
+**1. Add AppCode Enum Value**
 ```csharp
-public interface IUserValidator : IValidator<IBaseUser> { }
-
-public class MyUserValidator : IUserValidator
+public enum AppCode
 {
-    public bool IsValid(IBaseUser entity)
+    Inm, Abc, Tst,
+    Xyz  // New system
+}
+```
+
+**2. Create Domain Models**
+```csharp
+public class XyzUser : IBaseUser 
+{
+    public string Id { get; set; }
+    public string UserName { get; set; }
+    public string Email { get; set; }
+}
+
+public class XyzGroup : IBaseGroup 
+{
+    public string Id { get; set; }
+    public string DisplayName { get; set; }
+}
+```
+
+**3. Implement Mapper**
+```csharp
+public class XyzMapper : IMapper<XyzUser, XyzUserDto>
+{
+    public XyzUserDto ToDto(XyzUser entity) { /* ... */ }
+    public XyzUser FromDto(XyzUserDto dto) { /* ... */ }
+    public void ApplyPatch(XyzUser entity, XyzUserDto dto) { /* ... */ }
+}
+```
+
+**4. Implement Validator**
+```csharp
+public class XyzUserValidator : IUserValidator
+{
+    public bool IsValid(IBaseUser user)
     {
-        return !string.IsNullOrWhiteSpace(entity.UserName) &&
-               !string.IsNullOrWhiteSpace(entity.Email) &&
-               entity.Email.Contains("@");
+        // Add XYZ-specific validation rules
+        return !string.IsNullOrWhiteSpace(user.UserName) &&
+               !string.IsNullOrWhiteSpace(user.Email);
     }
 }
+```
+
+**5. Register in Program.cs**
+```csharp
+builder.Services.AddKeyedSingleton<IMapper<XyzUser, XyzUserDto>>(
+    AppCode.Xyz, new XyzMapper());
+builder.Services.AddKeyedSingleton<IUserValidator>(
+    AppCode.Xyz, new XyzUserValidator());
+```
+
+### Validation Pattern
+
+All validators implement `IValidator<T>`:
+
+```csharp
+public interface IValidator<T>
+{
+    bool IsValid(T entity);
+}
+
+public interface IUserValidator : IValidator<IBaseUser> { }
+public interface IGroupValidator : IValidator<IBaseGroup> { }
 ```
 
 ### Mapper Pattern
@@ -437,157 +437,192 @@ public class MyUserValidator : IUserValidator
 Mappers handle entity-DTO conversions:
 
 ```csharp
-public interface IMapper<TEntity, TRequestDto, TResponseDto>
+public interface IMapper<TEntity, TDto>
 {
-    TResponseDto ToResponseDto(TEntity entity);
-    TEntity FromRequestDto(TRequestDto dto);
-    void ApplyPatch(TEntity entity, TRequestDto dto);
+    TDto ToDto(TEntity entity);
+    TEntity FromDto(TDto dto);
+    void ApplyPatch(TEntity entity, TDto patchDto);
 }
 ```
 
 ---
 
-## 🐳 Docker Support
-
-### Dockerfile Overview
-
-The project includes a multi-stage Dockerfile:
-
-- **Base Stage:** ASP.NET 9.0 runtime
-- **Build Stage:** SDK for compilation
-- **Publish Stage:** Optimized output
-- **Final Stage:** Minimal runtime image
-
-### Docker Commands
-
-```bash
-# Build
-docker build -t grpcserver:latest .
-
-# Run
-docker run -p 8080:8080 -p 8081:8081 grpcserver:latest
-
-# Run with environment variables
-docker run -p 8080:8080 \
-  -e ASPNETCORE_ENVIRONMENT=Production \
-  grpcserver:latest
-```
-
-### Docker Compose
-
-See `compose.yaml` in the solution root for orchestration configuration.
-
----
-
 ## 🧪 Testing
 
-### Manual Testing with Swagger UI
+### Using Swagger UI
 
-1. **Start the application** (`dotnet run`)
-2. **Open Swagger UI** (http://localhost:5185)
-3. **Select an endpoint** and click "Try it out"
-4. **Fill in parameters** and request body
-5. **Click "Execute"** and view the response
+The easiest way to test the API:
 
-### Example Test Workflow
+1. **Start the application:**
+   ```bash
+   dotnet run
+   ```
 
-1. **Create User** → POST `/users` → Get userId from response
-2. **Create Group** → POST `/groups` → Get groupId from response
-3. **Add to Group** → POST `/users/{userId}/groups` with groupIds
-4. **Verify Relation** → GET `/users/{userId}/groups`
-5. **Update User** → PATCH `/users/{userId}` with new data
-6. **Delete User** → DELETE `/users/{userId}`
+2. **Open Swagger UI:**
+   - Navigate to `http://localhost:5185`
 
-### Unit Testing
+3. **Test an endpoint:**
+   - Click any endpoint to expand it
+   - Click "Try it out"
+   - Fill in the request body/parameters
+   - Click "Execute"
+   - View the response
 
-The solution includes a test project:
-```
-GrpcServer.Tests/
-├── Tests/
-│   ├── Repositories/
-│   ├── Services/
-│   └── Validators/
-```
+### Sample Test Workflow
 
-Run tests:
+Complete user lifecycle test:
+
 ```bash
-cd GrpcServer.Tests
+# 1. Create a user
+POST /users
+{
+  "userName": "testuser",
+  "email": "test@example.com"
+}
+# Save the returned userId
+
+# 2. Create a group
+POST /groups
+{
+  "displayName": "Test Group"
+}
+# Save the returned groupId
+
+# 3. Add user to group
+POST /users/{userId}/groups
+{
+  "groupIds": ["{groupId}"]
+}
+
+# 4. Verify relationship
+GET /users/{userId}/groups
+# Should return the group
+
+# 5. Update user
+PATCH /users/{userId}
+{
+  "email": "updated@example.com"
+}
+
+# 6. Clean up
+DELETE /users/{userId}
+DELETE /groups/{groupId}
+```
+
+### Unit Tests
+
+Run the test project:
+
+```bash
+cd ../GrpcServer.Tests
 dotnet test
 ```
 
----
-
-## 📚 Additional Documentation
-
-For more detailed information, see:
-
-- **[API_README.md](Documentation/API_README.md)** - Comprehensive API guide with examples
-- **[QUICKSTART.md](Documentation/QUICKSTART.md)** - Quick start guide for immediate testing
-- **[IMPLEMENTATION_SUMMARY.md](Documentation/IMPLEMENTATION_SUMMARY.md)** - Implementation details and status
-- **[DI_REGISTRATION_GUIDE.md](Documentation/DI_REGISTRATION_GUIDE.md)** - Dependency injection patterns
-- **[MULTI_CONTROLLER_IMPLEMENTATION.md](Documentation/MULTI_CONTROLLER_IMPLEMENTATION.md)** - Controller architecture
-- **[DI_MAPPER_VALIDATOR_IMPLEMENTATION.md](Documentation/DI_MAPPER_VALIDATOR_IMPLEMENTATION.md)** - Mapper and validator details
+The test project includes:
+- Repository tests
+- Service tests
+- Validator tests
+- Mapper tests
 
 ---
 
-## 🎯 Current Status
+## 🐳 Docker Deployment
 
-### ✅ Completed
+### Quick Start with Docker
 
-- Full RESTful API with 18 endpoints
-- Controllers for Users, Groups, and Relations
-- DTO pattern for all requests/responses
-- Validation framework with pluggable validators
-- Mapper framework for entity-DTO transformations
-- Keyed dependency injection setup
-- OpenAPI/Swagger documentation
+**Build the image:**
+```bash
+docker build -t grpcserver:latest .
+```
+
+**Run the container:**
+```bash
+docker run -p 8080:8080 -p 8081:8081 grpcserver:latest
+```
+
+**Access the API:**
+- HTTP: `http://localhost:8080`
+- HTTPS: `http://localhost:8081`
+
+### Docker Compose
+
+Use the solution's `compose.yaml` for multi-container setup:
+
+```bash
+cd ../
+docker-compose up
+```
+
+### Production Deployment
+
+Set environment variables:
+
+```bash
+docker run -p 8080:8080 \
+  -e ASPNETCORE_ENVIRONMENT=Production \
+  -e ASPNETCORE_URLS="http://+:8080" \
+  grpcserver:latest
+```
+
+The Dockerfile uses multi-stage builds for optimization:
+- **Base:** .NET 9.0 runtime
+- **Build:** SDK for compilation
+- **Publish:** Optimized output
+- **Final:** Minimal production image
+
+---
+
+## 📊 Project Status
+
+### ✅ Implemented
+
+- 18 RESTful API endpoints (Users, Groups, Relations)
+- Layered architecture (Controllers, Services, Repositories)
+- DTO pattern for all operations
+- Keyed dependency injection
+- Pluggable validators and mappers
+- Swagger/OpenAPI documentation
 - Docker support
 - Comprehensive documentation
 
-### ⚠️ In Progress
+### 🚧 In Progress
 
-- Repository implementations (currently stubs for external API integration)
-- User-Group relation storage (currently in-memory mock)
-- Health check endpoints
-- Authentication/Authorization
+- Repository implementations (external API integration)
+- Persistent storage for user-group relations
+- Authentication and authorization
 - Logging and monitoring
 - Integration tests
 
-### 🔮 Future Enhancements
+### 🎯 Future Enhancements
 
-- gRPC endpoint implementations
+- gRPC service implementations
+- Health check endpoints
 - Rate limiting
 - Caching layer
-- Database persistence
-- Message queue integration
+- Database integration
+- Message queue support
 - Distributed tracing
 
 ---
 
-## 🤝 Contributing
+## 📚 Additional Resources
 
-When adding new features:
-
-1. Follow the existing architecture patterns
-2. Add appropriate documentation
-3. Include XML comments for Swagger
-4. Write unit tests
-5. Update this README if needed
+- **Swagger UI** - `http://localhost:5185` (interactive API testing)
+- **Project Documentation** - See `/Documentation` folder
+- **.NET 9.0 Docs** - https://docs.microsoft.com/dotnet/
+- **ASP.NET Core** - https://docs.microsoft.com/aspnet/core/
 
 ---
 
-## 📄 License
+## 💡 Tips & Best Practices
 
-This is a demonstration project.
-
----
-
-## 📞 Support
-
-For questions or issues:
-- Check the documentation in the `/Documentation` folder
-- Review the Swagger UI for API details
-- Examine the code comments and XML documentation
+- Always validate input using the validator pattern
+- Use keyed services for system-specific implementations
+- Follow the DTO pattern for API contracts
+- Write unit tests for new validators and mappers
+- Update Swagger comments for new endpoints
+- Use PATCH for partial updates, PUT for full replacement
+- Check Swagger UI for schema validation requirements
 
 ---
 
