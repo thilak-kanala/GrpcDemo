@@ -23,4 +23,9 @@
       <Folder Include="Infrastructure\Validators\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Infrastructure\Resources\GroupsMockData.json" />
+      <_ContentIncludedByDefault Remove="Infrastructure\Resources\UsersMockData.json" />
+    </ItemGroup>
+
 </Project>
