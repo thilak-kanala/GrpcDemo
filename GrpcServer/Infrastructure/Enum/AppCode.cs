@@ -6,5 +6,6 @@ namespace GrpcServer.Infrastructure.Enum;
 public enum AppCode
 {
     Inm,
-    Abc
+    Abc,
+    Tst
 }

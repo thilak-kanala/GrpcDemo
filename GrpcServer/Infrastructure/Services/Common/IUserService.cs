@@ -5,7 +5,6 @@ namespace GrpcServer.Infrastructure.Services.Common;
 
 public interface IUserService
 {
-    Task<AppCode> GetServiceAppCodeAsync();
     Task<IBaseUser?> GetByIdAsync(string id);
     Task<IEnumerable<IBaseUser>> GetAllAsync();
     Task AddAsync(IBaseUser baseUser);

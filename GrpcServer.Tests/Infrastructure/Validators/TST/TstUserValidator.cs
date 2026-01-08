@@ -6,27 +6,29 @@ namespace GrpcServer.Tests.Infrastructure.Validators.TST;
 
 public class TstUserValidator : IUserValidator
 {
+    // Custom demonstration validation logic:
+    // - Id must not be empty
+    // - UserName must not be empty
+    // - Email must contain '@'
+    // - TstUserExtension1 must not be 'forbidden' (demo rule)
     public bool IsValid(IBaseUser entity)
     {
-        if (entity is not TstUser inmUser)
+        if (entity is not TstUser tstUser)
             return false;
 
-        if (string.IsNullOrWhiteSpace(inmUser.Id))
+        if (string.IsNullOrWhiteSpace(tstUser.Id))
             return false;
 
-        if (string.IsNullOrWhiteSpace(inmUser.UserName))
+        if (string.IsNullOrWhiteSpace(tstUser.UserName))
             return false;
 
-        if (string.IsNullOrWhiteSpace(inmUser.Email) || !inmUser.Email.Contains('@'))
+        if (string.IsNullOrWhiteSpace(tstUser.Email) || !tstUser.Email.Contains('@'))
             return false;
-        
-        if (string.IsNullOrWhiteSpace(inmUser.TstUserExtension1))
-            return false;
-        
-        if (string.IsNullOrWhiteSpace(inmUser.TstUserExtension2))
+
+        // DEMO: Extension1 must not be 'forbidden'
+        if (tstUser.TstUserExtension1 == "forbidden")
             return false;
 
         return true;
     }
 }
-

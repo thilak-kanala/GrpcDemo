@@ -6,24 +6,25 @@ namespace GrpcServer.Tests.Infrastructure.Validators.TST;
 
 public class TstGroupValidator : IGroupValidator
 {
+    // Custom demonstration validation logic:
+    // - Id must not be empty
+    // - DisplayName must not be empty
+    // - TstGroupExtension1 must be at least 5 characters long (demo rule)
     public bool IsValid(IBaseGroup entity)
     {
-        if (entity is not TstGroup inmGroup)
+        if (entity is not TstGroup tstGroup)
             return false;
 
-        if (string.IsNullOrWhiteSpace(inmGroup.Id))
+        if (string.IsNullOrWhiteSpace(tstGroup.Id))
             return false;
 
-        if (string.IsNullOrWhiteSpace(inmGroup.DisplayName))
+        if (string.IsNullOrWhiteSpace(tstGroup.DisplayName))
             return false;
-        
-        if (string.IsNullOrWhiteSpace(inmGroup.TstGroupExtension1))
-            return false;
-        
-        if (string.IsNullOrWhiteSpace(inmGroup.TstGroupExtension2))
+
+        // DEMO: Extension1 must be at least 5 chars
+        if (string.IsNullOrWhiteSpace(tstGroup.TstGroupExtension1) || tstGroup.TstGroupExtension1.Length < 5)
             return false;
 
         return true;
     }
 }
-

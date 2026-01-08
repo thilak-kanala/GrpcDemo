@@ -8,12 +8,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1f7adc3-5d58-4e06-9035-12df0221d91c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Services/TST/TstGroupService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Services/TST/TstUserGroupRelationService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Services/TST/TstUserService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer.Tests/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Services/TST/TstGroupServiceTests.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Services/TST/TstUserGroupRelationServiceTests.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Services/TST/TstUserServiceTests.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer/Documentation/COMPREHENSIVE_README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GrpcDemo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GrpcDemo/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GrpcDemo.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcDemo.sln.DotSettings.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Repositories/TST/TstUserGroupRelationRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Repositories/TST/TstUserGroupRelationRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Repositories/TST/TstGroupRepositoryTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Repositories/TST/TstGroupRepositoryTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Repositories/TST/TstUserGroupRelationRepositoryTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Repositories/TST/TstUserGroupRelationRepositoryTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Repositories/TST/TstUserRepositoryTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Repositories/TST/TstUserRepositoryTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Validators/TST/TstGroupValidator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Validators/TST/TstGroupValidator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Validators/TST/TstUserValidator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Validators/TST/TstUserValidator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Documentation/API_README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Documentation/COMPLETE_REDUNDANCY_REMOVAL_SUMMARY.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Documentation/DI_MAPPER_VALIDATOR_IMPLEMENTATION.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Documentation/DI_REGISTRATION_GUIDE.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Documentation/IMPLEMENTATION_SUMMARY.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Documentation/MULTI_CONTROLLER_IMPLEMENTATION.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Documentation/QUICKSTART.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Documentation/REDUNDANT_METHOD_REMOVAL.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Enum/AppCode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Enum/AppCode.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/Common/IGroupService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/Common/IGroupService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/Common/IUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/Common/IUserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/README.md" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,17 +77,18 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b554263068268a64c5ebaa4448fe16ec181c44dc3296c06241546c765ad8187b/MvcCoreMvcCoreBuilderExtensions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c7afd9724cf757c4a8469dba2bdc22ab5ac111c91f431dbfefc992dacb3e8635/ControllerBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f0c16cda8a141e194c9151fd8f6acd0f93ef39e54a2a250baf2e5b2fa1fac6/WebApplication.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/scratches/Controllers/ABC/AbcGroupsController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/scratches/Controllers/ABC/AbcUserGroupRelationsController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/scratches/MapperRegistry.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Models/TST/TstGroup.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Models/TST/TstUser.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Repositories/TST/TstGroupRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Repositories/TST/TstUserGroupRelationRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Repositories/TST/TstUserRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Services/TST/TstGroupService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Services/TST/TstUserService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/GrpcServer.Tests/Tests/Repositories/TST/TstGroupRepositoryTests.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/GrpcServer.Tests/Tests/Repositories/TST/TstUserGroupRelationRepositoryTests.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/GrpcServer.Tests/Tests/Repositories/TST/TstUserRepositoryTests.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer.Tests/Tests/Services/TST/TstGroupServiceTests.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer.Tests/Tests/Services/TST/TstUserServiceTests.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Enum/AppCode.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Models/Common/RelationDtos.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/Common/IGroupRepository.cs" root0="FORCE_HIGHLIGHTING" />
@@ -104,32 +123,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Launch Settings Profile.GrpcServer: http.executor": "Run",
-    ".NET Launch Settings Profile.GrpcServer: https.executor": "Debug",
-    "2fa62e94-19a3-42dc-8576-b007770b8f15.executor": "Debug",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Docker.GrpcServer/Dockerfile final.executor": "Run",
-    "HTTP Request.generated-requests | #1.executor": "Run",
-    "HTTP Request.generated-requests | #2.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "SHELLCHECK.PATH": "/Users/thilakkanala/Library/Application Support/JetBrains/Rider2025.3/plugins/Shell Script/shellcheck",
-    "git-widget-placeholder": "main",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.grazie",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Launch Settings Profile.GrpcServer: http.executor&quot;: &quot;Run&quot;,
+    &quot;.NET Launch Settings Profile.GrpcServer: https.executor&quot;: &quot;Debug&quot;,
+    &quot;2fa62e94-19a3-42dc-8576-b007770b8f15.executor&quot;: &quot;Debug&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Docker.GrpcServer/Dockerfile final.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.generated-requests | #1.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.generated-requests | #2.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHELLCHECK.PATH&quot;: &quot;/Users/thilakkanala/Library/Application Support/JetBrains/Rider2025.3/plugins/Shell Script/shellcheck&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.grazie&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "TEXT"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;TEXT&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunDashboard">
     <option name="configurationStatuses">
       <map>
@@ -321,7 +340,9 @@
       <workItem from="1767013671353" duration="5561000" />
       <workItem from="1767101947886" duration="2973000" />
       <workItem from="1767202945583" duration="1384000" />
-      <workItem from="1767570497422" duration="10951000" />
+      <workItem from="1767570497422" duration="14427000" />
+      <workItem from="1767620756040" duration="6746000" />
+      <workItem from="1767880102262" duration="8702000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit, contains partial implmentation of create user workflow">
       <option name="closed" value="true" />
@@ -403,7 +424,15 @@
       <option name="project" value="LOCAL" />
       <updated>1767582906963</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="feat: add unit tests for TstGroupRepository and TstUserRepository; include validation for non-Tst instances and duplicate entries">
+      <option name="closed" value="true" />
+      <created>1767585744370</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1767585744370</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -434,7 +463,8 @@
     <MESSAGE value="feat: update user and group models to use string IDs; add TST DTOs and repositories" />
     <MESSAGE value="feat: update user and group interfaces to use string IDs; add TST DTOs and repositories" />
     <MESSAGE value="refactor: remove unused Xunit reference from TstGroupRepositoryTests" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: remove unused Xunit reference from TstGroupRepositoryTests" />
+    <MESSAGE value="feat: add unit tests for TstGroupRepository and TstUserRepository; include validation for non-Tst instances and duplicate entries" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add unit tests for TstGroupRepository and TstUserRepository; include validation for non-Tst instances and duplicate entries" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

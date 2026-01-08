@@ -5,7 +5,6 @@ namespace GrpcServer.Infrastructure.Services.Common;
 
 public interface IGroupService
 {
-    Task<AppCode> GetServiceAppCodeAsync();
     Task<IBaseGroup?> GetByIdAsync(string id);
     Task<IEnumerable<IBaseGroup>> GetAllAsync();
     Task AddAsync(IBaseGroup baseGroup);
