@@ -7,7 +7,8 @@ namespace GrpcServer.Infrastructure.Services.Common;
 /// Defines the contract for group management operations across different application contexts.
 /// This service provides CRUD operations for group entities implementing the <see cref="IBaseGroup"/> interface.
 /// </summary>
-public interface IGroupService
+/// <typeparam name="TGroup">The type of group entity that implements IBaseGroup.</typeparam>
+public interface IGroupService<TGroup> where TGroup : IBaseGroup
 {
     /// <summary>
     /// Retrieves a group by its unique identifier.
@@ -16,7 +17,7 @@ public interface IGroupService
     /// <returns>
     /// A task that represents the asynchronous operation. The task result contains the group if found; otherwise, null.
     /// </returns>
-    Task<IBaseGroup?> GetByIdAsync(string id);
+    Task<TGroup?> GetByIdAsync(string id);
     
     /// <summary>
     /// Retrieves all groups from the data source.
@@ -24,21 +25,21 @@ public interface IGroupService
     /// <returns>
     /// A task that represents the asynchronous operation. The task result contains a collection of all groups.
     /// </returns>
-    Task<IEnumerable<IBaseGroup>> GetAllAsync();
+    Task<IEnumerable<TGroup>> GetAllAsync();
     
     /// <summary>
     /// Adds a new group to the data source.
     /// </summary>
-    /// <param name="baseGroup">The group entity to add.</param>
+    /// <param name="group">The group entity to add.</param>
     /// <returns>A task that represents the asynchronous operation.</returns>
-    Task AddAsync(IBaseGroup baseGroup);
+    Task AddAsync(TGroup group);
     
     /// <summary>
     /// Updates an existing group in the data source.
     /// </summary>
-    /// <param name="baseGroup">The group entity with updated information.</param>
+    /// <param name="group">The group entity with updated information.</param>
     /// <returns>A task that represents the asynchronous operation.</returns>
-    Task UpdateAsync(IBaseGroup baseGroup);
+    Task UpdateAsync(TGroup group);
     
     /// <summary>
     /// Deletes a group from the data source by its unique identifier.

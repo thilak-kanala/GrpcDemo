@@ -4,48 +4,38 @@ using GrpcServer.Tests.Infrastructure.Models.TST;
 
 namespace GrpcServer.Tests.Infrastructure.Repositories.TST;
 
-public class TstGroupRepository : IGroupRepository
+public class TstGroupRepository : IGroupRepository<TstGroup>
 {
     private readonly Dictionary<string, TstGroup> _groups = new(); // In-memory database for testing
 
-    public Task<IBaseGroup?> GetByIdAsync(string id)
+    public Task<TstGroup?> GetByIdAsync(string id)
     {
         _groups.TryGetValue(id, out var group);
-        return Task.FromResult<IBaseGroup?>(group);
+        return Task.FromResult(group);
     }
 
-    public Task<IEnumerable<IBaseGroup>> GetAllAsync()
+    public Task<IEnumerable<TstGroup>> GetAllAsync()
     {
-        return Task.FromResult<IEnumerable<IBaseGroup>>(_groups.Values.ToList());
+        return Task.FromResult<IEnumerable<TstGroup>>(_groups.Values.ToList());
     }
 
-    public Task AddAsync(IBaseGroup baseGroup)
+    public Task AddAsync(TstGroup group)
     {
-        if (baseGroup is not TstGroup tstGroup)
+        if (_groups.ContainsKey(group.Id))
         {
-            throw new ArgumentException("Only TstGroup instances are supported by this repository.", nameof(baseGroup));
+            throw new InvalidOperationException($"Group with ID '{group.Id}' already exists.");
         }
-        
-        if (_groups.ContainsKey(tstGroup.Id))
-        {
-            throw new InvalidOperationException($"Group with ID '{tstGroup.Id}' already exists.");
-        }
-        _groups[tstGroup.Id] = tstGroup;
+        _groups[group.Id] = group;
         return Task.CompletedTask;
     }
 
-    public Task UpdateAsync(IBaseGroup baseGroup)
+    public Task UpdateAsync(TstGroup group)
     {
-        if (baseGroup is not TstGroup tstGroup)
+        if (!_groups.ContainsKey(group.Id))
         {
-            throw new ArgumentException("Only TstGroup instances are supported by this repository.", nameof(baseGroup));
+            throw new InvalidOperationException($"Group with ID '{group.Id}' not found.");
         }
-        
-        if (!_groups.ContainsKey(tstGroup.Id))
-        {
-            throw new InvalidOperationException($"Group with ID '{tstGroup.Id}' not found.");
-        }
-        _groups[tstGroup.Id] = tstGroup;
+        _groups[group.Id] = group;
         return Task.CompletedTask;
     }
 

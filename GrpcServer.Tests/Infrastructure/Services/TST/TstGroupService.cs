@@ -9,63 +9,53 @@ namespace GrpcServer.Tests.Infrastructure.Services.TST;
 /// <summary>
 /// TST-specific implementation of IGroupService with basic business logic for demonstration.
 /// </summary>
-public class TstGroupService : IGroupService
+public class TstGroupService : IGroupService<TstGroup>
 {
-    private readonly IGroupRepository _groupRepository;
+    private readonly IGroupRepository<TstGroup> _groupRepository;
     private readonly IGroupValidator _groupValidator;
 
-    public TstGroupService(IGroupRepository groupRepository, IGroupValidator groupValidator)
+    public TstGroupService(IGroupRepository<TstGroup> groupRepository, IGroupValidator groupValidator)
     {
         _groupRepository = groupRepository;
         _groupValidator = groupValidator;
     }
 
-    public async Task<IBaseGroup?> GetByIdAsync(string id)
+    public async Task<TstGroup?> GetByIdAsync(string id)
     {
         return await _groupRepository.GetByIdAsync(id);
     }
 
-    public async Task<IEnumerable<IBaseGroup>> GetAllAsync()
+    public async Task<IEnumerable<TstGroup>> GetAllAsync()
     {
         return await _groupRepository.GetAllAsync();
     }
 
-    public async Task AddAsync(IBaseGroup baseGroup)
+    public async Task AddAsync(TstGroup group)
     {
-        if (baseGroup is not TstGroup tstGroup)
-        {
-            throw new ArgumentException("Only TstGroup instances are supported by this service.", nameof(baseGroup));
-        }
-        
         // Validate using the validator
-        if (!_groupValidator.IsValid(tstGroup))
+        if (!_groupValidator.IsValid(group))
         {
-            throw new ArgumentException("Group validation failed. Ensure all required fields are populated.", nameof(baseGroup));
+            throw new ArgumentException("Group validation failed. Ensure all required fields are populated.", nameof(group));
         }
         
         // Simple business logic: Trim whitespace from display name
-        tstGroup.DisplayName = tstGroup.DisplayName.Trim();
+        group.DisplayName = group.DisplayName.Trim();
         
-        await _groupRepository.AddAsync(tstGroup);
+        await _groupRepository.AddAsync(group);
     }
 
-    public async Task UpdateAsync(IBaseGroup baseGroup)
+    public async Task UpdateAsync(TstGroup group)
     {
-        if (baseGroup is not TstGroup tstGroup)
-        {
-            throw new ArgumentException("Only TstGroup instances are supported by this service.", nameof(baseGroup));
-        }
-        
         // Validate using the validator
-        if (!_groupValidator.IsValid(tstGroup))
+        if (!_groupValidator.IsValid(group))
         {
-            throw new ArgumentException("Group validation failed. Ensure all required fields are populated.", nameof(baseGroup));
+            throw new ArgumentException("Group validation failed. Ensure all required fields are populated.", nameof(group));
         }
         
         // Simple business logic: Trim whitespace from display name
-        tstGroup.DisplayName = tstGroup.DisplayName.Trim();
+        group.DisplayName = group.DisplayName.Trim();
         
-        await _groupRepository.UpdateAsync(tstGroup);
+        await _groupRepository.UpdateAsync(group);
     }
 
     public async Task DeleteAsync(string id)

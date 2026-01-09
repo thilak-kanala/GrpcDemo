@@ -1,4 +1,3 @@
-using GrpcServer.Infrastructure.Models.Common;
 using GrpcServer.Tests.Infrastructure.Repositories.TST;
 using GrpcServer.Tests.Infrastructure.Models.TST;
 
@@ -26,25 +25,11 @@ public class TstUserRepositoryTests
 
         // Assert
         Assert.NotNull(retrieved);
-        var tstUser = Assert.IsType<TstUser>(retrieved);
-        Assert.Equal("user1", tstUser.Id);
-        Assert.Equal("john.doe", tstUser.UserName);
-        Assert.Equal("john@example.com", tstUser.Email);
-        Assert.Equal("CustomValue1", tstUser.TstUserExtension1);
-        Assert.Equal("CustomValue2", tstUser.TstUserExtension2);
-    }
-
-    [Fact]
-    public async Task AddAsync_WithNonTstUser_ThrowsArgumentException()
-    {
-        // Arrange
-        var repository = new TstUserRepository();
-        var mockUser = new MockUser { Id = "user1", UserName = "mock.user", Email = "mock@example.com" };
-
-        // Act & Assert
-        var exception = await Assert.ThrowsAsync<ArgumentException>(async () => await repository.AddAsync(mockUser));
-        Assert.Contains("Only TstUser instances are supported", exception.Message);
-        Assert.Equal("baseUser", exception.ParamName);
+        Assert.Equal("user1", retrieved.Id);
+        Assert.Equal("john.doe", retrieved.UserName);
+        Assert.Equal("john@example.com", retrieved.Email);
+        Assert.Equal("CustomValue1", retrieved.TstUserExtension1);
+        Assert.Equal("CustomValue2", retrieved.TstUserExtension2);
     }
 
     [Fact]
@@ -96,24 +81,10 @@ public class TstUserRepositoryTests
 
         // Assert
         Assert.NotNull(retrieved);
-        var tstUser = Assert.IsType<TstUser>(retrieved);
-        Assert.Equal("john.doe.updated", tstUser.UserName);
-        Assert.Equal("john.updated@example.com", tstUser.Email);
-        Assert.Equal("UpdatedValue1", tstUser.TstUserExtension1);
-        Assert.Equal("UpdatedValue2", tstUser.TstUserExtension2);
-    }
-
-    [Fact]
-    public async Task UpdateAsync_WithNonTstUser_ThrowsArgumentException()
-    {
-        // Arrange
-        var repository = new TstUserRepository();
-        var mockUser = new MockUser { Id = "user1", UserName = "mock.user", Email = "mock@example.com" };
-
-        // Act & Assert
-        var exception = await Assert.ThrowsAsync<ArgumentException>(async () => await repository.UpdateAsync(mockUser));
-        Assert.Contains("Only TstUser instances are supported", exception.Message);
-        Assert.Equal("baseUser", exception.ParamName);
+        Assert.Equal("john.doe.updated", retrieved.UserName);
+        Assert.Equal("john.updated@example.com", retrieved.Email);
+        Assert.Equal("UpdatedValue1", retrieved.TstUserExtension1);
+        Assert.Equal("UpdatedValue2", retrieved.TstUserExtension2);
     }
 
     [Fact]
@@ -225,13 +196,5 @@ public class TstUserRepositoryTests
         // Act & Assert
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () => await repository.DeleteAsync("nonexistent"));
         Assert.Contains("User with ID 'nonexistent' not found", exception.Message);
-    }
-
-    // Mock class for testing non-TstUser scenarios
-    private class MockUser : IBaseUser
-    {
-        public required string Id { get; set; }
-        public required string UserName { get; set; }
-        public required string Email { get; set; }
     }
 }

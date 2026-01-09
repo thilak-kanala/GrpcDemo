@@ -1,30 +1,29 @@
-using GrpcServer.Infrastructure.Enum;
-using GrpcServer.Infrastructure.Models.Common;
 using GrpcServer.Infrastructure.Repositories.Common;
 using GrpcServer.Infrastructure.Services.Common;
+using GrpcServer.Tests.Infrastructure.Models.TST;
 
 namespace GrpcServer.Tests.Infrastructure.Services.TST;
 
 /// <summary>
 /// TST-specific implementation of IUserGroupRelationService with basic business logic for demonstration.
 /// </summary>
-public class TstUserGroupRelationService : IUserGroupRelationService
+public class TstUserGroupRelationService : IUserGroupRelationService<TstUser, TstGroup>
 {
     private readonly IUserGroupRelationRepository _relationRepository;
-    private readonly IUserRepository _userRepository;
-    private readonly IGroupRepository _groupRepository;
+    private readonly IUserRepository<TstUser> _userRepository;
+    private readonly IGroupRepository<TstGroup> _groupRepository;
 
     public TstUserGroupRelationService(
         IUserGroupRelationRepository relationRepository,
-        IUserRepository userRepository,
-        IGroupRepository groupRepository)
+        IUserRepository<TstUser> userRepository,
+        IGroupRepository<TstGroup> groupRepository)
     {
         _relationRepository = relationRepository;
         _userRepository = userRepository;
         _groupRepository = groupRepository;
     }
 
-    public async Task<IEnumerable<IBaseGroup>> GetUserGroupsAsync(string userId)
+    public async Task<IEnumerable<TstGroup>> GetUserGroupsAsync(string userId)
     {
         // Validate user exists
         var user = await _userRepository.GetByIdAsync(userId);
@@ -35,7 +34,7 @@ public class TstUserGroupRelationService : IUserGroupRelationService
         
         // Get group IDs and retrieve full group objects
         var groupIds = await _relationRepository.GetGroupIdsByUserIdAsync(userId);
-        var groups = new List<IBaseGroup>();
+        var groups = new List<TstGroup>();
         
         foreach (var groupId in groupIds)
         {
@@ -91,7 +90,7 @@ public class TstUserGroupRelationService : IUserGroupRelationService
         await _relationRepository.RemoveUserFromGroupAsync(userId, groupId);
     }
 
-    public async Task<IEnumerable<IBaseUser>> GetGroupUsersAsync(string groupId)
+    public async Task<IEnumerable<TstUser>> GetGroupUsersAsync(string groupId)
     {
         // Validate group exists
         var group = await _groupRepository.GetByIdAsync(groupId);
@@ -102,7 +101,7 @@ public class TstUserGroupRelationService : IUserGroupRelationService
         
         // Get user IDs and retrieve full user objects
         var userIds = await _relationRepository.GetUserIdsByGroupIdAsync(groupId);
-        var users = new List<IBaseUser>();
+        var users = new List<TstUser>();
         
         foreach (var userId in userIds)
         {

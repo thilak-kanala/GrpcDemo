@@ -7,7 +7,11 @@ namespace GrpcServer.Infrastructure.Services.Common;
 /// This service handles user-group membership operations including adding/removing users to/from groups,
 /// and querying group memberships across different application contexts.
 /// </summary>
-public interface IUserGroupRelationService
+/// <typeparam name="TUser">The type of user entity that implements IBaseUser.</typeparam>
+/// <typeparam name="TGroup">The type of group entity that implements IBaseGroup.</typeparam>
+public interface IUserGroupRelationService<TUser, TGroup> 
+    where TUser : IBaseUser 
+    where TGroup : IBaseGroup
 {
     /// <summary>
     /// Retrieves all groups that a specific user is a member of.
@@ -17,7 +21,7 @@ public interface IUserGroupRelationService
     /// A task that represents the asynchronous operation. The task result contains a collection of groups
     /// that the specified user belongs to.
     /// </returns>
-    Task<IEnumerable<IBaseGroup>> GetUserGroupsAsync(string userId);
+    Task<IEnumerable<TGroup>> GetUserGroupsAsync(string userId);
     
     /// <summary>
     /// Adds a user to multiple groups in a single operation.
@@ -43,7 +47,7 @@ public interface IUserGroupRelationService
     /// A task that represents the asynchronous operation. The task result contains a collection of users
     /// that belong to the specified group.
     /// </returns>
-    Task<IEnumerable<IBaseUser>> GetGroupUsersAsync(string groupId);
+    Task<IEnumerable<TUser>> GetGroupUsersAsync(string groupId);
     
     /// <summary>
     /// Adds multiple users to a group in a single operation.

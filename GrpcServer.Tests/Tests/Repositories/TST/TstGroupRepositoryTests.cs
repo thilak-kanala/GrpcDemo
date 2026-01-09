@@ -1,4 +1,3 @@
-using GrpcServer.Infrastructure.Models.Common;
 using GrpcServer.Tests.Infrastructure.Models.TST;
 using GrpcServer.Tests.Infrastructure.Repositories.TST;
 
@@ -25,24 +24,10 @@ public class TstGroupRepositoryTests
 
         // Assert
         Assert.NotNull(retrieved);
-        var tstGroup = Assert.IsType<TstGroup>(retrieved);
-        Assert.Equal("group1", tstGroup.Id);
-        Assert.Equal("Test Group", tstGroup.DisplayName);
-        Assert.Equal("CustomGroupValue1", tstGroup.TstGroupExtension1);
-        Assert.Equal("CustomGroupValue2", tstGroup.TstGroupExtension2);
-    }
-
-    [Fact]
-    public async Task AddAsync_WithNonTstGroup_ThrowsArgumentException()
-    {
-        // Arrange
-        var repository = new TstGroupRepository();
-        var mockGroup = new MockGroup { Id = "group1", DisplayName = "Mock Group" };
-
-        // Act & Assert
-        var exception = await Assert.ThrowsAsync<ArgumentException>(async () => await repository.AddAsync(mockGroup));
-        Assert.Contains("Only TstGroup instances are supported", exception.Message);
-        Assert.Equal("baseGroup", exception.ParamName);
+        Assert.Equal("group1", retrieved.Id);
+        Assert.Equal("Test Group", retrieved.DisplayName);
+        Assert.Equal("CustomGroupValue1", retrieved.TstGroupExtension1);
+        Assert.Equal("CustomGroupValue2", retrieved.TstGroupExtension2);
     }
 
     [Fact]
@@ -98,23 +83,9 @@ public class TstGroupRepositoryTests
 
         // Assert
         Assert.NotNull(retrieved);
-        var tstGroup = Assert.IsType<TstGroup>(retrieved);
-        Assert.Equal("Updated Group", tstGroup.DisplayName);
-        Assert.Equal("UpdatedExt1", tstGroup.TstGroupExtension1);
-        Assert.Equal("UpdatedExt2", tstGroup.TstGroupExtension2);
-    }
-
-    [Fact]
-    public async Task UpdateAsync_WithNonTstGroup_ThrowsArgumentException()
-    {
-        // Arrange
-        var repository = new TstGroupRepository();
-        var mockGroup = new MockGroup { Id = "group1", DisplayName = "Mock Group" };
-
-        // Act & Assert
-        var exception = await Assert.ThrowsAsync<ArgumentException>(async () => await repository.UpdateAsync(mockGroup));
-        Assert.Contains("Only TstGroup instances are supported", exception.Message);
-        Assert.Equal("baseGroup", exception.ParamName);
+        Assert.Equal("Updated Group", retrieved.DisplayName);
+        Assert.Equal("UpdatedExt1", retrieved.TstGroupExtension1);
+        Assert.Equal("UpdatedExt2", retrieved.TstGroupExtension2);
     }
 
     [Fact]
@@ -222,13 +193,6 @@ public class TstGroupRepositoryTests
         // Act & Assert
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () => await repository.DeleteAsync("nonexistent"));
         Assert.Contains("Group with ID 'nonexistent' not found", exception.Message);
-    }
-
-    // Mock class for testing non-TstGroup scenarios
-    private class MockGroup : IBaseGroup
-    {
-        public required string Id { get; set; }
-        public required string DisplayName { get; set; }
     }
 }
 

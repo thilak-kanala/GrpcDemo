@@ -4,48 +4,38 @@ using GrpcServer.Tests.Infrastructure.Models.TST;
 
 namespace GrpcServer.Tests.Infrastructure.Repositories.TST;
 
-public class TstUserRepository : IUserRepository
+public class TstUserRepository : IUserRepository<TstUser>
 {
     private readonly Dictionary<string, TstUser> _users = new(); // In-memory database for testing
 
-    public Task<IBaseUser?> GetByIdAsync(string id)
+    public Task<TstUser?> GetByIdAsync(string id)
     {
         _users.TryGetValue(id, out var user);
-        return Task.FromResult<IBaseUser?>(user);
+        return Task.FromResult(user);
     }
 
-    public Task<IEnumerable<IBaseUser>> GetAllAsync()
+    public Task<IEnumerable<TstUser>> GetAllAsync()
     {
-        return Task.FromResult<IEnumerable<IBaseUser>>(_users.Values.ToList());
+        return Task.FromResult<IEnumerable<TstUser>>(_users.Values.ToList());
     }
 
-    public Task AddAsync(IBaseUser baseUser)
+    public Task AddAsync(TstUser user)
     {
-        if (baseUser is not TstUser tstUser)
+        if (_users.ContainsKey(user.Id))
         {
-            throw new ArgumentException("Only TstUser instances are supported by this repository.", nameof(baseUser));
+            throw new InvalidOperationException($"User with ID '{user.Id}' already exists.");
         }
-        
-        if (_users.ContainsKey(tstUser.Id))
-        {
-            throw new InvalidOperationException($"User with ID '{tstUser.Id}' already exists.");
-        }
-        _users[tstUser.Id] = tstUser;
+        _users[user.Id] = user;
         return Task.CompletedTask;
     }
 
-    public Task UpdateAsync(IBaseUser baseUser)
+    public Task UpdateAsync(TstUser user)
     {
-        if (baseUser is not TstUser tstUser)
+        if (!_users.ContainsKey(user.Id))
         {
-            throw new ArgumentException("Only TstUser instances are supported by this repository.", nameof(baseUser));
+            throw new InvalidOperationException($"User with ID '{user.Id}' not found.");
         }
-        
-        if (!_users.ContainsKey(tstUser.Id))
-        {
-            throw new InvalidOperationException($"User with ID '{tstUser.Id}' not found.");
-        }
-        _users[tstUser.Id] = tstUser;
+        _users[user.Id] = user;
         return Task.CompletedTask;
     }
 

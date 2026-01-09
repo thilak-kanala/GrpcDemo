@@ -1,4 +1,3 @@
-using GrpcServer.Infrastructure.Models.Common;
 using GrpcServer.Infrastructure.Repositories.Common;
 using GrpcServer.Infrastructure.Services.Common;
 using GrpcServer.Infrastructure.Validators.Common;
@@ -9,63 +8,53 @@ namespace GrpcServer.Tests.Infrastructure.Services.TST;
 /// <summary>
 /// TST-specific implementation of IUserService with basic business logic for demonstration.
 /// </summary>
-public class TstUserService : IUserService
+public class TstUserService : IUserService<TstUser>
 {
-    private readonly IUserRepository _userRepository;
+    private readonly IUserRepository<TstUser> _userRepository;
     private readonly IUserValidator _userValidator;
 
-    public TstUserService(IUserRepository userRepository, IUserValidator userValidator)
+    public TstUserService(IUserRepository<TstUser> userRepository, IUserValidator userValidator)
     {
         _userRepository = userRepository;
         _userValidator = userValidator;
     }
 
-    public async Task<IBaseUser?> GetByIdAsync(string id)
+    public async Task<TstUser?> GetByIdAsync(string id)
     {
         return await _userRepository.GetByIdAsync(id);
     }
 
-    public async Task<IEnumerable<IBaseUser>> GetAllAsync()
+    public async Task<IEnumerable<TstUser>> GetAllAsync()
     {
         return await _userRepository.GetAllAsync();
     }
 
-    public async Task AddAsync(IBaseUser baseUser)
+    public async Task AddAsync(TstUser user)
     {
-        if (baseUser is not TstUser tstUser)
-        {
-            throw new ArgumentException("Only TstUser instances are supported by this service.", nameof(baseUser));
-        }
-        
         // Validate using the validator
-        if (!_userValidator.IsValid(tstUser))
+        if (!_userValidator.IsValid(user))
         {
-            throw new ArgumentException("User validation failed. Ensure all required fields are populated.", nameof(baseUser));
+            throw new ArgumentException("User validation failed. Ensure all required fields are populated.", nameof(user));
         }
         
         // Simple business logic: Normalize email to lowercase
-        tstUser.Email = tstUser.Email.ToLower();
+        user.Email = user.Email.ToLower();
         
-        await _userRepository.AddAsync(tstUser);
+        await _userRepository.AddAsync(user);
     }
 
-    public async Task UpdateAsync(IBaseUser baseUser)
+    public async Task UpdateAsync(TstUser user)
     {
-        if (baseUser is not TstUser tstUser)
-        {
-            throw new ArgumentException("Only TstUser instances are supported by this service.", nameof(baseUser));
-        }
-        
         // Validate using the validator
-        if (!_userValidator.IsValid(tstUser))
+        if (!_userValidator.IsValid(user))
         {
-            throw new ArgumentException("User validation failed. Ensure all required fields are populated.", nameof(baseUser));
+            throw new ArgumentException("User validation failed. Ensure all required fields are populated.", nameof(user));
         }
         
         // Simple business logic: Normalize email to lowercase
-        tstUser.Email = tstUser.Email.ToLower();
+        user.Email = user.Email.ToLower();
         
-        await _userRepository.UpdateAsync(tstUser);
+        await _userRepository.UpdateAsync(user);
     }
 
     public async Task DeleteAsync(string id)

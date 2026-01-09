@@ -1,4 +1,3 @@
-using GrpcServer.Infrastructure.Models.Common;
 using GrpcServer.Tests.Infrastructure.Models.TST;
 using GrpcServer.Tests.Infrastructure.Repositories.TST;
 using GrpcServer.Tests.Infrastructure.Services.TST;
@@ -30,9 +29,8 @@ public class TstUserServiceTests
 
         // Assert
         Assert.NotNull(result);
-        var tstUser = Assert.IsType<TstUser>(result);
-        Assert.Equal("user1", tstUser.Id);
-        Assert.Equal("john.doe", tstUser.UserName);
+        Assert.Equal("user1", result.Id);
+        Assert.Equal("john.doe", result.UserName);
     }
 
     [Fact]
@@ -109,27 +107,7 @@ public class TstUserServiceTests
 
         // Assert
         Assert.NotNull(result);
-        var tstUser = Assert.IsType<TstUser>(result);
-        Assert.Equal("john@example.com", tstUser.Email); // Email normalized to lowercase
-    }
-
-    [Fact]
-    public async Task AddAsync_WithNonTstUser_ThrowsArgumentException()
-    {
-        // Arrange
-        var repository = new TstUserRepository();
-        var validator = new TstUserValidator();
-        var service = new TstUserService(repository, validator);
-        var mockUser = new MockUser
-        {
-            Id = "user1",
-            UserName = "mock.user",
-            Email = "mock@example.com"
-        };
-
-        // Act & Assert
-        var exception = await Assert.ThrowsAsync<ArgumentException>(async () => await service.AddAsync(mockUser));
-        Assert.Contains("Only TstUser instances are supported", exception.Message);
+        Assert.Equal("john@example.com", result.Email); // Email normalized to lowercase
     }
 
     [Fact]
@@ -184,28 +162,8 @@ public class TstUserServiceTests
 
         // Assert
         Assert.NotNull(result);
-        var tstUser = Assert.IsType<TstUser>(result);
-        Assert.Equal("john.updated@example.com", tstUser.Email); // Email normalized
-        Assert.Equal("john.doe.updated", tstUser.UserName);
-    }
-
-    [Fact]
-    public async Task UpdateAsync_WithNonTstUser_ThrowsArgumentException()
-    {
-        // Arrange
-        var repository = new TstUserRepository();
-        var validator = new TstUserValidator();
-        var service = new TstUserService(repository, validator);
-        var mockUser = new MockUser
-        {
-            Id = "user1",
-            UserName = "mock.user",
-            Email = "mock@example.com"
-        };
-
-        // Act & Assert
-        var exception = await Assert.ThrowsAsync<ArgumentException>(async () => await service.UpdateAsync(mockUser));
-        Assert.Contains("Only TstUser instances are supported", exception.Message);
+        Assert.Equal("john.updated@example.com", result.Email); // Email normalized
+        Assert.Equal("john.doe.updated", result.UserName);
     }
 
     [Fact]
@@ -290,8 +248,7 @@ public class TstUserServiceTests
 
         // Assert
         Assert.NotNull(result);
-        var tstUser = Assert.IsType<TstUser>(result);
-        Assert.Equal("allowed", tstUser.TstUserExtension1);
+        Assert.Equal("allowed", result.TstUserExtension1);
     }
 
     [Fact]
@@ -316,8 +273,7 @@ public class TstUserServiceTests
 
         // Assert
         Assert.NotNull(result);
-        var tstUser = Assert.IsType<TstUser>(result);
-        Assert.Equal("", tstUser.TstUserExtension1);
+        Assert.Equal("", result.TstUserExtension1);
     }
 
     [Fact]
@@ -351,11 +307,4 @@ public class TstUserServiceTests
     }
 }
 
-// Mock class for testing non-TstUser scenarios
-internal class MockUser : IBaseUser
-{
-    public required string Id { get; set; }
-    public required string UserName { get; set; }
-    public required string Email { get; set; }
-}
 

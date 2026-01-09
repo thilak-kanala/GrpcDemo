@@ -10,8 +10,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1f7adc3-5d58-4e06-9035-12df0221d91c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/GENERICS_UPDATE.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GrpcDemo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GrpcDemo/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Repositories/TST/TstGroupRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Repositories/TST/TstGroupRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Repositories/TST/TstUserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Repositories/TST/TstUserRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Services/TST/TstGroupService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Services/TST/TstGroupService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Services/TST/TstUserGroupRelationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Services/TST/TstUserGroupRelationService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Services/TST/TstUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Services/TST/TstUserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Repositories/TST/TstGroupRepositoryTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Repositories/TST/TstGroupRepositoryTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Repositories/TST/TstUserRepositoryTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Repositories/TST/TstUserRepositoryTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Services/TST/TstGroupServiceTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Services/TST/TstGroupServiceTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Services/TST/TstUserServiceTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Services/TST/TstUserServiceTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/Common/IGroupRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/Common/IGroupRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/Common/IUserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/Common/IUserRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/Common/IGroupService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/Common/IGroupService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/Common/IUserGroupRelationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/Common/IUserGroupRelationService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/Common/IUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/Common/IUserService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -336,7 +350,7 @@
       <workItem from="1767570497422" duration="14427000" />
       <workItem from="1767620756040" duration="6746000" />
       <workItem from="1767880102262" duration="9945000" />
-      <workItem from="1767900810919" duration="13557000" />
+      <workItem from="1767900810919" duration="16022000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit, contains partial implmentation of create user workflow">
       <option name="closed" value="true" />
@@ -466,7 +480,15 @@
       <option name="project" value="LOCAL" />
       <updated>1767930445948</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="chore: remove unused using directive from IUserGroupRelationService.cs">
+      <option name="closed" value="true" />
+      <created>1767990887801</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1767990887801</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -503,7 +525,8 @@
     <MESSAGE value="chore: rename README file for consistency" />
     <MESSAGE value="feat: enhance IGroupService, IUserService and IUserGroupRelationService with detailed XML documentation" />
     <MESSAGE value="feat: restructure project by renaming and relocating files for TstWebServiceTargetApplication" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: restructure project by renaming and relocating files for TstWebServiceTargetApplication" />
+    <MESSAGE value="chore: remove unused using directive from IUserGroupRelationService.cs" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: remove unused using directive from IUserGroupRelationService.cs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

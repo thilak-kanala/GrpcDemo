@@ -6,7 +6,8 @@ namespace GrpcServer.Infrastructure.Services.Common;
 /// <summary>
 /// Defines the contract for user management operations across different application contexts.
 /// </summary>
-public interface IUserService
+/// <typeparam name="TUser">The type of user entity that implements IBaseUser.</typeparam>
+public interface IUserService<TUser> where TUser : IBaseUser
 {
     /// <summary>
     /// Retrieves a user by their unique identifier.
@@ -15,7 +16,7 @@ public interface IUserService
     /// <returns>
     /// A task that represents the asynchronous operation. The task result contains the user if found; otherwise, null.
     /// </returns>
-    Task<IBaseUser?> GetByIdAsync(string id);
+    Task<TUser?> GetByIdAsync(string id);
     
     /// <summary>
     /// Retrieves all users from the data source.
@@ -23,21 +24,21 @@ public interface IUserService
     /// <returns>
     /// A task that represents the asynchronous operation. The task result contains a collection of all users.
     /// </returns>
-    Task<IEnumerable<IBaseUser>> GetAllAsync();
+    Task<IEnumerable<TUser>> GetAllAsync();
     
     /// <summary>
     /// Adds a new user to the data source.
     /// </summary>
-    /// <param name="baseUser">The user entity to add.</param>
+    /// <param name="user">The user entity to add.</param>
     /// <returns>A task that represents the asynchronous operation.</returns>
-    Task AddAsync(IBaseUser baseUser);
+    Task AddAsync(TUser user);
     
     /// <summary>
     /// Updates an existing user in the data source.
     /// </summary>
-    /// <param name="baseUser">The user entity with updated information.</param>
+    /// <param name="user">The user entity with updated information.</param>
     /// <returns>A task that represents the asynchronous operation.</returns>
-    Task UpdateAsync(IBaseUser baseUser);
+    Task UpdateAsync(TUser user);
     
     /// <summary>
     /// Deletes a user from the data source by their unique identifier.
