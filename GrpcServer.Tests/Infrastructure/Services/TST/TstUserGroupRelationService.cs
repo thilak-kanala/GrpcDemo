@@ -24,12 +24,6 @@ public class TstUserGroupRelationService : IUserGroupRelationService
         _groupRepository = groupRepository;
     }
 
-    public Task<AppCode> GetServiceAppCodeAsync()
-    {
-        // Return TST app code
-        return Task.FromResult(AppCode.Tst);
-    }
-
     public async Task<IEnumerable<IBaseGroup>> GetUserGroupsAsync(string userId)
     {
         // Validate user exists

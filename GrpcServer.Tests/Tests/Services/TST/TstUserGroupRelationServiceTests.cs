@@ -1,4 +1,3 @@
-using GrpcServer.Infrastructure.Enum;
 using GrpcServer.Tests.Infrastructure.Models.TST;
 using GrpcServer.Tests.Infrastructure.Repositories.TST;
 using GrpcServer.Tests.Infrastructure.Services.TST;
@@ -7,22 +6,6 @@ namespace GrpcServer.Tests.Tests.Services.TST;
 
 public class TstUserGroupRelationServiceTests
 {
-    [Fact]
-    public async Task GetServiceAppCodeAsync_ReturnsAppCode()
-    {
-        // Arrange
-        var relationRepo = new TstUserGroupRelationRepository();
-        var userRepo = new TstUserRepository();
-        var groupRepo = new TstGroupRepository();
-        var service = new TstUserGroupRelationService(relationRepo, userRepo, groupRepo);
-
-        // Act
-        var result = await service.GetServiceAppCodeAsync();
-
-        // Assert
-        Assert.Equal(AppCode.Tst, result);
-    }
-
     [Fact]
     public async Task GetUserGroupsAsync_WithValidUser_ReturnsGroups()
     {

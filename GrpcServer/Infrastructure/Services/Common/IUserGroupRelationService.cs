@@ -11,15 +11,6 @@ namespace GrpcServer.Infrastructure.Services.Common;
 public interface IUserGroupRelationService
 {
     /// <summary>
-    /// Retrieves the application code that this service is configured to work with.
-    /// </summary>
-    /// <returns>
-    /// A task that represents the asynchronous operation. The task result contains the <see cref="AppCode"/> enum value
-    /// indicating which application context this service instance operates in.
-    /// </returns>
-    Task<AppCode> GetServiceAppCodeAsync();
-    
-    /// <summary>
     /// Retrieves all groups that a specific user is a member of.
     /// </summary>
     /// <param name="userId">The unique identifier of the user whose group memberships to retrieve.</param>

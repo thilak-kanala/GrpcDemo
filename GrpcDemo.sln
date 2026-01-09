@@ -1,5 +1,4 @@
-﻿﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrpcServer", "GrpcServer\GrpcServer.csproj", "{12232A9F-C097-4908-AB58-1B5D830E5C2A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrpcServer.Tests", "GrpcServer.Tests\GrpcServer.Tests.csproj", "{8A9E9F3C-4D5B-4E2F-9C7A-1D8E3F6B2A4C}"
@@ -9,7 +8,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		compose.yaml = compose.yaml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TstTargetApplication", "TstTargetApplication\TstTargetApplication.csproj", "{B06FCB55-DD9F-4383-8C7B-29355D8ED882}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TstWebServiceTargetApplication", "TstWebServiceTargetApplication\TstWebServiceTargetApplication.csproj", "{B06FCB55-DD9F-4383-8C7B-29355D8ED882}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
