@@ -4,18 +4,15 @@ using GrpcServer.Tests.Infrastructure.Models.TST;
 
 namespace GrpcServer.Tests.Infrastructure.Validators.TST;
 
-public class TstUserValidator : IUserValidator
+public class TstUserValidator : IValidator<TstUser>
 {
     // Custom demonstration validation logic:
     // - Id must not be empty
     // - UserName must not be empty
     // - Email must contain '@'
     // - TstUserExtension1 must not be 'forbidden' (demo rule)
-    public bool IsValid(IBaseUser entity)
+    public bool IsValid(TstUser tstUser)
     {
-        if (entity is not TstUser tstUser)
-            return false;
-
         if (string.IsNullOrWhiteSpace(tstUser.Id))
             return false;
 

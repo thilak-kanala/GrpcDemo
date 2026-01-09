@@ -1,4 +1,3 @@
-using GrpcServer.Infrastructure.Models.Common;
 using GrpcServer.Infrastructure.Repositories.Common;
 using GrpcServer.Infrastructure.Services.Common;
 using GrpcServer.Infrastructure.Validators.Common;
@@ -12,9 +11,9 @@ namespace GrpcServer.Tests.Infrastructure.Services.TST;
 public class TstGroupService : IGroupService<TstGroup>
 {
     private readonly IGroupRepository<TstGroup> _groupRepository;
-    private readonly IGroupValidator _groupValidator;
+    private readonly IValidator<TstGroup> _groupValidator;
 
-    public TstGroupService(IGroupRepository<TstGroup> groupRepository, IGroupValidator groupValidator)
+    public TstGroupService(IGroupRepository<TstGroup> groupRepository, IValidator<TstGroup> groupValidator)
     {
         _groupRepository = groupRepository;
         _groupValidator = groupValidator;

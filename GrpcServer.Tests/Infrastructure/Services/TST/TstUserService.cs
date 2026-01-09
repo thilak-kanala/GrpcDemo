@@ -11,9 +11,9 @@ namespace GrpcServer.Tests.Infrastructure.Services.TST;
 public class TstUserService : IUserService<TstUser>
 {
     private readonly IUserRepository<TstUser> _userRepository;
-    private readonly IUserValidator _userValidator;
+    private readonly IValidator<TstUser> _userValidator;
 
-    public TstUserService(IUserRepository<TstUser> userRepository, IUserValidator userValidator)
+    public TstUserService(IUserRepository<TstUser> userRepository, IValidator<TstUser> userValidator)
     {
         _userRepository = userRepository;
         _userValidator = userValidator;

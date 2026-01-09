@@ -4,17 +4,14 @@ using GrpcServer.Tests.Infrastructure.Models.TST;
 
 namespace GrpcServer.Tests.Infrastructure.Validators.TST;
 
-public class TstGroupValidator : IGroupValidator
+public class TstGroupValidator : IValidator<TstGroup>
 {
     // Custom demonstration validation logic:
     // - Id must not be empty
     // - DisplayName must not be empty
     // - TstGroupExtension1 must be at least 5 characters long (demo rule)
-    public bool IsValid(IBaseGroup entity)
+    public bool IsValid(TstGroup tstGroup)
     {
-        if (entity is not TstGroup tstGroup)
-            return false;
-
         if (string.IsNullOrWhiteSpace(tstGroup.Id))
             return false;
 
