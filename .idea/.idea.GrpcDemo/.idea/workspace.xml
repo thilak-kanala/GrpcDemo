@@ -10,32 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1f7adc3-5d58-4e06-9035-12df0221d91c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/TstWebServiceTargetApplication/TstWebServiceTargetApplication.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GrpcDemo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GrpcDemo/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcDemo.sln" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcDemo.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcDemo.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcDemo.sln.DotSettings.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Services/TST/TstUserGroupRelationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Services/TST/TstUserGroupRelationService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Services/TST/TstUserGroupRelationServiceTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Services/TST/TstUserGroupRelationServiceTests.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/Common/IUserGroupRelationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/Common/IUserGroupRelationService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TstTargetApplication/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/TstWebServiceTargetApplication/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TstTargetApplication/Documentation/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/TstWebServiceTargetApplication/Documentation/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TstTargetApplication/Documentation/TODO.md" beforeDir="false" afterPath="$PROJECT_DIR$/TstWebServiceTargetApplication/Documentation/TODO.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TstTargetApplication/Infrastructure/Models/Group.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TstWebServiceTargetApplication/Infrastructure/Models/Group.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TstTargetApplication/Infrastructure/Models/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TstWebServiceTargetApplication/Infrastructure/Models/User.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TstTargetApplication/Infrastructure/Models/UserWithGroupIds.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TstWebServiceTargetApplication/Infrastructure/Models/UserWithGroupIds.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TstTargetApplication/Infrastructure/Repositories/GroupRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TstWebServiceTargetApplication/Infrastructure/Repositories/GroupRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TstTargetApplication/Infrastructure/Repositories/IGroupRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TstWebServiceTargetApplication/Infrastructure/Repositories/IGroupRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TstTargetApplication/Infrastructure/Repositories/IUserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TstWebServiceTargetApplication/Infrastructure/Repositories/IUserRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TstTargetApplication/Infrastructure/Repositories/UserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TstWebServiceTargetApplication/Infrastructure/Repositories/UserRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TstTargetApplication/Infrastructure/Settings/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/TstWebServiceTargetApplication/Infrastructure/Settings/appsettings.Development.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TstTargetApplication/Infrastructure/Settings/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/TstWebServiceTargetApplication/Infrastructure/Settings/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TstTargetApplication/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TstWebServiceTargetApplication/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TstTargetApplication/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/TstWebServiceTargetApplication/Properties/launchSettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TstTargetApplication/Resources/GroupsMockData.json" beforeDir="false" afterPath="$PROJECT_DIR$/TstWebServiceTargetApplication/Resources/GroupsMockData.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TstTargetApplication/Resources/UsersMockData.json" beforeDir="false" afterPath="$PROJECT_DIR$/TstWebServiceTargetApplication/Resources/UsersMockData.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TstTargetApplication/TstTargetApplication.csproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TstTargetApplication/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/TstWebServiceTargetApplication/appsettings.Development.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TstTargetApplication/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/TstWebServiceTargetApplication/appsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +29,19 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <excluded-from-favorite>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="main" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </excluded-from-favorite>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -347,7 +336,7 @@
       <workItem from="1767570497422" duration="14427000" />
       <workItem from="1767620756040" duration="6746000" />
       <workItem from="1767880102262" duration="9945000" />
-      <workItem from="1767900810919" duration="9095000" />
+      <workItem from="1767900810919" duration="13557000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit, contains partial implmentation of create user workflow">
       <option name="closed" value="true" />
@@ -469,7 +458,15 @@
       <option name="project" value="LOCAL" />
       <updated>1767906894108</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="feat: restructure project by renaming and relocating files for TstWebServiceTargetApplication">
+      <option name="closed" value="true" />
+      <created>1767930445948</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1767930445948</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -505,7 +502,8 @@
     <MESSAGE value="feat: add TODO file for upcoming tasks; rename mock data files for consistency" />
     <MESSAGE value="chore: rename README file for consistency" />
     <MESSAGE value="feat: enhance IGroupService, IUserService and IUserGroupRelationService with detailed XML documentation" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: enhance IGroupService, IUserService and IUserGroupRelationService with detailed XML documentation" />
+    <MESSAGE value="feat: restructure project by renaming and relocating files for TstWebServiceTargetApplication" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: restructure project by renaming and relocating files for TstWebServiceTargetApplication" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

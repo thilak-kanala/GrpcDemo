@@ -1,4 +1,3 @@
-using GrpcServer.Infrastructure.Enum;
 using GrpcServer.Infrastructure.Models.Common;
 
 namespace GrpcServer.Infrastructure.Services.Common;
