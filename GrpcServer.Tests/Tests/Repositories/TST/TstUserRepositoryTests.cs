@@ -1,5 +1,5 @@
-using GrpcServer.Tests.Infrastructure.Repositories.TST;
-using GrpcServer.Tests.Infrastructure.Models.TST;
+using GrpcServer.Infrastructure.Models.TST;
+using GrpcServer.Infrastructure.Repositories.TST;
 
 namespace GrpcServer.Tests.Tests.Repositories.TST;
 

@@ -2,6 +2,8 @@ using GrpcServer.Infrastructure.Models.TST;
 using GrpcServer.Infrastructure.Repositories.Common;
 using GrpcServer.Infrastructure.Services.Common;
 using GrpcServer.Infrastructure.Validators.Common;
+using GrpcServer.Infrastructure.Enum;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace GrpcServer.Infrastructure.Services.TST;
 
@@ -13,7 +15,9 @@ public class TstUserService : IUserService<TstUser>
     private readonly IUserRepository<TstUser> _userRepository;
     private readonly IValidator<TstUser> _userValidator;
 
-    public TstUserService(IUserRepository<TstUser> userRepository, IValidator<TstUser> userValidator)
+    public TstUserService(
+        [FromKeyedServices(AppCode.TST)] IUserRepository<TstUser> userRepository, 
+        [FromKeyedServices(AppCode.TST)] IValidator<TstUser> userValidator)
     {
         _userRepository = userRepository;
         _userValidator = userValidator;

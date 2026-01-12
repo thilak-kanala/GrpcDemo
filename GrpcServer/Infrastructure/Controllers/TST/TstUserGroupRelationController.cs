@@ -3,6 +3,8 @@ using GrpcServer.Infrastructure.Models.TST;
 using GrpcServer.Infrastructure.Models.TST.DTO;
 using GrpcServer.Infrastructure.Services.Common;
 using GrpcServer.Infrastructure.Mappers.TST;
+using GrpcServer.Infrastructure.Enum;
+using Microsoft.Extensions.DependencyInjection;
 using static GrpcServer.Infrastructure.Models.Common.RelationDtos;
 
 namespace GrpcServer.Infrastructure.Controllers.TST;
@@ -34,8 +36,8 @@ public class TstUserGroupRelationController : ControllerBase
     /// <param name="relationService">Service layer for user-group relationship business logic</param>
     /// <param name="mapper">Mapper for converting between domain models and DTOs</param>
     public TstUserGroupRelationController(
-        IUserGroupRelationService<TstUser, TstGroup> relationService, 
-        TstMapper mapper)
+        [FromKeyedServices(AppCode.TST)] IUserGroupRelationService<TstUser, TstGroup> relationService,
+        [FromKeyedServices(AppCode.TST)] TstMapper mapper)
     {
         _relationService = relationService;
         _mapper = mapper;

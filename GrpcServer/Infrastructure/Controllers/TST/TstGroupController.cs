@@ -3,6 +3,8 @@ using GrpcServer.Infrastructure.Models.TST;
 using GrpcServer.Infrastructure.Models.TST.DTO;
 using GrpcServer.Infrastructure.Services.Common;
 using GrpcServer.Infrastructure.Mappers.TST;
+using GrpcServer.Infrastructure.Enum;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace GrpcServer.Infrastructure.Controllers.TST;
 
@@ -28,7 +30,9 @@ public class TstGroupController : ControllerBase
     /// </summary>
     /// <param name="groupService">Service layer for group business logic</param>
     /// <param name="mapper">Mapper for converting between domain models and DTOs</param>
-    public TstGroupController(IGroupService<TstGroup> groupService, TstMapper mapper)
+    public TstGroupController(
+        [FromKeyedServices(AppCode.TST)] IGroupService<TstGroup> groupService, 
+        [FromKeyedServices(AppCode.TST)] TstMapper mapper)
     {
         _groupService = groupService;
         _mapper = mapper;

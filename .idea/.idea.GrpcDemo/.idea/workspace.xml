@@ -10,12 +10,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1f7adc3-5d58-4e06-9035-12df0221d91c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Controllers/TST/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Controllers/TST/TEST_SUMMARY.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Controllers/TST/TstGroupControllerTests.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Controllers/TST/TstUserControllerTests.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Controllers/TST/TstUserGroupRelationControllerTests.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/KEYED_SERVICES_UPDATE.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GrpcDemo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GrpcDemo/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Mappers/TST/TstMapper.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Models/TST/DTO/TstGroupRequestDto.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Models/TST/DTO/TstGroupResponseDto.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Models/TST/DTO/TstUserRequestDto.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Models/TST/DTO/TstUserResponseDto.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Models/TST/TstGroup.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Models/TST/TstUser.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Repositories/TST/TstGroupRepository.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Repositories/TST/TstUserGroupRelationRepository.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Repositories/TST/TstUserRepository.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Services/TST/TstGroupService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Services/TST/TstUserGroupRelationService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Services/TST/TstUserService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Validators/TST/TstGroupValidator.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Infrastructure/Validators/TST/TstUserValidator.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Repositories/TST/TstGroupRepositoryTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Repositories/TST/TstGroupRepositoryTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Repositories/TST/TstUserGroupRelationRepositoryTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Repositories/TST/TstUserGroupRelationRepositoryTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Repositories/TST/TstUserRepositoryTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Repositories/TST/TstUserRepositoryTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Services/TST/TstGroupServiceTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Services/TST/TstGroupServiceTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Services/TST/TstUserGroupRelationServiceTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Services/TST/TstUserGroupRelationServiceTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Services/TST/TstUserServiceTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Services/TST/TstUserServiceTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/TST/TstGroupController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/TST/TstGroupController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/TST/TstUserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/TST/TstUserController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/TST/TstUserGroupRelationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/TST/TstUserGroupRelationController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Enum/AppCode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Enum/AppCode.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/TST/TstDataSeeder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/TST/TstDataSeeder.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/TST/TstGroupService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/TST/TstGroupService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/TST/TstUserGroupRelationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/TST/TstUserGroupRelationService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/TST/TstUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/TST/TstUserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -349,7 +375,7 @@
       <workItem from="1767620756040" duration="6746000" />
       <workItem from="1767880102262" duration="9945000" />
       <workItem from="1767900810919" duration="19012000" />
-      <workItem from="1768066283901" duration="29560000" />
+      <workItem from="1768066283901" duration="32869000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit, contains partial implmentation of create user workflow">
       <option name="closed" value="true" />
@@ -511,7 +537,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768188062632</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="feat: add comprehensive unit tests for TST controllers with detailed documentation">
+      <option name="closed" value="true" />
+      <created>1768189818246</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1768189818246</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -552,7 +586,8 @@
     <MESSAGE value="feat: implement generics in repository and service layers for type safety" />
     <MESSAGE value="feat: refactor validation interfaces to use generics for improved type safety" />
     <MESSAGE value="feat: add TST user and group models, repositories, services, controllers and validators with initial test data seeding" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: add TST user and group models, repositories, services, controllers and validators with initial test data seeding" />
+    <MESSAGE value="feat: add comprehensive unit tests for TST controllers with detailed documentation" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add comprehensive unit tests for TST controllers with detailed documentation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -569,19 +604,6 @@
           <properties exception="System.Threading.ThreadAbortException" breakIfHandledByOtherCode="false" displayValue="System.Threading.ThreadAbortException" />
           <option name="timeStamp" value="3" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/GrpcServer/Infrastructure/Services/TST/TstGroupService.cs</url>
-          <line>34</line>
-          <properties documentPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Services/TST/TstGroupService.cs" containingFunctionPresentation="Method 'AddAsync'">
-            <startOffsets>
-              <option value="1114" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1150" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

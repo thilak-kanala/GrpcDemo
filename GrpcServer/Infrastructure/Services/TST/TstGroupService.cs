@@ -2,6 +2,8 @@ using GrpcServer.Infrastructure.Models.TST;
 using GrpcServer.Infrastructure.Repositories.Common;
 using GrpcServer.Infrastructure.Services.Common;
 using GrpcServer.Infrastructure.Validators.Common;
+using GrpcServer.Infrastructure.Enum;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace GrpcServer.Infrastructure.Services.TST;
 
@@ -13,7 +15,9 @@ public class TstGroupService : IGroupService<TstGroup>
     private readonly IGroupRepository<TstGroup> _groupRepository;
     private readonly IValidator<TstGroup> _groupValidator;
 
-    public TstGroupService(IGroupRepository<TstGroup> groupRepository, IValidator<TstGroup> groupValidator)
+    public TstGroupService(
+        [FromKeyedServices(AppCode.TST)] IGroupRepository<TstGroup> groupRepository, 
+        [FromKeyedServices(AppCode.TST)] IValidator<TstGroup> groupValidator)
     {
         _groupRepository = groupRepository;
         _groupValidator = groupValidator;

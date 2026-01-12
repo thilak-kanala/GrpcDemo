@@ -1,7 +1,7 @@
-using GrpcServer.Tests.Infrastructure.Models.TST;
-using GrpcServer.Tests.Infrastructure.Repositories.TST;
-using GrpcServer.Tests.Infrastructure.Services.TST;
-using GrpcServer.Tests.Infrastructure.Validators.TST;
+using GrpcServer.Infrastructure.Models.TST;
+using GrpcServer.Infrastructure.Repositories.TST;
+using GrpcServer.Infrastructure.Services.TST;
+using GrpcServer.Infrastructure.Validators.TST;
 
 namespace GrpcServer.Tests.Tests.Services.TST;
 

@@ -6,31 +6,32 @@ using GrpcServer.Infrastructure.Validators.Common;
 using GrpcServer.Infrastructure.Validators.TST;
 using GrpcServer.Infrastructure.Mappers.TST;
 using GrpcServer.Infrastructure.Models.TST;
+using GrpcServer.Infrastructure.Enum;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add API controllers
 builder.Services.AddControllers();
 
-// Register TST Services
-builder.Services.AddScoped<IUserService<TstUser>, TstUserService>();
-builder.Services.AddScoped<IGroupService<TstGroup>, TstGroupService>();
-builder.Services.AddScoped<IUserGroupRelationService<TstUser, TstGroup>, TstUserGroupRelationService>();
+// Register TST Services as Keyed Services
+builder.Services.AddKeyedScoped<IUserService<TstUser>, TstUserService>(AppCode.TST);
+builder.Services.AddKeyedScoped<IGroupService<TstGroup>, TstGroupService>(AppCode.TST);
+builder.Services.AddKeyedScoped<IUserGroupRelationService<TstUser, TstGroup>, TstUserGroupRelationService>(AppCode.TST);
 
-// Register TST Repositories as singletons
-builder.Services.AddSingleton<IUserRepository<TstUser>, TstUserRepository>();
-builder.Services.AddSingleton<IGroupRepository<TstGroup>, TstGroupRepository>();
-builder.Services.AddSingleton<IUserGroupRelationRepository, TstUserGroupRelationRepository>();
+// Register TST Repositories as Keyed Singletons
+builder.Services.AddKeyedSingleton<IUserRepository<TstUser>, TstUserRepository>(AppCode.TST);
+builder.Services.AddKeyedSingleton<IGroupRepository<TstGroup>, TstGroupRepository>(AppCode.TST);
+builder.Services.AddKeyedSingleton<IUserGroupRelationRepository, TstUserGroupRelationRepository>(AppCode.TST);
 
-// Register TST Validators
-builder.Services.AddScoped<IValidator<TstUser>, TstUserValidator>();
-builder.Services.AddScoped<IValidator<TstGroup>, TstGroupValidator>();
+// Register TST Validators as Keyed Services
+builder.Services.AddKeyedScoped<IValidator<TstUser>, TstUserValidator>(AppCode.TST);
+builder.Services.AddKeyedScoped<IValidator<TstGroup>, TstGroupValidator>(AppCode.TST);
 
-// Register TST Mapper
-builder.Services.AddSingleton<TstMapper>();
+// Register TST Mapper as Keyed Singleton
+builder.Services.AddKeyedSingleton<TstMapper, TstMapper>(AppCode.TST);
 
-// Register TST Data Seeder
-builder.Services.AddScoped<TstDataSeeder>();
+// Register TST Data Seeder as Keyed Service
+builder.Services.AddKeyedScoped<TstDataSeeder, TstDataSeeder>(AppCode.TST);
 
 // Add Swagger/OpenAPI documentation
 builder.Services.AddEndpointsApiExplorer();
@@ -63,7 +64,7 @@ var app = builder.Build();
 // Seed test data on startup
 using (var scope = app.Services.CreateScope())
 {
-    var seeder = scope.ServiceProvider.GetRequiredService<TstDataSeeder>();
+    var seeder = scope.ServiceProvider.GetRequiredKeyedService<TstDataSeeder>(AppCode.TST);
     await seeder.SeedDataAsync();
 }
 

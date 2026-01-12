@@ -1,5 +1,7 @@
 using GrpcServer.Infrastructure.Models.TST;
 using GrpcServer.Infrastructure.Repositories.Common;
+using GrpcServer.Infrastructure.Enum;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace GrpcServer.Infrastructure.Services.TST;
 
@@ -13,9 +15,9 @@ public class TstDataSeeder
     private readonly IUserGroupRelationRepository _relationRepository;
 
     public TstDataSeeder(
-        IUserRepository<TstUser> userRepository,
-        IGroupRepository<TstGroup> groupRepository,
-        IUserGroupRelationRepository relationRepository)
+        [FromKeyedServices(AppCode.TST)] IUserRepository<TstUser> userRepository,
+        [FromKeyedServices(AppCode.TST)] IGroupRepository<TstGroup> groupRepository,
+        [FromKeyedServices(AppCode.TST)] IUserGroupRelationRepository relationRepository)
     {
         _userRepository = userRepository;
         _groupRepository = groupRepository;

@@ -1,4 +1,4 @@
-using GrpcServer.Tests.Infrastructure.Repositories.TST;
+using GrpcServer.Infrastructure.Repositories.TST;
 
 namespace GrpcServer.Tests.Tests.Repositories.TST;
 
