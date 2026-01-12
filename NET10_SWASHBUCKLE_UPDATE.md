@@ -20,7 +20,6 @@ Updated all projects in the GrpcDemo solution to target **.NET 10.0** and use **
 #### GrpcServer Project
 - Uses `Swashbuckle.AspNetCore` v6.5.0
 - Packages:
-  - Asp.Versioning.Mvc v8.1.0
   - Grpc.AspNetCore v2.64.0
   - Swashbuckle.AspNetCore v6.5.0
 
