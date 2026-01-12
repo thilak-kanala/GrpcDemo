@@ -4,7 +4,7 @@
 This is the test project for **GrpcServer**, providing comprehensive unit tests for a multi-tenant user and group management system. The tests demonstrate the proper implementation and usage of the TST (Test) application code domain with in-memory repositories, services, validators, and mappers.
 
 ## Technology Stack
-- **.NET 9.0**
+- **.NET 10.0**
 - **xUnit** - Testing framework
 - **Moq** - Mocking library
 - **Coverlet** - Code coverage tool

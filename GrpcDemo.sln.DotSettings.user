@@ -12,6 +12,9 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=2fa62e94_002D19a3_002D42dc_002D8576_002Db007770b8f15/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="IBaseGroupTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;ProjectFolder&gt;8A9E9F3C-4D5B-4E2F-9C7A-1D8E3F6B2A4C/d:Tests/d:Repositories/d:TST&lt;/ProjectFolder&gt;
 &lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=375f4ec5_002Dde9d_002D4885_002Db7e4_002D277f8f4d3f4c/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from &amp;lt;GrpcServer.Tests&amp;gt;" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;Project Location="/Users/thilakkanala/RiderProjects/GrpcDemo/GrpcServer.Tests" Presentation="&amp;lt;GrpcServer.Tests&amp;gt;" /&gt;
+&lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=91cc9cb9_002D763c_002D44b4_002Da21b_002D560001441213/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from TST" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;ProjectFolder&gt;8A9E9F3C-4D5B-4E2F-9C7A-1D8E3F6B2A4C/d:Tests&lt;/ProjectFolder&gt;
 &lt;/SessionState&gt;</s:String>

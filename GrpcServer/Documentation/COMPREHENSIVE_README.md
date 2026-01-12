@@ -1,6 +1,6 @@
 # GrpcServer - User & Group Management API
 
-A .NET 9.0 RESTful API for managing users and groups across multiple backend systems with full CRUD operations and many-to-many relationships.
+A .NET 10.0 RESTful API for managing users and groups across multiple backend systems with full CRUD operations and many-to-many relationships.
 
 ## 📋 Table of Contents
 
@@ -21,7 +21,7 @@ A .NET 9.0 RESTful API for managing users and groups across multiple backend sys
 GrpcServer is a multi-tenant API gateway that manages users and groups across different backend systems (ABC, INM, TST). Each system can have its own validation rules, data mappings, and repositories while sharing a common API interface.
 
 **Key Technologies:**
-- **.NET 9.0** - Modern C# framework
+- **.NET 10.0** - Modern C# framework
 - **ASP.NET Core** - Web API framework
 - **Swagger/OpenAPI** - Interactive API documentation
 - **Keyed Dependency Injection** - Multi-system support
@@ -39,7 +39,7 @@ GrpcServer is a multi-tenant API gateway that manages users and groups across di
 
 ### Prerequisites
 
-- .NET 9.0 SDK or later ([download here](https://dotnet.microsoft.com/download/dotnet/9.0))
+- .NET 10.0 SDK or later ([download here](https://dotnet.microsoft.com/download/dotnet/10.0))
 - (Optional) Docker for containerized deployment
 
 ### Run Locally in 3 Steps
@@ -565,7 +565,7 @@ docker run -p 8080:8080 \
 ```
 
 The Dockerfile uses multi-stage builds for optimization:
-- **Base:** .NET 9.0 runtime
+- **Base:** .NET 10.0 runtime
 - **Build:** SDK for compilation
 - **Publish:** Optimized output
 - **Final:** Minimal production image
@@ -609,7 +609,7 @@ The Dockerfile uses multi-stage builds for optimization:
 
 - **Swagger UI** - `http://localhost:5185` (interactive API testing)
 - **Project Documentation** - See `/Documentation` folder
-- **.NET 9.0 Docs** - https://docs.microsoft.com/dotnet/
+- **.NET 10.0 Docs** - https://docs.microsoft.com/dotnet/
 - **ASP.NET Core** - https://docs.microsoft.com/aspnet/core/
 
 ---
@@ -626,5 +626,5 @@ The Dockerfile uses multi-stage builds for optimization:
 
 ---
 
-**Built with .NET 9.0 | RESTful API | Swagger/OpenAPI | Docker**
+**Built with .NET 10.0 | RESTful API | Swagger/OpenAPI | Docker**
 

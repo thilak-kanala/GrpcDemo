@@ -1,22 +1,52 @@
-using Microsoft.OpenApi.Models;
+using GrpcServer.Infrastructure.Services.Common;
+using GrpcServer.Infrastructure.Services.TST;
+using GrpcServer.Infrastructure.Repositories.Common;
+using GrpcServer.Infrastructure.Repositories.TST;
+using GrpcServer.Infrastructure.Validators.Common;
+using GrpcServer.Infrastructure.Validators.TST;
+using GrpcServer.Infrastructure.Mappers.TST;
+using GrpcServer.Infrastructure.Models.TST;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add gRPC services
-builder.Services.AddGrpc();
 
 // Add API controllers
 builder.Services.AddControllers();
 
-// Add Swagger/OpenAPI
+// Register TST Services
+builder.Services.AddScoped<IUserService<TstUser>, TstUserService>();
+builder.Services.AddScoped<IGroupService<TstGroup>, TstGroupService>();
+builder.Services.AddScoped<IUserGroupRelationService<TstUser, TstGroup>, TstUserGroupRelationService>();
+
+// Register TST Repositories as singletons
+builder.Services.AddSingleton<IUserRepository<TstUser>, TstUserRepository>();
+builder.Services.AddSingleton<IGroupRepository<TstGroup>, TstGroupRepository>();
+builder.Services.AddSingleton<IUserGroupRelationRepository, TstUserGroupRelationRepository>();
+
+// Register TST Validators
+builder.Services.AddScoped<IValidator<TstUser>, TstUserValidator>();
+builder.Services.AddScoped<IValidator<TstGroup>, TstGroupValidator>();
+
+// Register TST Mapper
+builder.Services.AddSingleton<TstMapper>();
+
+// Register TST Data Seeder
+builder.Services.AddScoped<TstDataSeeder>();
+
+// Add Swagger/OpenAPI documentation
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
-    options.SwaggerDoc("v1", new OpenApiInfo
+    options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
     {
         Title = "User & Group Management API",
         Version = "v1",
-        Description = "RESTful CRUD API for Users and Groups with many-to-many relationship"
+        Description = "RESTful CRUD API for Users and Groups with many-to-many relationship management. " +
+                     "Supports full CRUD operations on Users and Groups, plus relationship management between them.",
+        // Contact = new Microsoft.OpenApi.Models.OpenApiContact
+        // {
+        //     Name = "API Support",
+        //     Email = "support@example.com"
+        // }
     });
     
     // Include XML comments if available
@@ -30,6 +60,13 @@ builder.Services.AddSwaggerGen(options =>
 
 var app = builder.Build();
 
+// Seed test data on startup
+using (var scope = app.Services.CreateScope())
+{
+    var seeder = scope.ServiceProvider.GetRequiredService<TstDataSeeder>();
+    await seeder.SeedDataAsync();
+}
+
 // Configure HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {
@@ -37,12 +74,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(options =>
     {
         options.SwaggerEndpoint("/swagger/v1/swagger.json", "User & Group Management API v1");
-        options.RoutePrefix = string.Empty; // Serve Swagger UI at the app's root
+        options.DocumentTitle = "User & Group Management API";
     });
 }
-
-// app.UseHttpsRedirection();
-// app.UseAuthorization();
 
 app.MapControllers();
 
