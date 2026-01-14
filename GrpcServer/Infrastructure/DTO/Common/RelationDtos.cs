@@ -1,4 +1,4 @@
-namespace GrpcServer.Infrastructure.Models.Common;
+namespace GrpcServer.Infrastructure.DTO.Common;
 
 public static class RelationDtos
 {

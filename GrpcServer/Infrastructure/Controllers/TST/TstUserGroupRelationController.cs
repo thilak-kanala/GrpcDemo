@@ -5,7 +5,7 @@ using GrpcServer.Infrastructure.Services.Common;
 using GrpcServer.Infrastructure.Mappers.TST;
 using GrpcServer.Infrastructure.Enum;
 using Microsoft.Extensions.DependencyInjection;
-using static GrpcServer.Infrastructure.Models.Common.RelationDtos;
+using static GrpcServer.Infrastructure.DTO.Common.RelationDtos;
 
 namespace GrpcServer.Infrastructure.Controllers.TST;
 

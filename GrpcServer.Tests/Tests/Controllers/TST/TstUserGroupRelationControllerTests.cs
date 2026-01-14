@@ -5,7 +5,7 @@ using GrpcServer.Infrastructure.DTO.TST;
 using GrpcServer.Infrastructure.Models.TST;
 using GrpcServer.Infrastructure.Services.Common;
 using GrpcServer.Infrastructure.Mappers.TST;
-using static GrpcServer.Infrastructure.Models.Common.RelationDtos;
+using static GrpcServer.Infrastructure.DTO.Common.RelationDtos;
 
 namespace GrpcServer.Tests.Tests.Controllers.TST;
 
