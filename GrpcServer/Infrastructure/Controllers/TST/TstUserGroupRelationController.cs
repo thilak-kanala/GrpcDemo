@@ -1,6 +1,6 @@
+using GrpcServer.Infrastructure.DTO.TST;
 using Microsoft.AspNetCore.Mvc;
 using GrpcServer.Infrastructure.Models.TST;
-using GrpcServer.Infrastructure.Models.TST.DTO;
 using GrpcServer.Infrastructure.Services.Common;
 using GrpcServer.Infrastructure.Mappers.TST;
 using GrpcServer.Infrastructure.Enum;

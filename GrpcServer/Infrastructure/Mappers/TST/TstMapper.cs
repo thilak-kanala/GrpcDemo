@@ -1,6 +1,6 @@
+using GrpcServer.Infrastructure.DTO.TST;
 using GrpcServer.Infrastructure.Mappers.Common;
 using GrpcServer.Infrastructure.Models.TST;
-using GrpcServer.Infrastructure.Models.TST.DTO;
 
 namespace GrpcServer.Infrastructure.Mappers.TST
 {

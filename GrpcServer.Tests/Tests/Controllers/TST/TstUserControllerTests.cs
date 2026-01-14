@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using GrpcServer.Infrastructure.Controllers.TST;
+using GrpcServer.Infrastructure.DTO.TST;
 using GrpcServer.Infrastructure.Models.TST;
-using GrpcServer.Infrastructure.Models.TST.DTO;
 using GrpcServer.Infrastructure.Services.Common;
 using GrpcServer.Infrastructure.Mappers.TST;
 
