@@ -60,12 +60,4 @@ public sealed class TstMapper :
             TstGroupExtension2 = dto.TstGroupExtension2
         };
     }
-
-    public void ApplyPatch(TstGroup entity, TstGroupRequestDto dto)
-    {
-        entity.Id = dto.Id;
-        entity.DisplayName = dto.DisplayName;
-        entity.TstGroupExtension1 = dto.TstGroupExtension1;
-        entity.TstGroupExtension2 = dto.TstGroupExtension2;
-    }
 }
