@@ -1,3 +1,4 @@
+using GrpcServer.Infrastructure.DTO.Common;
 using GrpcServer.Infrastructure.DTO.TST;
 using GrpcServer.Infrastructure.Mappers.Common;
 using GrpcServer.Infrastructure.Models.TST;
@@ -10,10 +11,9 @@ public sealed class TstMapper :
 {
     public TstUserResponseDto ToResponseDto(TstUser entity)
     {
+        var baseUser = new BaseUserDto(entity.Id, entity.UserName, entity.Email);
         return new TstUserResponseDto(
-            entity.Id,
-            entity.UserName,
-            entity.Email,
+            baseUser,
             entity.TstUserExtension1,
             entity.TstUserExtension2
         );
@@ -23,9 +23,9 @@ public sealed class TstMapper :
     {
         return new TstUser
         {
-            Id = dto.Id,
-            UserName = dto.UserName,
-            Email = dto.Email,
+            Id = dto.BaseUser.Id,
+            UserName = dto.BaseUser.UserName,
+            Email = dto.BaseUser.Email,
             TstUserExtension1 = dto.TstUserExtension1,
             TstUserExtension2 = dto.TstUserExtension2
         };
@@ -33,18 +33,18 @@ public sealed class TstMapper :
 
     public void ApplyPatch(TstUser entity, TstUserRequestDto dto)
     {
-        entity.Id = dto.Id;
-        entity.UserName = dto.UserName;
-        entity.Email = dto.Email;
+        entity.Id = dto.BaseUser.Id;
+        entity.UserName = dto.BaseUser.UserName;
+        entity.Email = dto.BaseUser.Email;
         entity.TstUserExtension1 = dto.TstUserExtension1;
         entity.TstUserExtension2 = dto.TstUserExtension2;
     }
 
     public TstGroupResponseDto ToResponseDto(TstGroup entity)
     {
+        var baseGroup = new BaseGroupDto(entity.Id, entity.DisplayName);
         return new TstGroupResponseDto(
-            entity.Id,
-            entity.DisplayName,
+            baseGroup,
             entity.TstGroupExtension1,
             entity.TstGroupExtension2
         );
@@ -54,8 +54,8 @@ public sealed class TstMapper :
     {
         return new TstGroup
         {
-            Id = dto.Id,
-            DisplayName = dto.DisplayName,
+            Id = dto.BaseGroup.Id,
+            DisplayName = dto.BaseGroup.DisplayName,
             TstGroupExtension1 = dto.TstGroupExtension1,
             TstGroupExtension2 = dto.TstGroupExtension2
         };

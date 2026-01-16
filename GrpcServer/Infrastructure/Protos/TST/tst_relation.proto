@@ -20,7 +20,7 @@ message GetGroupUsersResponse {
 
 // Service definition for TST User-Group relationship operations
 // Provides operations to manage many-to-many relationships between users and groups
-service TstUserGroupRelationService {
+service TstUserGroupRelationGrpcServiceDefinition {
   // Retrieves all groups that a specific user belongs to
   rpc GetUserGroups (common.GetUserGroupsRequest) returns (GetUserGroupsResponse);
   

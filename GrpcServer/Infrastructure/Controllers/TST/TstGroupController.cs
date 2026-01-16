@@ -4,7 +4,6 @@ using GrpcServer.Infrastructure.Models.TST;
 using GrpcServer.Infrastructure.Services.Common;
 using GrpcServer.Infrastructure.Mappers.TST;
 using GrpcServer.Infrastructure.Enum;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace GrpcServer.Infrastructure.Controllers.TST;
 
@@ -181,7 +180,7 @@ public class TstGroupController : ControllerBase
         try
         {
             // Validate ID consistency
-            if (id != requestDto.Id)
+            if (id != requestDto.BaseGroup.Id)
             {
                 return BadRequest(new { message = "ID in URL does not match ID in request body." });
             }

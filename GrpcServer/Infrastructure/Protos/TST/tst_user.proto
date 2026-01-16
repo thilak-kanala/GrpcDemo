@@ -40,7 +40,7 @@ message TstUserResponse {
 
 // Service definition for TST User operations
 // Provides CRUD operations for user entities
-service TstUserService {
+service TstUserGrpcServiceDefinition {
   // Retrieves all users from the TST system
   rpc GetAllUsers (common.GetAllUsersRequest) returns (GetAllUsersResponse);
   

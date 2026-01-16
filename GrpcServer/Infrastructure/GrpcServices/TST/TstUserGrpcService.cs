@@ -13,7 +13,7 @@ namespace GrpcServer.Infrastructure.GrpcServices.TST;
 /// gRPC service implementation for TST User operations.
 /// Provides remote procedure calls for user management mirroring the REST controller interface.
 /// </summary>
-public class TstUserGrpcService : TstUserService.TstUserServiceBase
+public class TstUserGrpcService : TstUserGrpcServiceDefinition.TstUserGrpcServiceDefinitionBase
 {
     private readonly IUserService<TstUser> _userService;
     private readonly TstProtoMapper _mapper;

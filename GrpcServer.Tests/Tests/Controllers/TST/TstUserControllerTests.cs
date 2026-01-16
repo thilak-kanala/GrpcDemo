@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using GrpcServer.Infrastructure.Controllers.TST;
+using GrpcServer.Infrastructure.DTO.Common;
 using GrpcServer.Infrastructure.DTO.TST;
 using GrpcServer.Infrastructure.Models.TST;
 using GrpcServer.Infrastructure.Services.Common;
@@ -54,8 +55,8 @@ public class TstUserControllerTests
         var okResult = Assert.IsType<OkObjectResult>(result.Result);
         var returnedUsers = Assert.IsAssignableFrom<IEnumerable<TstUserResponseDto>>(okResult.Value).ToList();
         Assert.Equal(2, returnedUsers.Count);
-        Assert.Equal("user1", returnedUsers.First().Id);
-        Assert.Equal("john.doe", returnedUsers.First().UserName);
+        Assert.Equal("user1", returnedUsers.First().BaseUser.Id);
+        Assert.Equal("john.doe", returnedUsers.First().BaseUser.UserName);
         
         _mockUserService.Verify(s => s.GetAllAsync(), Times.Once);
     }
@@ -114,9 +115,9 @@ public class TstUserControllerTests
         // Assert
         var okResult = Assert.IsType<OkObjectResult>(result.Result);
         var returnedUser = Assert.IsType<TstUserResponseDto>(okResult.Value);
-        Assert.Equal("user1", returnedUser.Id);
-        Assert.Equal("john.doe", returnedUser.UserName);
-        Assert.Equal("john@example.com", returnedUser.Email);
+        Assert.Equal("user1", returnedUser.BaseUser.Id);
+        Assert.Equal("john.doe", returnedUser.BaseUser.UserName);
+        Assert.Equal("john@example.com", returnedUser.BaseUser.Email);
         
         _mockUserService.Verify(s => s.GetByIdAsync("user1"), Times.Once);
     }
@@ -159,9 +160,7 @@ public class TstUserControllerTests
     {
         // Arrange
         var requestDto = new TstUserRequestDto(
-            "user1",
-            "john.doe",
-            "john@example.com",
+            new BaseUserDto("user1", "john.doe", "john@example.com"),
             "extension1",
             "extension2"
         );
@@ -176,8 +175,8 @@ public class TstUserControllerTests
         Assert.Equal(nameof(TstUserController.GetUserById), createdAtActionResult.ActionName);
         
         var returnedUser = Assert.IsType<TstUserResponseDto>(createdAtActionResult.Value);
-        Assert.Equal("user1", returnedUser.Id);
-        Assert.Equal("john.doe", returnedUser.UserName);
+        Assert.Equal("user1", returnedUser.BaseUser.Id);
+        Assert.Equal("john.doe", returnedUser.BaseUser.UserName);
         
         _mockUserService.Verify(s => s.AddAsync(It.Is<TstUser>(u => 
             u.Id == "user1" && 
@@ -191,9 +190,7 @@ public class TstUserControllerTests
     {
         // Arrange
         var requestDto = new TstUserRequestDto(
-            "",
-            "john.doe",
-            "john@example.com",
+            new BaseUserDto("", "john.doe", "john@example.com"),
             "extension1",
             "extension2"
         );
@@ -215,13 +212,7 @@ public class TstUserControllerTests
     public async Task CreateUser_ServiceThrowsException_ReturnsInternalServerError()
     {
         // Arrange
-        var requestDto = new TstUserRequestDto(
-            "user1",
-            "john.doe",
-            "john@example.com",
-            "extension1",
-            "extension2"
-        );
+        var requestDto = new TstUserRequestDto(new BaseUserDto("user1", "john.doe", "john@example.com"), "extension1", "extension2");
 
         _mockUserService.Setup(s => s.AddAsync(It.IsAny<TstUser>()))
             .ThrowsAsync(new Exception("Database error"));
@@ -240,13 +231,7 @@ public class TstUserControllerTests
     public async Task UpdateUser_WithValidUserAndMatchingId_ReturnsNoContent()
     {
         // Arrange
-        var requestDto = new TstUserRequestDto(
-            "user1",
-            "john.doe.updated",
-            "john.updated@example.com",
-            "extension1",
-            "extension2"
-        );
+        var requestDto = new TstUserRequestDto(new BaseUserDto("user1", "john.doe.updated", "john.updated@example.com"), "extension1", "extension2");
 
         var existingUser = new TstUser
         {
@@ -278,13 +263,7 @@ public class TstUserControllerTests
     public async Task UpdateUser_WithMismatchedId_ReturnsBadRequest()
     {
         // Arrange
-        var requestDto = new TstUserRequestDto(
-            "user2",
-            "john.doe",
-            "john@example.com",
-            "extension1",
-            "extension2"
-        );
+        var requestDto = new TstUserRequestDto(new BaseUserDto("user2", "john.doe", "john@example.com"), "extension1", "extension2");
 
         // Act
         var result = await _controller.UpdateUser("user1", requestDto);
@@ -301,13 +280,7 @@ public class TstUserControllerTests
     public async Task UpdateUser_WithNonExistentUser_ReturnsNotFound()
     {
         // Arrange
-        var requestDto = new TstUserRequestDto(
-            "user1",
-            "john.doe",
-            "john@example.com",
-            "extension1",
-            "extension2"
-        );
+        var requestDto = new TstUserRequestDto(new BaseUserDto("user1", "john.doe", "john@example.com"), "extension1", "extension2");
 
         _mockUserService.Setup(s => s.GetByIdAsync("user1")).ReturnsAsync((TstUser?)null);
 
@@ -327,9 +300,7 @@ public class TstUserControllerTests
     {
         // Arrange
         var requestDto = new TstUserRequestDto(
-            "user1",
-            "",
-            "john@example.com",
+            new BaseUserDto("user1", "", "john@example.com"),
             "extension1",
             "extension2"
         );
@@ -361,13 +332,7 @@ public class TstUserControllerTests
     public async Task UpdateUser_ServiceThrowsException_ReturnsInternalServerError()
     {
         // Arrange
-        var requestDto = new TstUserRequestDto(
-            "user1",
-            "john.doe",
-            "john@example.com",
-            "extension1",
-            "extension2"
-        );
+        var requestDto = new TstUserRequestDto(new BaseUserDto("user1", "john.doe", "john@example.com"), "extension1", "extension2");
 
         var existingUser = new TstUser
         {

@@ -1,3 +1,5 @@
+using GrpcServer.Infrastructure.DTO.Common;
+
 namespace GrpcServer.Infrastructure.DTO.TST;
 
-public record TstGroupResponseDto(string Id, string DisplayName, string TstGroupExtension1, string TstGroupExtension2);
+public record TstGroupResponseDto(BaseGroupDto BaseGroup, string TstGroupExtension1, string TstGroupExtension2);

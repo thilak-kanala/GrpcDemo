@@ -40,7 +40,7 @@ message TstGroupResponse {
 
 // Service definition for TST Group operations
 // Provides CRUD operations for group entities
-service TstGroupService {
+service TstGroupGrpcServiceDefinition {
   // Retrieves all groups from the TST system
   rpc GetAllGroups (common.GetAllGroupsRequest) returns (GetAllGroupsResponse);
   

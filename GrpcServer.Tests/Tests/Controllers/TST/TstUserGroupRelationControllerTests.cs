@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using GrpcServer.Infrastructure.Controllers.TST;
+using GrpcServer.Infrastructure.DTO.Common;
 using GrpcServer.Infrastructure.DTO.TST;
 using GrpcServer.Infrastructure.Models.TST;
 using GrpcServer.Infrastructure.Services.Common;
@@ -53,8 +54,8 @@ public class TstUserGroupRelationControllerTests
         var okResult = Assert.IsType<OkObjectResult>(result.Result);
         var returnedGroups = Assert.IsAssignableFrom<IEnumerable<TstGroupResponseDto>>(okResult.Value).ToList();
         Assert.Equal(2, returnedGroups.Count);
-        Assert.Equal("group1", returnedGroups.First().Id);
-        Assert.Equal("Engineering", returnedGroups.First().DisplayName);
+        Assert.Equal("group1", returnedGroups.First().BaseGroup.Id);
+        Assert.Equal("Engineering", returnedGroups.First().BaseGroup.DisplayName);
         
         _mockRelationService.Verify(s => s.GetUserGroupsAsync("user1"), Times.Once);
     }
@@ -302,8 +303,8 @@ public class TstUserGroupRelationControllerTests
         var okResult = Assert.IsType<OkObjectResult>(result.Result);
         var returnedUsers = Assert.IsAssignableFrom<IEnumerable<TstUserResponseDto>>(okResult.Value).ToList();
         Assert.Equal(2, returnedUsers.Count);
-        Assert.Equal("user1", returnedUsers.First().Id);
-        Assert.Equal("john.doe", returnedUsers.First().UserName);
+        Assert.Equal("user1", returnedUsers.First().BaseUser.Id);
+        Assert.Equal("john.doe", returnedUsers.First().BaseUser.UserName);
         
         _mockRelationService.Verify(s => s.GetGroupUsersAsync("group1"), Times.Once);
     }

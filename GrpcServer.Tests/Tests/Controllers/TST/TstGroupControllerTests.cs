@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using GrpcServer.Infrastructure.Controllers.TST;
+using GrpcServer.Infrastructure.DTO.Common;
 using GrpcServer.Infrastructure.DTO.TST;
 using GrpcServer.Infrastructure.Models.TST;
 using GrpcServer.Infrastructure.Services.Common;
@@ -53,8 +54,8 @@ public class TstGroupControllerTests
         var okResult = Assert.IsType<OkObjectResult>(result.Result);
         var returnedGroups = Assert.IsAssignableFrom<IEnumerable<TstGroupResponseDto>>(okResult.Value).ToList();
         Assert.Equal(2, returnedGroups.Count);
-        Assert.Equal("group1", returnedGroups.First().Id);
-        Assert.Equal("Engineering", returnedGroups.First().DisplayName);
+        Assert.Equal("group1", returnedGroups.First().BaseGroup.Id);
+        Assert.Equal("Engineering", returnedGroups.First().BaseGroup.DisplayName);
         
         _mockGroupService.Verify(s => s.GetAllAsync(), Times.Once);
     }
@@ -113,8 +114,8 @@ public class TstGroupControllerTests
         // Assert
         var okResult = Assert.IsType<OkObjectResult>(result.Result);
         var returnedGroup = Assert.IsType<TstGroupResponseDto>(okResult.Value);
-        Assert.Equal("group1", returnedGroup.Id);
-        Assert.Equal("Engineering", returnedGroup.DisplayName);
+        Assert.Equal("group1", returnedGroup.BaseGroup.Id);
+        Assert.Equal("Engineering", returnedGroup.BaseGroup.DisplayName);
         
         _mockGroupService.Verify(s => s.GetByIdAsync("group1"), Times.Once);
     }
@@ -158,8 +159,7 @@ public class TstGroupControllerTests
     {
         // Arrange
         var requestDto = new TstGroupRequestDto(
-            "group1",
-            "Engineering",
+            new BaseGroupDto("group1", "Engineering"),
             "ext1",
             "ext2"
         );
@@ -174,8 +174,8 @@ public class TstGroupControllerTests
         Assert.Equal(nameof(TstGroupController.GetGroupById), createdAtActionResult.ActionName);
         
         var returnedGroup = Assert.IsType<TstGroupResponseDto>(createdAtActionResult.Value);
-        Assert.Equal("group1", returnedGroup.Id);
-        Assert.Equal("Engineering", returnedGroup.DisplayName);
+        Assert.Equal("group1", returnedGroup.BaseGroup.Id);
+        Assert.Equal("Engineering", returnedGroup.BaseGroup.DisplayName);
         
         _mockGroupService.Verify(s => s.AddAsync(It.Is<TstGroup>(g => 
             g.Id == "group1" && 
@@ -188,8 +188,7 @@ public class TstGroupControllerTests
     {
         // Arrange
         var requestDto = new TstGroupRequestDto(
-            "",
-            "Engineering",
+            new BaseGroupDto("", "Engineering"),
             "ext1",
             "ext2"
         );
@@ -212,8 +211,7 @@ public class TstGroupControllerTests
     {
         // Arrange
         var requestDto = new TstGroupRequestDto(
-            "group1",
-            "Engineering",
+            new BaseGroupDto("group1", "Engineering"),
             "ext1",
             "ext2"
         );
@@ -237,8 +235,7 @@ public class TstGroupControllerTests
     {
         // Arrange
         var requestDto = new TstGroupRequestDto(
-            "group1",
-            "Engineering Updated",
+            new BaseGroupDto("group1", "Engineering Updated"),
             "ext1",
             "ext2"
         );
@@ -272,8 +269,7 @@ public class TstGroupControllerTests
     {
         // Arrange
         var requestDto = new TstGroupRequestDto(
-            "group2",
-            "Engineering",
+            new BaseGroupDto("group2", "Engineering"),
             "ext1",
             "ext2"
         );
@@ -294,8 +290,7 @@ public class TstGroupControllerTests
     {
         // Arrange
         var requestDto = new TstGroupRequestDto(
-            "group1",
-            "Engineering",
+            new BaseGroupDto("group1", "Engineering"),
             "ext1",
             "ext2"
         );
@@ -318,8 +313,7 @@ public class TstGroupControllerTests
     {
         // Arrange
         var requestDto = new TstGroupRequestDto(
-            "group1",
-            "",
+            new BaseGroupDto("group1", ""),
             "ext1",
             "ext2"
         );
@@ -351,8 +345,7 @@ public class TstGroupControllerTests
     {
         // Arrange
         var requestDto = new TstGroupRequestDto(
-            "group1",
-            "Engineering",
+            new BaseGroupDto("group1", "Engineering"),
             "ext1",
             "ext2"
         );

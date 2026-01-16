@@ -5,7 +5,6 @@ using GrpcServer.Infrastructure.Models.TST;
 using GrpcServer.Infrastructure.Services.Common;
 using GrpcServer.Protos.Common;
 using GrpcServer.Protos.TST;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace GrpcServer.Infrastructure.GrpcServices.TST;
 
@@ -13,7 +12,7 @@ namespace GrpcServer.Infrastructure.GrpcServices.TST;
 /// gRPC service implementation for TST Group operations.
 /// Provides remote procedure calls for group management mirroring the REST controller interface.
 /// </summary>
-public class TstGroupGrpcService : TstGroupService.TstGroupServiceBase
+public class TstGroupGrpcService : TstGroupGrpcServiceDefinition.TstGroupGrpcServiceDefinitionBase
 {
     private readonly IGroupService<TstGroup> _groupService;
     private readonly TstProtoMapper _mapper;
