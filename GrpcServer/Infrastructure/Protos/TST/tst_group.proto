@@ -4,16 +4,14 @@ option csharp_namespace = "GrpcServer.Protos.TST";
 
 package tst;
 
-// Message representing a TST Group
-message TstGroupMessage {
-  string id = 1;
-  string display_name = 2;
-  string tst_group_extension1 = 3;
-  string tst_group_extension2 = 4;
-}
+import "Common/base_group.proto";
 
-// Request message for GetAllGroups
-message GetAllGroupsRequest {
+// Message representing a TST Group
+// Extends the base group message with TST-specific fields
+message TstGroupMessage {
+  common.BaseGroupMessage base = 1;
+  string tst_group_extension1 = 2;
+  string tst_group_extension2 = 3;
 }
 
 // Response message for GetAllGroups
@@ -21,68 +19,40 @@ message GetAllGroupsResponse {
   repeated TstGroupMessage groups = 1;
 }
 
-// Request message for GetGroupById
-message GetGroupByIdRequest {
-  string id = 1;
-}
-
 // Response message for GetGroupById
 message GetGroupByIdResponse {
   TstGroupMessage group = 1;
 }
 
-// Request message for CreateGroup
-message CreateGroupRequest {
-  string id = 1;
-  string display_name = 2;
-  string tst_group_extension1 = 3;
-  string tst_group_extension2 = 4;
+// Unified request message for both Create and Update Group operations
+// Extends the base group message with TST-specific fields
+message TstGroupRequest {
+  common.BaseGroupMessage base = 1;
+  string tst_group_extension1 = 2;
+  string tst_group_extension2 = 3;
 }
 
-// Response message for CreateGroup
-message CreateGroupResponse {
+// Unified response message for both CreateGroup and UpdateGroup operations
+message TstGroupResponse {
   TstGroupMessage group = 1;
 }
 
-// Request message for UpdateGroup
-message UpdateGroupRequest {
-  string id = 1;
-  string display_name = 2;
-  string tst_group_extension1 = 3;
-  string tst_group_extension2 = 4;
-}
-
-// Response message for UpdateGroup
-message UpdateGroupResponse {
-  TstGroupMessage group = 1;
-}
-
-// Request message for DeleteGroup
-message DeleteGroupRequest {
-  string id = 1;
-}
-
-// Response message for DeleteGroup
-message DeleteGroupResponse {
-  bool success = 1;
-}
 
 // Service definition for TST Group operations
 // Provides CRUD operations for group entities
 service TstGroupService {
   // Retrieves all groups from the TST system
-  rpc GetAllGroups (GetAllGroupsRequest) returns (GetAllGroupsResponse);
+  rpc GetAllGroups (common.GetAllGroupsRequest) returns (GetAllGroupsResponse);
   
   // Retrieves a specific group by its unique identifier
-  rpc GetGroupById (GetGroupByIdRequest) returns (GetGroupByIdResponse);
+  rpc GetGroupById (common.GetGroupByIdRequest) returns (GetGroupByIdResponse);
   
   // Creates a new group in the TST system
-  rpc CreateGroup (CreateGroupRequest) returns (CreateGroupResponse);
+  rpc CreateGroup (TstGroupRequest) returns (TstGroupResponse);
   
   // Updates an existing group in the TST system
-  rpc UpdateGroup (UpdateGroupRequest) returns (UpdateGroupResponse);
+  rpc UpdateGroup (TstGroupRequest) returns (TstGroupResponse);
   
   // Deletes a group from the TST system
-  rpc DeleteGroup (DeleteGroupRequest) returns (DeleteGroupResponse);
+  rpc DeleteGroup (common.DeleteGroupRequest) returns (common.DeleteGroupResponse);
 }
-

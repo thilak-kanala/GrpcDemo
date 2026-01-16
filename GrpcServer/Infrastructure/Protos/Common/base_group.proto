@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcServer.Protos.Common";
+
+package common;
+
+// Base message representing common group fields across all applications
+// Applications should extend this with their specific fields
+message BaseGroupMessage {
+  string id = 1;
+  string display_name = 2;
+}
+
+// Generic request message for GetAllGroups operations
+message GetAllGroupsRequest {
+  // Can be extended with filters if needed
+}
+
+// Generic request message for GetGroupById operations
+message GetGroupByIdRequest {
+  string id = 1;
+}
+
+// Generic request message for DeleteGroup operations
+message DeleteGroupRequest {
+  string id = 1;
+}
+
+// Generic response message for DeleteGroup operations
+message DeleteGroupResponse {
+  bool success = 1;
+  string message = 2; // Optional: for error messages or additional info
+}
+

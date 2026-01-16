@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcServer.Protos.Common";
+
+package common;
+
+// Base message representing common user fields across all applications
+// Applications should extend this with their specific fields
+message BaseUserMessage {
+  string id = 1;
+  string user_name = 2;
+  string email = 3;
+}
+
+// Generic request message for GetAllUsers operations
+message GetAllUsersRequest {
+  // Can be extended with filters if needed
+}
+
+// Generic request message for GetUserById operations
+message GetUserByIdRequest {
+  string id = 1;
+}
+
+// Generic request message for DeleteUser operations
+message DeleteUserRequest {
+  string id = 1;
+}
+
+// Generic response message for DeleteUser operations
+message DeleteUserResponse {
+  bool success = 1;
+  string message = 2; // Optional: for error messages or additional info
+}
+

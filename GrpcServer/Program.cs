@@ -7,11 +7,15 @@ using GrpcServer.Infrastructure.Validators.TST;
 using GrpcServer.Infrastructure.Mappers.TST;
 using GrpcServer.Infrastructure.Models.TST;
 using GrpcServer.Infrastructure.Enum;
+using GrpcServer.Infrastructure.GrpcServices.TST;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add API controllers
 builder.Services.AddControllers();
+
+// Add gRPC services
+builder.Services.AddGrpc();
 
 // Register TST Services as Keyed Services
 builder.Services.AddKeyedScoped<IUserService<TstUser>, TstUserService>(AppCode.TST);
@@ -29,6 +33,9 @@ builder.Services.AddKeyedScoped<IValidator<TstGroup>, TstGroupValidator>(AppCode
 
 // Register TST Mapper as Keyed Singleton
 builder.Services.AddKeyedSingleton<TstMapper, TstMapper>(AppCode.TST);
+
+// Register TST Proto Mapper as Keyed Singleton
+builder.Services.AddKeyedSingleton<TstProtoMapper, TstProtoMapper>(AppCode.TST);
 
 // Register TST Data Seeder as Keyed Service
 builder.Services.AddKeyedScoped<TstDataSeeder, TstDataSeeder>(AppCode.TST);
@@ -80,5 +87,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapControllers();
+
+// Map gRPC services
+app.MapGrpcService<TstUserGrpcService>();
+app.MapGrpcService<TstGroupGrpcService>();
+app.MapGrpcService<TstUserGroupRelationGrpcService>();
 
 app.Run();

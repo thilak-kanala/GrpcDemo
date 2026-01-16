@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcServer.Protos.Common";
+
+package common;
+
+// Generic request message for getting groups associated with a user
+message GetUserGroupsRequest {
+  string user_id = 1;
+}
+
+// Generic request message for adding a user to multiple groups
+message AddUserToGroupsRequest {
+  string user_id = 1;
+  repeated string group_ids = 2;
+}
+
+// Generic response message for add operations
+message AddUserToGroupsResponse {
+  bool success = 1;
+  string message = 2; // Optional: for error messages or additional info
+}
+
+// Generic request message for removing a user from a group
+message RemoveUserFromGroupRequest {
+  string user_id = 1;
+  string group_id = 2;
+}
+
+// Generic response message for remove operations
+message RemoveUserFromGroupResponse {
+  bool success = 1;
+  string message = 2; // Optional: for error messages or additional info
+}
+
+// Generic request message for getting users in a group
+message GetGroupUsersRequest {
+  string group_id = 1;
+}
+
+// Generic request message for adding multiple users to a group
+message AddUsersToGroupRequest {
+  string group_id = 1;
+  repeated string user_ids = 2;
+}
+
+// Generic response message for add operations
+message AddUsersToGroupResponse {
+  bool success = 1;
+  string message = 2; // Optional: for error messages or additional info
+}

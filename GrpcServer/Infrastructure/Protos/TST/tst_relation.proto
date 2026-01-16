@@ -4,44 +4,13 @@ option csharp_namespace = "GrpcServer.Protos.TST";
 
 package tst;
 
-import "tst_user.proto";
-import "tst_group.proto";
-
-// Request message for GetUserGroups
-message GetUserGroupsRequest {
-  string user_id = 1;
-}
+import "TST/tst_user.proto";
+import "TST/tst_group.proto";
+import "Common/base_relation.proto";
 
 // Response message for GetUserGroups
 message GetUserGroupsResponse {
   repeated TstGroupMessage groups = 1;
-}
-
-// Request message for AddUserToGroups
-message AddUserToGroupsRequest {
-  string user_id = 1;
-  repeated string group_ids = 2;
-}
-
-// Response message for AddUserToGroups
-message AddUserToGroupsResponse {
-  bool success = 1;
-}
-
-// Request message for RemoveUserFromGroup
-message RemoveUserFromGroupRequest {
-  string user_id = 1;
-  string group_id = 2;
-}
-
-// Response message for RemoveUserFromGroup
-message RemoveUserFromGroupResponse {
-  bool success = 1;
-}
-
-// Request message for GetGroupUsers
-message GetGroupUsersRequest {
-  string group_id = 1;
 }
 
 // Response message for GetGroupUsers
@@ -49,33 +18,22 @@ message GetGroupUsersResponse {
   repeated TstUserMessage users = 1;
 }
 
-// Request message for AddUsersToGroup
-message AddUsersToGroupRequest {
-  string group_id = 1;
-  repeated string user_ids = 2;
-}
-
-// Response message for AddUsersToGroup
-message AddUsersToGroupResponse {
-  bool success = 1;
-}
-
 // Service definition for TST User-Group relationship operations
 // Provides operations to manage many-to-many relationships between users and groups
 service TstUserGroupRelationService {
   // Retrieves all groups that a specific user belongs to
-  rpc GetUserGroups (GetUserGroupsRequest) returns (GetUserGroupsResponse);
+  rpc GetUserGroups (common.GetUserGroupsRequest) returns (GetUserGroupsResponse);
   
   // Adds a user to multiple groups
-  rpc AddUserToGroups (AddUserToGroupsRequest) returns (AddUserToGroupsResponse);
+  rpc AddUserToGroups (common.AddUserToGroupsRequest) returns (common.AddUserToGroupsResponse);
   
   // Removes a user from a specific group
-  rpc RemoveUserFromGroup (RemoveUserFromGroupRequest) returns (RemoveUserFromGroupResponse);
+  rpc RemoveUserFromGroup (common.RemoveUserFromGroupRequest) returns (common.RemoveUserFromGroupResponse);
   
   // Retrieves all users that belong to a specific group
-  rpc GetGroupUsers (GetGroupUsersRequest) returns (GetGroupUsersResponse);
+  rpc GetGroupUsers (common.GetGroupUsersRequest) returns (GetGroupUsersResponse);
   
   // Adds multiple users to a specific group
-  rpc AddUsersToGroup (AddUsersToGroupRequest) returns (AddUsersToGroupResponse);
+  rpc AddUsersToGroup (common.AddUsersToGroupRequest) returns (common.AddUsersToGroupResponse);
 }
 
