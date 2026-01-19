@@ -542,12 +542,3 @@ public class TstUserGroupRelationControllerTests
         _mockRelationService.Verify(s => s.GetGroupUsersAsync(groupId), Times.Once);
     }
 }
-
-
-
-
-
-
-
-
-

@@ -441,6 +441,3 @@ public class TstGroupControllerTests
         _mockGroupService.Verify(s => s.DeleteAsync("group1"), Times.Once);
     }
 }
-
-
-
