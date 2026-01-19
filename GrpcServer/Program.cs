@@ -8,6 +8,7 @@ using GrpcServer.Infrastructure.Mappers.TST;
 using GrpcServer.Infrastructure.Models.TST;
 using GrpcServer.Infrastructure.Enum;
 using GrpcServer.Infrastructure.GrpcServices.TST;
+using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,30 +41,17 @@ builder.Services.AddKeyedSingleton<TstProtoMapper, TstProtoMapper>(AppCode.TST);
 // Register TST Data Seeder as Keyed Service
 builder.Services.AddKeyedScoped<TstDataSeeder, TstDataSeeder>(AppCode.TST);
 
-// Add Swagger/OpenAPI documentation
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(options =>
+// Add OpenAPI documentation
+builder.Services.AddOpenApi(options =>
 {
-    options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    options.AddDocumentTransformer((document, _, _) =>
     {
-        Title = "User & Group Management API",
-        Version = "v1",
-        Description = "RESTful CRUD API for Users and Groups with many-to-many relationship management. " +
-                     "Supports full CRUD operations on Users and Groups, plus relationship management between them.",
-        // Contact = new Microsoft.OpenApi.Models.OpenApiContact
-        // {
-        //     Name = "API Support",
-        //     Email = "support@example.com"
-        // }
+        document.Info.Title = "User & Group Management API";
+        document.Info.Version = "v1";
+        document.Info.Description = "RESTful CRUD API for Users and Groups with many-to-many relationship management. " +
+                     "Supports full CRUD operations on Users and Groups, plus relationship management between them.";
+        return Task.CompletedTask;
     });
-    
-    // Include XML comments if available
-    var xmlFile = $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-    if (File.Exists(xmlPath))
-    {
-        options.IncludeXmlComments(xmlPath);
-    }
 });
 
 var app = builder.Build();
@@ -78,12 +66,8 @@ using (var scope = app.Services.CreateScope())
 // Configure HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI(options =>
-    {
-        options.SwaggerEndpoint("/swagger/v1/swagger.json", "User & Group Management API v1");
-        options.DocumentTitle = "User & Group Management API";
-    });
+    app.MapOpenApi();
+    app.MapScalarApiReference();
 }
 
 app.MapControllers();

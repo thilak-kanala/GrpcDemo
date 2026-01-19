@@ -10,40 +10,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1f7adc3-5d58-4e06-9035-12df0221d91c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/DTO_REFACTORING_SUMMARY.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GRPC_TESTS_COVERAGE_VISUAL.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GRPC_TESTS_IMPLEMENTATION_REPORT.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GRPC_TESTS_QUICK_REFERENCE.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GRPC_TESTS_SUMMARY.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GrpcServer.Tests/Tests/GrpcServices/TST/TstGroupGrpcServiceTests.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GrpcServer.Tests/Tests/GrpcServices/TST/TstUserGroupRelationGrpcServiceTests.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GrpcServer.Tests/Tests/GrpcServices/TST/TstUserGrpcServiceTests.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/DTO/Common/BaseGroupDto.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/DTO/Common/BaseUserDto.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/update_tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OPENAPI_MIGRATION_SUMMARY.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OPENAPI_QUICK_REFERENCE.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GrpcDemo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GrpcDemo/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcDemo.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcDemo.sln.DotSettings.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Controllers/TST/TstGroupControllerTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Controllers/TST/TstGroupControllerTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Controllers/TST/TstUserControllerTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Controllers/TST/TstUserControllerTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Controllers/TST/TstUserGroupRelationControllerTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer.Tests/Tests/Controllers/TST/TstUserGroupRelationControllerTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/TST/TstGroupController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/TST/TstGroupController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/TST/TstUserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Controllers/TST/TstUserController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/DTO/TST/TstGroupRequestDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/DTO/TST/TstGroupRequestDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/DTO/TST/TstGroupResponseDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/DTO/TST/TstGroupResponseDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/DTO/TST/TstUserRequestDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/DTO/TST/TstUserRequestDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/DTO/TST/TstUserResponseDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/DTO/TST/TstUserResponseDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/GrpcServices/TST/TstGroupGrpcService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/GrpcServices/TST/TstGroupGrpcService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/GrpcServices/TST/TstUserGroupRelationGrpcService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/GrpcServices/TST/TstUserGroupRelationGrpcService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/GrpcServices/TST/TstUserGrpcService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/GrpcServices/TST/TstUserGrpcService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Mappers/TST/TstMapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Mappers/TST/TstMapper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Protos/TST/tst_group.proto" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Protos/TST/tst_group.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Protos/TST/tst_relation.proto" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Protos/TST/tst_relation.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Protos/TST/tst_user.proto" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Protos/TST/tst_user.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/GrpcServer.Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer.Tests/GrpcServer.Tests.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/GrpcServer.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/GrpcServer.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CopilotPersistence">
+    <persistenceIdMap>
+      <entry key="_/Users/thilakkanala/RiderProjects/GrpcDemo" value="36fMH2txNXfrk0lJvp5K1tKMUc2" />
+    </persistenceIdMap>
   </component>
   <component name="DpaMonitoringSettings">
     <option name="firstShow" value="false" />
@@ -96,6 +78,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/a6d7c3abd4bb25b143ddc7a36ea5f74afd9a85471a3df5ea5d0653fea102b/ControllerEndpointRouteBuilderExtensions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b554263068268a64c5ebaa4448fe16ec181c44dc3296c06241546c765ad8187b/MvcCoreMvcCoreBuilderExtensions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c7afd9724cf757c4a8469dba2bdc22ab5ac111c91f431dbfefc992dacb3e8635/ControllerBase.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d27d79aa83f5093b48425fcbed69038d64aa2335d5e86f2b821457d9f61d/OpenApiEndpointRouteBuilderExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f0c16cda8a141e194c9151fd8f6acd0f93ef39e54a2a250baf2e5b2fa1fac6/WebApplication.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/GrpcServer.Tests/Tests/Controllers/TST/TstGroupControllerTests.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/GrpcServer.Tests/Tests/Controllers/TST/TstUserControllerTests.cs" root0="FORCE_HIGHLIGHTING" />
@@ -360,7 +343,8 @@
       <workItem from="1768066283901" duration="34795000" />
       <workItem from="1768399961580" duration="3450000" />
       <workItem from="1768407608201" duration="3544000" />
-      <workItem from="1768516895961" duration="20782000" />
+      <workItem from="1768516895961" duration="22068000" />
+      <workItem from="1768832540336" duration="10435000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit, contains partial implmentation of create user workflow">
       <option name="closed" value="true" />
@@ -578,7 +562,23 @@
       <option name="project" value="LOCAL" />
       <updated>1768571616546</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="feat: refactor TST DTOs to introduce BaseGroupDto and BaseUserDto for improved structure and maintainability">
+      <option name="closed" value="true" />
+      <created>1768579933156</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1768579933156</updated>
+    </task>
+    <task id="LOCAL-00029" summary="refactor: clean up TST controller and test files by removing unnecessary whitespace">
+      <option name="closed" value="true" />
+      <created>1768837539726</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1768837539726</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -599,8 +599,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="checkpoint - decent structure" />
-    <MESSAGE value="add DTOs, mappers, and services for ABC and INM user/group management" />
     <MESSAGE value="refactor: rename generic models and update namespaces to common structure; add mappers and validators for ABC and INM" />
     <MESSAGE value="feat: add initial project structure with configuration files, Docker setup, and a sample WeatherForecast API" />
     <MESSAGE value="feat: implement user and group repositories with CRUD operations and mock data" />
@@ -624,7 +622,9 @@
     <MESSAGE value="refactor: simplify TstMapper class formatting for improved readability" />
     <MESSAGE value="refactor: remove ApplyPatch method from TstMapper class to streamline mapping logic" />
     <MESSAGE value="feat: implement gRPC services for TST user and group management with proto definitions" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: implement gRPC services for TST user and group management with proto definitions" />
+    <MESSAGE value="feat: refactor TST DTOs to introduce BaseGroupDto and BaseUserDto for improved structure and maintainability" />
+    <MESSAGE value="refactor: clean up TST controller and test files by removing unnecessary whitespace" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: clean up TST controller and test files by removing unnecessary whitespace" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
