@@ -56,16 +56,16 @@ builder.Services.AddOpenApi(options =>
 
 var app = builder.Build();
 
-// Seed test data on startup
-using (var scope = app.Services.CreateScope())
-{
-    var seeder = scope.ServiceProvider.GetRequiredKeyedService<TstDataSeeder>(AppCode.TST);
-    await seeder.SeedDataAsync();
-}
-
-// Configure HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {
+    // Seed test data on startup
+    using (var scope = app.Services.CreateScope())
+    {
+        var seeder = scope.ServiceProvider.GetRequiredKeyedService<TstDataSeeder>(AppCode.TST);
+        await seeder.SeedDataAsync();
+    }
+    
+    // Configure HTTP request pipeline
     app.MapOpenApi();
     app.MapScalarApiReference();
 }
