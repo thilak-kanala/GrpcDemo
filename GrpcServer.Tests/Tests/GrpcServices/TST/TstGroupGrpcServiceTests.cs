@@ -1,73 +1,55 @@
 using Grpc.Core;
+using Moq;
 using GrpcServer.Infrastructure.GrpcServices.TST;
 using GrpcServer.Infrastructure.Mappers.TST;
 using GrpcServer.Infrastructure.Models.TST;
-using GrpcServer.Infrastructure.Repositories.TST;
-using GrpcServer.Infrastructure.Services.TST;
-using GrpcServer.Infrastructure.Validators.TST;
+using GrpcServer.Infrastructure.Services.Common;
 using GrpcServer.Protos.Common;
 using GrpcServer.Protos.TST;
 
 namespace GrpcServer.Tests.Tests.GrpcServices.TST;
 
 /// <summary>
-/// Comprehensive unit tests for TstGroupGrpcService covering all gRPC operations and scenarios.
-/// Tests include: successful operations, error handling, validation, and edge cases.
+/// Unit tests for TstGroupGrpcService covering all gRPC operations.
+/// Tests mirror the controller layer scenarios using mocked dependencies.
 /// </summary>
 public class TstGroupGrpcServiceTests
 {
-    private readonly TstGroupGrpcService _grpcService;
-    private readonly TstGroupRepository _repository;
+    private readonly Mock<IGroupService<TstGroup>> _mockGroupService;
     private readonly TstProtoMapper _mapper;
-    private readonly TstGroupService _groupService;
+    private readonly TstGroupGrpcService _grpcService;
 
     public TstGroupGrpcServiceTests()
     {
-        _repository = new TstGroupRepository();
-        var validator = new TstGroupValidator();
-        _groupService = new Infrastructure.Services.TST.TstGroupService(_repository, validator);
+        _mockGroupService = new Mock<IGroupService<TstGroup>>();
         _mapper = new TstProtoMapper();
-        _grpcService = new TstGroupGrpcService(_groupService, _mapper);
+        _grpcService = new TstGroupGrpcService(_mockGroupService.Object, _mapper);
     }
 
-    #region GetAllGroups Tests
 
     [Fact]
-    public async Task GetAllGroups_WithNoGroups_ReturnsEmptyResponse()
+    public async Task GetAllGroups_WithExistingGroups_ReturnsGroups()
     {
         // Arrange
-        var request = new GetAllGroupsRequest();
-        var context = TestServerCallContext.Create();
-
-        // Act
-        var response = await _grpcService.GetAllGroups(request, context);
-
-        // Assert
-        Assert.NotNull(response);
-        Assert.Empty(response.Groups);
-    }
-
-    [Fact]
-    public async Task GetAllGroups_WithMultipleGroups_ReturnsAllGroups()
-    {
-        // Arrange
-        var group1 = new TstGroup
+        var groups = new List<TstGroup>
         {
-            Id = "group1",
-            DisplayName = "Test Group 1",
-            TstGroupExtension1 = "Extension1",
-            TstGroupExtension2 = "Extension2"
+            new TstGroup
+            {
+                Id = "group1",
+                DisplayName = "Engineering",
+                TstGroupExtension1 = "ext1",
+                TstGroupExtension2 = "ext2"
+            },
+            new TstGroup
+            {
+                Id = "group2",
+                DisplayName = "Marketing",
+                TstGroupExtension1 = "ext3",
+                TstGroupExtension2 = "ext4"
+            }
         };
-        var group2 = new TstGroup
-        {
-            Id = "group2",
-            DisplayName = "Test Group 2",
-            TstGroupExtension1 = "Extension1",
-            TstGroupExtension2 = "Extension2"
-        };
-        await _repository.AddAsync(group1);
-        await _repository.AddAsync(group2);
 
+        _mockGroupService.Setup(s => s.GetAllAsync()).ReturnsAsync(groups);
         var request = new GetAllGroupsRequest();
         var context = TestServerCallContext.Create();
 
@@ -77,23 +59,17 @@ public class TstGroupGrpcServiceTests
         // Assert
         Assert.NotNull(response);
         Assert.Equal(2, response.Groups.Count);
-        Assert.Contains(response.Groups, g => g.Base.Id == "group1");
-        Assert.Contains(response.Groups, g => g.Base.Id == "group2");
+        Assert.Equal("group1", response.Groups[0].Base.Id);
+        Assert.Equal("Engineering", response.Groups[0].Base.DisplayName);
+        
+        _mockGroupService.Verify(s => s.GetAllAsync(), Times.Once);
     }
 
     [Fact]
-    public async Task GetAllGroups_VerifiesCorrectMapping()
+    public async Task GetAllGroups_WithNoGroups_ReturnsEmptyList()
     {
         // Arrange
-        var group = new TstGroup
-        {
-            Id = "group1",
-            DisplayName = "Test Group",
-            TstGroupExtension1 = "CustomExtension1",
-            TstGroupExtension2 = "CustomExtension2"
-        };
-        await _repository.AddAsync(group);
-
+        _mockGroupService.Setup(s => s.GetAllAsync()).ReturnsAsync(new List<TstGroup>());
         var request = new GetAllGroupsRequest();
         var context = TestServerCallContext.Create();
 
@@ -101,30 +77,42 @@ public class TstGroupGrpcServiceTests
         var response = await _grpcService.GetAllGroups(request, context);
 
         // Assert
-        var returnedGroup = response.Groups.First();
-        Assert.Equal("group1", returnedGroup.Base.Id);
-        Assert.Equal("Test Group", returnedGroup.Base.DisplayName);
-        Assert.Equal("CustomExtension1", returnedGroup.TstGroupExtension1);
-        Assert.Equal("CustomExtension2", returnedGroup.TstGroupExtension2);
+        Assert.NotNull(response);
+        Assert.Empty(response.Groups);
+        
+        _mockGroupService.Verify(s => s.GetAllAsync(), Times.Once);
     }
 
-    #endregion
+    [Fact]
+    public async Task GetAllGroups_ServiceThrowsException_ThrowsRpcException()
+    {
+        // Arrange
+        _mockGroupService.Setup(s => s.GetAllAsync()).ThrowsAsync(new Exception("Database error"));
+        var request = new GetAllGroupsRequest();
+        var context = TestServerCallContext.Create();
 
-    #region GetGroupById Tests
+        // Act & Assert
+        var exception = await Assert.ThrowsAsync<RpcException>(
+            async () => await _grpcService.GetAllGroups(request, context));
+        
+        Assert.Equal(StatusCode.Internal, exception.StatusCode);
+        
+        _mockGroupService.Verify(s => s.GetAllAsync(), Times.Once);
+    }
 
     [Fact]
-    public async Task GetGroupById_WithValidId_ReturnsGroup()
+    public async Task GetGroupById_WithExistingGroup_ReturnsGroup()
     {
         // Arrange
         var group = new TstGroup
         {
             Id = "group1",
-            DisplayName = "Test Group",
-            TstGroupExtension1 = "Extension1",
-            TstGroupExtension2 = "Extension2"
+            DisplayName = "Engineering",
+            TstGroupExtension1 = "ext1",
+            TstGroupExtension2 = "ext2"
         };
-        await _repository.AddAsync(group);
 
+        _mockGroupService.Setup(s => s.GetByIdAsync("group1")).ReturnsAsync(group);
         var request = new GetGroupByIdRequest { Id = "group1" };
         var context = TestServerCallContext.Create();
 
@@ -135,13 +123,16 @@ public class TstGroupGrpcServiceTests
         Assert.NotNull(response);
         Assert.NotNull(response.Group);
         Assert.Equal("group1", response.Group.Base.Id);
-        Assert.Equal("Test Group", response.Group.Base.DisplayName);
+        Assert.Equal("Engineering", response.Group.Base.DisplayName);
+        
+        _mockGroupService.Verify(s => s.GetByIdAsync("group1"), Times.Once);
     }
 
     [Fact]
-    public async Task GetGroupById_WithNonExistentId_ThrowsNotFoundRpcException()
+    public async Task GetGroupById_WithNonExistentGroup_ThrowsNotFoundRpcException()
     {
         // Arrange
+        _mockGroupService.Setup(s => s.GetByIdAsync("nonexistent")).ReturnsAsync((TstGroup?)null);
         var request = new GetGroupByIdRequest { Id = "nonexistent" };
         var context = TestServerCallContext.Create();
 
@@ -151,38 +142,30 @@ public class TstGroupGrpcServiceTests
         
         Assert.Equal(StatusCode.NotFound, exception.StatusCode);
         Assert.Contains("not found", exception.Status.Detail);
+        
+        _mockGroupService.Verify(s => s.GetByIdAsync("nonexistent"), Times.Once);
     }
 
     [Fact]
-    public async Task GetGroupById_VerifiesAllFieldsMapped()
+    public async Task GetGroupById_ServiceThrowsException_ThrowsRpcException()
     {
         // Arrange
-        var group = new TstGroup
-        {
-            Id = "group1",
-            DisplayName = "Test Group",
-            TstGroupExtension1 = "SpecialExt1",
-            TstGroupExtension2 = "SpecialExt2"
-        };
-        await _repository.AddAsync(group);
-
+        _mockGroupService.Setup(s => s.GetByIdAsync(It.IsAny<string>()))
+            .ThrowsAsync(new Exception("Database error"));
         var request = new GetGroupByIdRequest { Id = "group1" };
         var context = TestServerCallContext.Create();
 
-        // Act
-        var response = await _grpcService.GetGroupById(request, context);
-
-        // Assert
-        Assert.Equal("SpecialExt1", response.Group.TstGroupExtension1);
-        Assert.Equal("SpecialExt2", response.Group.TstGroupExtension2);
+        // Act & Assert
+        var exception = await Assert.ThrowsAsync<RpcException>(
+            async () => await _grpcService.GetGroupById(request, context));
+        
+        Assert.Equal(StatusCode.Internal, exception.StatusCode);
+        
+        _mockGroupService.Verify(s => s.GetByIdAsync("group1"), Times.Once);
     }
 
-    #endregion
-
-    #region CreateGroup Tests
-
     [Fact]
-    public async Task CreateGroup_WithValidRequest_CreatesAndReturnsGroup()
+    public async Task CreateGroup_WithValidGroup_CreatesAndReturnsGroup()
     {
         // Arrange
         var request = new TstGroupRequest
@@ -190,11 +173,13 @@ public class TstGroupGrpcServiceTests
             Base = new BaseGroupMessage
             {
                 Id = "group1",
-                DisplayName = "Test Group"
+                DisplayName = "Engineering"
             },
-            TstGroupExtension1 = "Extension1",
-            TstGroupExtension2 = "Extension2"
+            TstGroupExtension1 = "ext1",
+            TstGroupExtension2 = "ext2"
         };
+
+        _mockGroupService.Setup(s => s.AddAsync(It.IsAny<TstGroup>())).Returns(Task.CompletedTask);
         var context = TestServerCallContext.Create();
 
         // Act
@@ -204,27 +189,31 @@ public class TstGroupGrpcServiceTests
         Assert.NotNull(response);
         Assert.NotNull(response.Group);
         Assert.Equal("group1", response.Group.Base.Id);
+        Assert.Equal("Engineering", response.Group.Base.DisplayName);
         
-        // Verify group was actually created in repository
-        var createdGroup = await _repository.GetByIdAsync("group1");
-        Assert.NotNull(createdGroup);
-        Assert.Equal("Test Group", createdGroup.DisplayName);
+        _mockGroupService.Verify(s => s.AddAsync(It.Is<TstGroup>(g => 
+            g.Id == "group1" && 
+            g.DisplayName == "Engineering"
+        )), Times.Once);
     }
 
     [Fact]
-    public async Task CreateGroup_WithEmptyDisplayName_ThrowsInvalidArgumentRpcException()
+    public async Task CreateGroup_WithInvalidGroup_ThrowsInvalidArgumentRpcException()
     {
         // Arrange
         var request = new TstGroupRequest
         {
             Base = new BaseGroupMessage
             {
-                Id = "group1",
-                DisplayName = "" // Invalid: empty display name
+                Id = "",
+                DisplayName = "Engineering"
             },
-            TstGroupExtension1 = "Extension1",
-            TstGroupExtension2 = "Extension2"
+            TstGroupExtension1 = "ext1",
+            TstGroupExtension2 = "ext2"
         };
+
+        _mockGroupService.Setup(s => s.AddAsync(It.IsAny<TstGroup>()))
+            .ThrowsAsync(new ArgumentException("Id cannot be empty"));
         var context = TestServerCallContext.Create();
 
         // Act & Assert
@@ -232,11 +221,12 @@ public class TstGroupGrpcServiceTests
             async () => await _grpcService.CreateGroup(request, context));
         
         Assert.Equal(StatusCode.InvalidArgument, exception.StatusCode);
-        Assert.Contains("validation failed", exception.Status.Detail);
+        
+        _mockGroupService.Verify(s => s.AddAsync(It.IsAny<TstGroup>()), Times.Once);
     }
 
     [Fact]
-    public async Task CreateGroup_WithExtension1LessThan5Chars_ThrowsInvalidArgumentRpcException()
+    public async Task CreateGroup_ServiceThrowsException_ThrowsRpcException()
     {
         // Arrange
         var request = new TstGroupRequest
@@ -244,45 +234,27 @@ public class TstGroupGrpcServiceTests
             Base = new BaseGroupMessage
             {
                 Id = "group1",
-                DisplayName = "Test Group"
+                DisplayName = "Engineering"
             },
-            TstGroupExtension1 = "Ext", // Invalid: less than 5 characters
-            TstGroupExtension2 = "Extension2"
+            TstGroupExtension1 = "ext1",
+            TstGroupExtension2 = "ext2"
         };
+
+        _mockGroupService.Setup(s => s.AddAsync(It.IsAny<TstGroup>()))
+            .ThrowsAsync(new Exception("Database error"));
         var context = TestServerCallContext.Create();
 
         // Act & Assert
         var exception = await Assert.ThrowsAsync<RpcException>(
             async () => await _grpcService.CreateGroup(request, context));
         
-        Assert.Equal(StatusCode.InvalidArgument, exception.StatusCode);
-    }
-
-    [Fact]
-    public async Task CreateGroup_WithEmptyExtension1_ThrowsInvalidArgumentRpcException()
-    {
-        // Arrange
-        var request = new TstGroupRequest
-        {
-            Base = new BaseGroupMessage
-            {
-                Id = "group1",
-                DisplayName = "Test Group"
-            },
-            TstGroupExtension1 = "", // Invalid: empty extension
-            TstGroupExtension2 = "Extension2"
-        };
-        var context = TestServerCallContext.Create();
-
-        // Act & Assert
-        var exception = await Assert.ThrowsAsync<RpcException>(
-            async () => await _grpcService.CreateGroup(request, context));
+        Assert.Equal(StatusCode.Internal, exception.StatusCode);
         
-        Assert.Equal(StatusCode.InvalidArgument, exception.StatusCode);
+        _mockGroupService.Verify(s => s.AddAsync(It.IsAny<TstGroup>()), Times.Once);
     }
 
     [Fact]
-    public async Task CreateGroup_TrimsWhitespaceFromDisplayName()
+    public async Task UpdateGroup_WithValidGroup_UpdatesGroup()
     {
         // Arrange
         var request = new TstGroupRequest
@@ -290,72 +262,22 @@ public class TstGroupGrpcServiceTests
             Base = new BaseGroupMessage
             {
                 Id = "group1",
-                DisplayName = "  Test Group  " // Has whitespace
+                DisplayName = "Engineering Updated"
             },
-            TstGroupExtension1 = "Extension1",
-            TstGroupExtension2 = "Extension2"
+            TstGroupExtension1 = "ext1",
+            TstGroupExtension2 = "ext2"
         };
-        var context = TestServerCallContext.Create();
 
-        // Act
-        var response = await _grpcService.CreateGroup(request, context);
-
-        // Assert
-        var createdGroup = await _repository.GetByIdAsync("group1");
-        Assert.Equal("Test Group", createdGroup?.DisplayName); // Whitespace trimmed
-    }
-
-    [Fact]
-    public async Task CreateGroup_WithExtension1Exactly5Chars_Succeeds()
-    {
-        // Arrange
-        var request = new TstGroupRequest
-        {
-            Base = new BaseGroupMessage
-            {
-                Id = "group1",
-                DisplayName = "Test Group"
-            },
-            TstGroupExtension1 = "Ext12", // Valid: exactly 5 characters
-            TstGroupExtension2 = "Extension2"
-        };
-        var context = TestServerCallContext.Create();
-
-        // Act
-        var response = await _grpcService.CreateGroup(request, context);
-
-        // Assert
-        Assert.NotNull(response);
-        Assert.Equal("Ext12", response.Group.TstGroupExtension1);
-    }
-
-    #endregion
-
-    #region UpdateGroup Tests
-
-    [Fact]
-    public async Task UpdateGroup_WithValidRequest_UpdatesAndReturnsGroup()
-    {
-        // Arrange
-        var group = new TstGroup
+        var existingGroup = new TstGroup
         {
             Id = "group1",
-            DisplayName = "Original Name",
-            TstGroupExtension1 = "OriginalExt1",
-            TstGroupExtension2 = "OriginalExt2"
+            DisplayName = "Engineering",
+            TstGroupExtension1 = "ext1",
+            TstGroupExtension2 = "ext2"
         };
-        await _repository.AddAsync(group);
 
-        var request = new TstGroupRequest
-        {
-            Base = new BaseGroupMessage
-            {
-                Id = "group1",
-                DisplayName = "Updated Name"
-            },
-            TstGroupExtension1 = "UpdatedExt1",
-            TstGroupExtension2 = "UpdatedExt2"
-        };
+        _mockGroupService.Setup(s => s.GetByIdAsync("group1")).ReturnsAsync(existingGroup);
+        _mockGroupService.Setup(s => s.UpdateAsync(It.IsAny<TstGroup>())).Returns(Task.CompletedTask);
         var context = TestServerCallContext.Create();
 
         // Act
@@ -363,27 +285,31 @@ public class TstGroupGrpcServiceTests
 
         // Assert
         Assert.NotNull(response);
-        Assert.Equal("Updated Name", response.Group.Base.DisplayName);
+        Assert.Equal("Engineering Updated", response.Group.Base.DisplayName);
         
-        var updatedGroup = await _repository.GetByIdAsync("group1");
-        Assert.Equal("Updated Name", updatedGroup?.DisplayName);
-        Assert.Equal("UpdatedExt1", updatedGroup?.TstGroupExtension1);
+        _mockGroupService.Verify(s => s.GetByIdAsync("group1"), Times.Once);
+        _mockGroupService.Verify(s => s.UpdateAsync(It.Is<TstGroup>(g => 
+            g.Id == "group1" && 
+            g.DisplayName == "Engineering Updated"
+        )), Times.Once);
     }
 
     [Fact]
-    public async Task UpdateGroup_WithNonExistentId_ThrowsNotFoundRpcException()
+    public async Task UpdateGroup_WithNonExistentGroup_ThrowsNotFoundRpcException()
     {
         // Arrange
         var request = new TstGroupRequest
         {
             Base = new BaseGroupMessage
             {
-                Id = "nonexistent",
-                DisplayName = "Test Group"
+                Id = "group1",
+                DisplayName = "Engineering"
             },
-            TstGroupExtension1 = "Extension1",
-            TstGroupExtension2 = "Extension2"
+            TstGroupExtension1 = "ext1",
+            TstGroupExtension2 = "ext2"
         };
+
+        _mockGroupService.Setup(s => s.GetByIdAsync("group1")).ReturnsAsync((TstGroup?)null);
         var context = TestServerCallContext.Create();
 
         // Act & Assert
@@ -392,31 +318,37 @@ public class TstGroupGrpcServiceTests
         
         Assert.Equal(StatusCode.NotFound, exception.StatusCode);
         Assert.Contains("not found", exception.Status.Detail);
+        
+        _mockGroupService.Verify(s => s.GetByIdAsync("group1"), Times.Once);
+        _mockGroupService.Verify(s => s.UpdateAsync(It.IsAny<TstGroup>()), Times.Never);
     }
 
     [Fact]
-    public async Task UpdateGroup_WithEmptyDisplayName_ThrowsInvalidArgumentRpcException()
+    public async Task UpdateGroup_WithValidationError_ThrowsInvalidArgumentRpcException()
     {
         // Arrange
-        var group = new TstGroup
-        {
-            Id = "group1",
-            DisplayName = "Test Group",
-            TstGroupExtension1 = "Extension1",
-            TstGroupExtension2 = "Extension2"
-        };
-        await _repository.AddAsync(group);
-
         var request = new TstGroupRequest
         {
             Base = new BaseGroupMessage
             {
                 Id = "group1",
-                DisplayName = "" // Invalid: empty display name
+                DisplayName = ""
             },
-            TstGroupExtension1 = "Extension1",
-            TstGroupExtension2 = "Extension2"
+            TstGroupExtension1 = "ext1",
+            TstGroupExtension2 = "ext2"
         };
+
+        var existingGroup = new TstGroup
+        {
+            Id = "group1",
+            DisplayName = "Engineering",
+            TstGroupExtension1 = "ext1",
+            TstGroupExtension2 = "ext2"
+        };
+
+        _mockGroupService.Setup(s => s.GetByIdAsync("group1")).ReturnsAsync(existingGroup);
+        _mockGroupService.Setup(s => s.UpdateAsync(It.IsAny<TstGroup>()))
+            .ThrowsAsync(new ArgumentException("DisplayName cannot be empty"));
         var context = TestServerCallContext.Create();
 
         // Act & Assert
@@ -424,90 +356,61 @@ public class TstGroupGrpcServiceTests
             async () => await _grpcService.UpdateGroup(request, context));
         
         Assert.Equal(StatusCode.InvalidArgument, exception.StatusCode);
+        
+        _mockGroupService.Verify(s => s.UpdateAsync(It.IsAny<TstGroup>()), Times.Once);
     }
 
     [Fact]
-    public async Task UpdateGroup_WithExtension1LessThan5Chars_ThrowsInvalidArgumentRpcException()
+    public async Task UpdateGroup_ServiceThrowsException_ThrowsRpcException()
     {
         // Arrange
-        var group = new TstGroup
-        {
-            Id = "group1",
-            DisplayName = "Test Group",
-            TstGroupExtension1 = "ValidExt1",
-            TstGroupExtension2 = "Extension2"
-        };
-        await _repository.AddAsync(group);
-
         var request = new TstGroupRequest
         {
             Base = new BaseGroupMessage
             {
                 Id = "group1",
-                DisplayName = "Test Group"
+                DisplayName = "Engineering"
             },
-            TstGroupExtension1 = "Bad", // Invalid: less than 5 characters
-            TstGroupExtension2 = "Extension2"
+            TstGroupExtension1 = "ext1",
+            TstGroupExtension2 = "ext2"
         };
+
+        var existingGroup = new TstGroup
+        {
+            Id = "group1",
+            DisplayName = "Engineering",
+            TstGroupExtension1 = "ext1",
+            TstGroupExtension2 = "ext2"
+        };
+
+        _mockGroupService.Setup(s => s.GetByIdAsync("group1")).ReturnsAsync(existingGroup);
+        _mockGroupService.Setup(s => s.UpdateAsync(It.IsAny<TstGroup>()))
+            .ThrowsAsync(new Exception("Database error"));
         var context = TestServerCallContext.Create();
 
         // Act & Assert
         var exception = await Assert.ThrowsAsync<RpcException>(
             async () => await _grpcService.UpdateGroup(request, context));
         
-        Assert.Equal(StatusCode.InvalidArgument, exception.StatusCode);
+        Assert.Equal(StatusCode.Internal, exception.StatusCode);
+        
+        _mockGroupService.Verify(s => s.UpdateAsync(It.IsAny<TstGroup>()), Times.Once);
     }
 
     [Fact]
-    public async Task UpdateGroup_TrimsWhitespaceFromFields()
+    public async Task DeleteGroup_WithExistingGroup_DeletesGroup()
     {
         // Arrange
-        var group = new TstGroup
+        var existingGroup = new TstGroup
         {
             Id = "group1",
-            DisplayName = "Original Name",
-            TstGroupExtension1 = "Extension1",
-            TstGroupExtension2 = "Extension2"
+            DisplayName = "Engineering",
+            TstGroupExtension1 = "ext1",
+            TstGroupExtension2 = "ext2"
         };
-        await _repository.AddAsync(group);
 
-        var request = new TstGroupRequest
-        {
-            Base = new BaseGroupMessage
-            {
-                Id = "group1",
-                DisplayName = "  Updated Name  " // Has whitespace
-            },
-            TstGroupExtension1 = "Extension1",
-            TstGroupExtension2 = "Extension2"
-        };
-        var context = TestServerCallContext.Create();
-
-        // Act
-        await _grpcService.UpdateGroup(request, context);
-
-        // Assert
-        var updatedGroup = await _repository.GetByIdAsync("group1");
-        Assert.Equal("Updated Name", updatedGroup?.DisplayName);
-    }
-
-    #endregion
-
-    #region DeleteGroup Tests
-
-    [Fact]
-    public async Task DeleteGroup_WithValidId_DeletesGroupSuccessfully()
-    {
-        // Arrange
-        var group = new TstGroup
-        {
-            Id = "group1",
-            DisplayName = "Test Group",
-            TstGroupExtension1 = "Extension1",
-            TstGroupExtension2 = "Extension2"
-        };
-        await _repository.AddAsync(group);
-
+        _mockGroupService.Setup(s => s.GetByIdAsync("group1")).ReturnsAsync(existingGroup);
+        _mockGroupService.Setup(s => s.DeleteAsync("group1")).Returns(Task.CompletedTask);
         var request = new DeleteGroupRequest { Id = "group1" };
         var context = TestServerCallContext.Create();
 
@@ -519,14 +422,15 @@ public class TstGroupGrpcServiceTests
         Assert.True(response.Success);
         Assert.Contains("successfully deleted", response.Message);
         
-        var deletedGroup = await _repository.GetByIdAsync("group1");
-        Assert.Null(deletedGroup);
+        _mockGroupService.Verify(s => s.GetByIdAsync("group1"), Times.Once);
+        _mockGroupService.Verify(s => s.DeleteAsync("group1"), Times.Once);
     }
 
     [Fact]
-    public async Task DeleteGroup_WithNonExistentId_ThrowsNotFoundRpcException()
+    public async Task DeleteGroup_WithNonExistentGroup_ThrowsNotFoundRpcException()
     {
         // Arrange
+        _mockGroupService.Setup(s => s.GetByIdAsync("nonexistent")).ReturnsAsync((TstGroup?)null);
         var request = new DeleteGroupRequest { Id = "nonexistent" };
         var context = TestServerCallContext.Create();
 
@@ -536,166 +440,36 @@ public class TstGroupGrpcServiceTests
         
         Assert.Equal(StatusCode.NotFound, exception.StatusCode);
         Assert.Contains("not found", exception.Status.Detail);
+        
+        _mockGroupService.Verify(s => s.GetByIdAsync("nonexistent"), Times.Once);
+        _mockGroupService.Verify(s => s.DeleteAsync(It.IsAny<string>()), Times.Never);
     }
 
     [Fact]
-    public async Task DeleteGroup_VerifiesMessageContent()
+    public async Task DeleteGroup_ServiceThrowsException_ThrowsRpcException()
     {
         // Arrange
-        var group = new TstGroup
+        var existingGroup = new TstGroup
         {
             Id = "group1",
-            DisplayName = "Test Group",
-            TstGroupExtension1 = "Extension1",
-            TstGroupExtension2 = "Extension2"
+            DisplayName = "Engineering",
+            TstGroupExtension1 = "ext1",
+            TstGroupExtension2 = "ext2"
         };
-        await _repository.AddAsync(group);
 
+        _mockGroupService.Setup(s => s.GetByIdAsync("group1")).ReturnsAsync(existingGroup);
+        _mockGroupService.Setup(s => s.DeleteAsync("group1"))
+            .ThrowsAsync(new Exception("Database error"));
         var request = new DeleteGroupRequest { Id = "group1" };
         var context = TestServerCallContext.Create();
 
-        // Act
-        var response = await _grpcService.DeleteGroup(request, context);
-
-        // Assert
-        Assert.Contains("group1", response.Message);
+        // Act & Assert
+        var exception = await Assert.ThrowsAsync<RpcException>(
+            async () => await _grpcService.DeleteGroup(request, context));
+        
+        Assert.Equal(StatusCode.Internal, exception.StatusCode);
+        
+        _mockGroupService.Verify(s => s.DeleteAsync("group1"), Times.Once);
     }
-
-    #endregion
-
-    #region Edge Cases and Boundary Tests
-
-    [Fact]
-    public async Task CreateGroup_WithSpecialCharactersInDisplayName_Succeeds()
-    {
-        // Arrange
-        var request = new TstGroupRequest
-        {
-            Base = new BaseGroupMessage
-            {
-                Id = "group1",
-                DisplayName = "Test-Group_123 & Co."
-            },
-            TstGroupExtension1 = "Extension1",
-            TstGroupExtension2 = "Extension2"
-        };
-        var context = TestServerCallContext.Create();
-
-        // Act
-        var response = await _grpcService.CreateGroup(request, context);
-
-        // Assert
-        Assert.NotNull(response);
-        Assert.Equal("Test-Group_123 & Co.", response.Group.Base.DisplayName);
-    }
-
-    [Fact]
-    public async Task GetAllGroups_WithLargeNumberOfGroups_ReturnsAll()
-    {
-        // Arrange
-        for (int i = 0; i < 100; i++)
-        {
-            await _repository.AddAsync(new TstGroup
-            {
-                Id = $"group{i}",
-                DisplayName = $"Test Group {i}",
-                TstGroupExtension1 = "Extension1",
-                TstGroupExtension2 = "Extension2"
-            });
-        }
-
-        var request = new GetAllGroupsRequest();
-        var context = TestServerCallContext.Create();
-
-        // Act
-        var response = await _grpcService.GetAllGroups(request, context);
-
-        // Assert
-        Assert.Equal(100, response.Groups.Count);
-    }
-
-    [Fact]
-    public async Task UpdateGroup_WithOnlyDisplayNameChanged_Succeeds()
-    {
-        // Arrange
-        var group = new TstGroup
-        {
-            Id = "group1",
-            DisplayName = "Original Name",
-            TstGroupExtension1 = "Extension1",
-            TstGroupExtension2 = "Extension2"
-        };
-        await _repository.AddAsync(group);
-
-        var request = new TstGroupRequest
-        {
-            Base = new BaseGroupMessage
-            {
-                Id = "group1",
-                DisplayName = "Updated Name"
-            },
-            TstGroupExtension1 = "Extension1", // Keep same
-            TstGroupExtension2 = "Extension2"  // Keep same
-        };
-        var context = TestServerCallContext.Create();
-
-        // Act
-        var response = await _grpcService.UpdateGroup(request, context);
-
-        // Assert
-        Assert.Equal("Updated Name", response.Group.Base.DisplayName);
-        Assert.Equal("Extension1", response.Group.TstGroupExtension1);
-        Assert.Equal("Extension2", response.Group.TstGroupExtension2);
-    }
-
-    [Fact]
-    public async Task CreateGroup_WithLongDisplayName_Succeeds()
-    {
-        // Arrange
-        var longName = new string('A', 200);
-        var request = new TstGroupRequest
-        {
-            Base = new BaseGroupMessage
-            {
-                Id = "group1",
-                DisplayName = longName
-            },
-            TstGroupExtension1 = "Extension1",
-            TstGroupExtension2 = "Extension2"
-        };
-        var context = TestServerCallContext.Create();
-
-        // Act
-        var response = await _grpcService.CreateGroup(request, context);
-
-        // Assert
-        Assert.Equal(longName, response.Group.Base.DisplayName);
-    }
-
-    [Fact]
-    public async Task CreateGroup_WithExtension1AtMinimumLength_Succeeds()
-    {
-        // Arrange
-        var request = new TstGroupRequest
-        {
-            Base = new BaseGroupMessage
-            {
-                Id = "group1",
-                DisplayName = "Test Group"
-            },
-            TstGroupExtension1 = "12345", // Exactly 5 characters (minimum)
-            TstGroupExtension2 = "Extension2"
-        };
-        var context = TestServerCallContext.Create();
-
-        // Act
-        var response = await _grpcService.CreateGroup(request, context);
-
-        // Assert
-        Assert.NotNull(response);
-        Assert.Equal("12345", response.Group.TstGroupExtension1);
-    }
-
-    #endregion
 }
 

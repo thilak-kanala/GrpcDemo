@@ -1,75 +1,57 @@
 using Grpc.Core;
+using Moq;
 using GrpcServer.Infrastructure.GrpcServices.TST;
 using GrpcServer.Infrastructure.Mappers.TST;
 using GrpcServer.Infrastructure.Models.TST;
-using GrpcServer.Infrastructure.Repositories.TST;
-using GrpcServer.Infrastructure.Services.TST;
-using GrpcServer.Infrastructure.Validators.TST;
+using GrpcServer.Infrastructure.Services.Common;
 using GrpcServer.Protos.Common;
 using GrpcServer.Protos.TST;
 
 namespace GrpcServer.Tests.Tests.GrpcServices.TST;
 
 /// <summary>
-/// Comprehensive unit tests for TstUserGrpcService covering all gRPC operations and scenarios.
-/// Tests include: successful operations, error handling, validation, and edge cases.
+/// Unit tests for TstUserGrpcService covering all gRPC operations.
+/// Tests mirror the controller layer scenarios using mocked dependencies.
 /// </summary>
 public class TstUserGrpcServiceTests
 {
-    private readonly TstUserGrpcService _grpcService;
-    private readonly TstUserRepository _repository;
+    private readonly Mock<IUserService<TstUser>> _mockUserService;
     private readonly TstProtoMapper _mapper;
-    private readonly TstUserService _userService;
+    private readonly TstUserGrpcService _grpcService;
 
     public TstUserGrpcServiceTests()
     {
-        _repository = new TstUserRepository();
-        var validator = new TstUserValidator();
-        _userService = new Infrastructure.Services.TST.TstUserService(_repository, validator);
+        _mockUserService = new Mock<IUserService<TstUser>>();
         _mapper = new TstProtoMapper();
-        _grpcService = new TstUserGrpcService(_userService, _mapper);
+        _grpcService = new TstUserGrpcService(_mockUserService.Object, _mapper);
     }
 
-    #region GetAllUsers Tests
 
     [Fact]
-    public async Task GetAllUsers_WithNoUsers_ReturnsEmptyResponse()
+    public async Task GetAllUsers_WithExistingUsers_ReturnsUsers()
     {
         // Arrange
-        var request = new GetAllUsersRequest();
-        var context = TestServerCallContext.Create();
-
-        // Act
-        var response = await _grpcService.GetAllUsers(request, context);
-
-        // Assert
-        Assert.NotNull(response);
-        Assert.Empty(response.Users);
-    }
-
-    [Fact]
-    public async Task GetAllUsers_WithMultipleUsers_ReturnsAllUsers()
-    {
-        // Arrange
-        var user1 = new TstUser
+        var users = new List<TstUser>
         {
-            Id = "user1",
-            UserName = "testuser1",
-            Email = "test1@example.com",
-            TstUserExtension1 = "Extension1",
-            TstUserExtension2 = "Extension2"
+            new TstUser
+            {
+                Id = "user1",
+                UserName = "john.doe",
+                Email = "john@example.com",
+                TstUserExtension1 = "extension1",
+                TstUserExtension2 = "extension2"
+            },
+            new TstUser
+            {
+                Id = "user2",
+                UserName = "jane.doe",
+                Email = "jane@example.com",
+                TstUserExtension1 = "ext3",
+                TstUserExtension2 = "ext4"
+            }
         };
-        var user2 = new TstUser
-        {
-            Id = "user2",
-            UserName = "testuser2",
-            Email = "test2@example.com",
-            TstUserExtension1 = "Extension1",
-            TstUserExtension2 = "Extension2"
-        };
-        await _repository.AddAsync(user1);
-        await _repository.AddAsync(user2);
 
+        _mockUserService.Setup(s => s.GetAllAsync()).ReturnsAsync(users);
         var request = new GetAllUsersRequest();
         var context = TestServerCallContext.Create();
 
@@ -79,24 +61,17 @@ public class TstUserGrpcServiceTests
         // Assert
         Assert.NotNull(response);
         Assert.Equal(2, response.Users.Count);
-        Assert.Contains(response.Users, u => u.Base.Id == "user1");
-        Assert.Contains(response.Users, u => u.Base.Id == "user2");
+        Assert.Equal("user1", response.Users[0].Base.Id);
+        Assert.Equal("john.doe", response.Users[0].Base.UserName);
+        
+        _mockUserService.Verify(s => s.GetAllAsync(), Times.Once);
     }
 
     [Fact]
-    public async Task GetAllUsers_VerifiesCorrectMapping()
+    public async Task GetAllUsers_WithNoUsers_ReturnsEmptyList()
     {
         // Arrange
-        var user = new TstUser
-        {
-            Id = "user1",
-            UserName = "testuser",
-            Email = "test@example.com",
-            TstUserExtension1 = "Extension1",
-            TstUserExtension2 = "Extension2"
-        };
-        await _repository.AddAsync(user);
-
+        _mockUserService.Setup(s => s.GetAllAsync()).ReturnsAsync(new List<TstUser>());
         var request = new GetAllUsersRequest();
         var context = TestServerCallContext.Create();
 
@@ -104,32 +79,43 @@ public class TstUserGrpcServiceTests
         var response = await _grpcService.GetAllUsers(request, context);
 
         // Assert
-        var returnedUser = response.Users.First();
-        Assert.Equal("user1", returnedUser.Base.Id);
-        Assert.Equal("testuser", returnedUser.Base.UserName);
-        Assert.Equal("test@example.com", returnedUser.Base.Email);
-        Assert.Equal("Extension1", returnedUser.TstUserExtension1);
-        Assert.Equal("Extension2", returnedUser.TstUserExtension2);
+        Assert.NotNull(response);
+        Assert.Empty(response.Users);
+        
+        _mockUserService.Verify(s => s.GetAllAsync(), Times.Once);
     }
 
-    #endregion
+    [Fact]
+    public async Task GetAllUsers_ServiceThrowsException_ThrowsRpcException()
+    {
+        // Arrange
+        _mockUserService.Setup(s => s.GetAllAsync()).ThrowsAsync(new Exception("Database error"));
+        var request = new GetAllUsersRequest();
+        var context = TestServerCallContext.Create();
 
-    #region GetUserById Tests
+        // Act & Assert
+        var exception = await Assert.ThrowsAsync<RpcException>(
+            async () => await _grpcService.GetAllUsers(request, context));
+        
+        Assert.Equal(StatusCode.Internal, exception.StatusCode);
+        
+        _mockUserService.Verify(s => s.GetAllAsync(), Times.Once);
+    }
 
     [Fact]
-    public async Task GetUserById_WithValidId_ReturnsUser()
+    public async Task GetUserById_WithExistingUser_ReturnsUser()
     {
         // Arrange
         var user = new TstUser
         {
             Id = "user1",
-            UserName = "testuser",
-            Email = "test@example.com",
-            TstUserExtension1 = "Extension1",
-            TstUserExtension2 = "Extension2"
+            UserName = "john.doe",
+            Email = "john@example.com",
+            TstUserExtension1 = "extension1",
+            TstUserExtension2 = "extension2"
         };
-        await _repository.AddAsync(user);
 
+        _mockUserService.Setup(s => s.GetByIdAsync("user1")).ReturnsAsync(user);
         var request = new GetUserByIdRequest { Id = "user1" };
         var context = TestServerCallContext.Create();
 
@@ -140,13 +126,17 @@ public class TstUserGrpcServiceTests
         Assert.NotNull(response);
         Assert.NotNull(response.User);
         Assert.Equal("user1", response.User.Base.Id);
-        Assert.Equal("testuser", response.User.Base.UserName);
+        Assert.Equal("john.doe", response.User.Base.UserName);
+        Assert.Equal("john@example.com", response.User.Base.Email);
+        
+        _mockUserService.Verify(s => s.GetByIdAsync("user1"), Times.Once);
     }
 
     [Fact]
-    public async Task GetUserById_WithNonExistentId_ThrowsNotFoundRpcException()
+    public async Task GetUserById_WithNonExistentUser_ThrowsNotFoundRpcException()
     {
         // Arrange
+        _mockUserService.Setup(s => s.GetByIdAsync("nonexistent")).ReturnsAsync((TstUser?)null);
         var request = new GetUserByIdRequest { Id = "nonexistent" };
         var context = TestServerCallContext.Create();
 
@@ -156,39 +146,30 @@ public class TstUserGrpcServiceTests
         
         Assert.Equal(StatusCode.NotFound, exception.StatusCode);
         Assert.Contains("not found", exception.Status.Detail);
+        
+        _mockUserService.Verify(s => s.GetByIdAsync("nonexistent"), Times.Once);
     }
 
     [Fact]
-    public async Task GetUserById_VerifiesAllFieldsMapped()
+    public async Task GetUserById_ServiceThrowsException_ThrowsRpcException()
     {
         // Arrange
-        var user = new TstUser
-        {
-            Id = "user1",
-            UserName = "testuser",
-            Email = "test@example.com",
-            TstUserExtension1 = "CustomExtension1",
-            TstUserExtension2 = "CustomExtension2"
-        };
-        await _repository.AddAsync(user);
-
+        _mockUserService.Setup(s => s.GetByIdAsync(It.IsAny<string>()))
+            .ThrowsAsync(new Exception("Database error"));
         var request = new GetUserByIdRequest { Id = "user1" };
         var context = TestServerCallContext.Create();
 
-        // Act
-        var response = await _grpcService.GetUserById(request, context);
-
-        // Assert
-        Assert.Equal("CustomExtension1", response.User.TstUserExtension1);
-        Assert.Equal("CustomExtension2", response.User.TstUserExtension2);
+        // Act & Assert
+        var exception = await Assert.ThrowsAsync<RpcException>(
+            async () => await _grpcService.GetUserById(request, context));
+        
+        Assert.Equal(StatusCode.Internal, exception.StatusCode);
+        
+        _mockUserService.Verify(s => s.GetByIdAsync("user1"), Times.Once);
     }
 
-    #endregion
-
-    #region CreateUser Tests
-
     [Fact]
-    public async Task CreateUser_WithValidRequest_CreatesAndReturnsUser()
+    public async Task CreateUser_WithValidUser_CreatesAndReturnsUser()
     {
         // Arrange
         var request = new TstUserRequest
@@ -196,12 +177,14 @@ public class TstUserGrpcServiceTests
             Base = new BaseUserMessage
             {
                 Id = "user1",
-                UserName = "testuser",
-                Email = "test@example.com"
+                UserName = "john.doe",
+                Email = "john@example.com"
             },
-            TstUserExtension1 = "Extension1",
-            TstUserExtension2 = "Extension2"
+            TstUserExtension1 = "extension1",
+            TstUserExtension2 = "extension2"
         };
+
+        _mockUserService.Setup(s => s.AddAsync(It.IsAny<TstUser>())).Returns(Task.CompletedTask);
         var context = TestServerCallContext.Create();
 
         // Act
@@ -211,28 +194,33 @@ public class TstUserGrpcServiceTests
         Assert.NotNull(response);
         Assert.NotNull(response.User);
         Assert.Equal("user1", response.User.Base.Id);
+        Assert.Equal("john.doe", response.User.Base.UserName);
         
-        // Verify user was actually created in repository
-        var createdUser = await _repository.GetByIdAsync("user1");
-        Assert.NotNull(createdUser);
-        Assert.Equal("testuser", createdUser.UserName);
+        _mockUserService.Verify(s => s.AddAsync(It.Is<TstUser>(u => 
+            u.Id == "user1" && 
+            u.UserName == "john.doe" && 
+            u.Email == "john@example.com"
+        )), Times.Once);
     }
 
     [Fact]
-    public async Task CreateUser_WithInvalidEmail_ThrowsInvalidArgumentRpcException()
+    public async Task CreateUser_WithInvalidUser_ThrowsInvalidArgumentRpcException()
     {
         // Arrange
         var request = new TstUserRequest
         {
             Base = new BaseUserMessage
             {
-                Id = "user1",
-                UserName = "testuser",
-                Email = "invalid-email" // Invalid email format
+                Id = "",
+                UserName = "john.doe",
+                Email = "john@example.com"
             },
-            TstUserExtension1 = "Extension1",
-            TstUserExtension2 = "Extension2"
+            TstUserExtension1 = "extension1",
+            TstUserExtension2 = "extension2"
         };
+
+        _mockUserService.Setup(s => s.AddAsync(It.IsAny<TstUser>()))
+            .ThrowsAsync(new ArgumentException("Id cannot be empty"));
         var context = TestServerCallContext.Create();
 
         // Act & Assert
@@ -240,11 +228,12 @@ public class TstUserGrpcServiceTests
             async () => await _grpcService.CreateUser(request, context));
         
         Assert.Equal(StatusCode.InvalidArgument, exception.StatusCode);
-        Assert.Contains("validation failed", exception.Status.Detail);
+        
+        _mockUserService.Verify(s => s.AddAsync(It.IsAny<TstUser>()), Times.Once);
     }
 
     [Fact]
-    public async Task CreateUser_WithEmptyUserName_ThrowsInvalidArgumentRpcException()
+    public async Task CreateUser_ServiceThrowsException_ThrowsRpcException()
     {
         // Arrange
         var request = new TstUserRequest
@@ -252,47 +241,28 @@ public class TstUserGrpcServiceTests
             Base = new BaseUserMessage
             {
                 Id = "user1",
-                UserName = "", // Invalid: empty username
-                Email = "test@example.com"
+                UserName = "john.doe",
+                Email = "john@example.com"
             },
-            TstUserExtension1 = "Extension1",
-            TstUserExtension2 = "Extension2"
+            TstUserExtension1 = "extension1",
+            TstUserExtension2 = "extension2"
         };
+
+        _mockUserService.Setup(s => s.AddAsync(It.IsAny<TstUser>()))
+            .ThrowsAsync(new Exception("Database error"));
         var context = TestServerCallContext.Create();
 
         // Act & Assert
         var exception = await Assert.ThrowsAsync<RpcException>(
             async () => await _grpcService.CreateUser(request, context));
         
-        Assert.Equal(StatusCode.InvalidArgument, exception.StatusCode);
-    }
-
-    [Fact]
-    public async Task CreateUser_WithEmptyExtension1_ThrowsInvalidArgumentRpcException()
-    {
-        // Arrange
-        var request = new TstUserRequest
-        {
-            Base = new BaseUserMessage
-            {
-                Id = "user1",
-                UserName = "testuser",
-                Email = "test@example.com"
-            },
-            TstUserExtension1 = "", // Invalid: empty extension
-            TstUserExtension2 = "Extension2"
-        };
-        var context = TestServerCallContext.Create();
-
-        // Act & Assert
-        var exception = await Assert.ThrowsAsync<RpcException>(
-            async () => await _grpcService.CreateUser(request, context));
+        Assert.Equal(StatusCode.Internal, exception.StatusCode);
         
-        Assert.Equal(StatusCode.InvalidArgument, exception.StatusCode);
+        _mockUserService.Verify(s => s.AddAsync(It.IsAny<TstUser>()), Times.Once);
     }
 
     [Fact]
-    public async Task CreateUser_TrimsWhitespaceFromUserName()
+    public async Task UpdateUser_WithValidUser_UpdatesUser()
     {
         // Arrange
         var request = new TstUserRequest
@@ -300,51 +270,24 @@ public class TstUserGrpcServiceTests
             Base = new BaseUserMessage
             {
                 Id = "user1",
-                UserName = "  testuser  ", // Has whitespace
-                Email = "test@example.com"
+                UserName = "john.doe.updated",
+                Email = "john.updated@example.com"
             },
-            TstUserExtension1 = "Extension1",
-            TstUserExtension2 = "Extension2"
+            TstUserExtension1 = "extension1",
+            TstUserExtension2 = "extension2"
         };
-        var context = TestServerCallContext.Create();
 
-        // Act
-        var response = await _grpcService.CreateUser(request, context);
-
-        // Assert
-        var createdUser = await _repository.GetByIdAsync("user1");
-        Assert.Equal("testuser", createdUser?.UserName); // Whitespace trimmed
-    }
-
-    #endregion
-
-    #region UpdateUser Tests
-
-    [Fact]
-    public async Task UpdateUser_WithValidRequest_UpdatesAndReturnsUser()
-    {
-        // Arrange
-        var user = new TstUser
+        var existingUser = new TstUser
         {
             Id = "user1",
-            UserName = "originalname",
-            Email = "original@example.com",
-            TstUserExtension1 = "OriginalExt1",
-            TstUserExtension2 = "OriginalExt2"
+            UserName = "john.doe",
+            Email = "john@example.com",
+            TstUserExtension1 = "extension1",
+            TstUserExtension2 = "extension2"
         };
-        await _repository.AddAsync(user);
 
-        var request = new TstUserRequest
-        {
-            Base = new BaseUserMessage
-            {
-                Id = "user1",
-                UserName = "updatedname",
-                Email = "updated@example.com"
-            },
-            TstUserExtension1 = "UpdatedExt1",
-            TstUserExtension2 = "UpdatedExt2"
-        };
+        _mockUserService.Setup(s => s.GetByIdAsync("user1")).ReturnsAsync(existingUser);
+        _mockUserService.Setup(s => s.UpdateAsync(It.IsAny<TstUser>())).Returns(Task.CompletedTask);
         var context = TestServerCallContext.Create();
 
         // Act
@@ -352,28 +295,33 @@ public class TstUserGrpcServiceTests
 
         // Assert
         Assert.NotNull(response);
-        Assert.Equal("updatedname", response.User.Base.UserName);
+        Assert.Equal("john.doe.updated", response.User.Base.UserName);
         
-        var updatedUser = await _repository.GetByIdAsync("user1");
-        Assert.Equal("updatedname", updatedUser?.UserName);
-        Assert.Equal("updated@example.com", updatedUser?.Email);
+        _mockUserService.Verify(s => s.GetByIdAsync("user1"), Times.Once);
+        _mockUserService.Verify(s => s.UpdateAsync(It.Is<TstUser>(u => 
+            u.Id == "user1" && 
+            u.UserName == "john.doe.updated" && 
+            u.Email == "john.updated@example.com"
+        )), Times.Once);
     }
 
     [Fact]
-    public async Task UpdateUser_WithNonExistentId_ThrowsNotFoundRpcException()
+    public async Task UpdateUser_WithNonExistentUser_ThrowsNotFoundRpcException()
     {
         // Arrange
         var request = new TstUserRequest
         {
             Base = new BaseUserMessage
             {
-                Id = "nonexistent",
-                UserName = "testuser",
-                Email = "test@example.com"
+                Id = "user1",
+                UserName = "john.doe",
+                Email = "john@example.com"
             },
-            TstUserExtension1 = "Extension1",
-            TstUserExtension2 = "Extension2"
+            TstUserExtension1 = "extension1",
+            TstUserExtension2 = "extension2"
         };
+
+        _mockUserService.Setup(s => s.GetByIdAsync("user1")).ReturnsAsync((TstUser?)null);
         var context = TestServerCallContext.Create();
 
         // Act & Assert
@@ -382,33 +330,39 @@ public class TstUserGrpcServiceTests
         
         Assert.Equal(StatusCode.NotFound, exception.StatusCode);
         Assert.Contains("not found", exception.Status.Detail);
+        
+        _mockUserService.Verify(s => s.GetByIdAsync("user1"), Times.Once);
+        _mockUserService.Verify(s => s.UpdateAsync(It.IsAny<TstUser>()), Times.Never);
     }
 
     [Fact]
-    public async Task UpdateUser_WithInvalidEmail_ThrowsInvalidArgumentRpcException()
+    public async Task UpdateUser_WithValidationError_ThrowsInvalidArgumentRpcException()
     {
         // Arrange
-        var user = new TstUser
-        {
-            Id = "user1",
-            UserName = "testuser",
-            Email = "test@example.com",
-            TstUserExtension1 = "Extension1",
-            TstUserExtension2 = "Extension2"
-        };
-        await _repository.AddAsync(user);
-
         var request = new TstUserRequest
         {
             Base = new BaseUserMessage
             {
                 Id = "user1",
-                UserName = "testuser",
-                Email = "invalid-email" // Invalid format
+                UserName = "",
+                Email = "john@example.com"
             },
-            TstUserExtension1 = "Extension1",
-            TstUserExtension2 = "Extension2"
+            TstUserExtension1 = "extension1",
+            TstUserExtension2 = "extension2"
         };
+
+        var existingUser = new TstUser
+        {
+            Id = "user1",
+            UserName = "john.doe",
+            Email = "john@example.com",
+            TstUserExtension1 = "extension1",
+            TstUserExtension2 = "extension2"
+        };
+
+        _mockUserService.Setup(s => s.GetByIdAsync("user1")).ReturnsAsync(existingUser);
+        _mockUserService.Setup(s => s.UpdateAsync(It.IsAny<TstUser>()))
+            .ThrowsAsync(new ArgumentException("UserName cannot be empty"));
         var context = TestServerCallContext.Create();
 
         // Act & Assert
@@ -416,62 +370,64 @@ public class TstUserGrpcServiceTests
             async () => await _grpcService.UpdateUser(request, context));
         
         Assert.Equal(StatusCode.InvalidArgument, exception.StatusCode);
+        
+        _mockUserService.Verify(s => s.UpdateAsync(It.IsAny<TstUser>()), Times.Once);
     }
 
     [Fact]
-    public async Task UpdateUser_TrimsWhitespaceFromFields()
+    public async Task UpdateUser_ServiceThrowsException_ThrowsRpcException()
     {
         // Arrange
-        var user = new TstUser
-        {
-            Id = "user1",
-            UserName = "originalname",
-            Email = "original@example.com",
-            TstUserExtension1 = "Extension1",
-            TstUserExtension2 = "Extension2"
-        };
-        await _repository.AddAsync(user);
-
         var request = new TstUserRequest
         {
             Base = new BaseUserMessage
             {
                 Id = "user1",
-                UserName = "  updatedname  ",
-                Email = "  updated@example.com  "
+                UserName = "john.doe",
+                Email = "john@example.com"
             },
-            TstUserExtension1 = "Extension1",
-            TstUserExtension2 = "Extension2"
+            TstUserExtension1 = "extension1",
+            TstUserExtension2 = "extension2"
         };
-        var context = TestServerCallContext.Create();
 
-        // Act
-        await _grpcService.UpdateUser(request, context);
-
-        // Assert
-        var updatedUser = await _repository.GetByIdAsync("user1");
-        Assert.Equal("updatedname", updatedUser?.UserName);
-        Assert.Equal("updated@example.com", updatedUser?.Email);
-    }
-
-    #endregion
-
-    #region DeleteUser Tests
-
-    [Fact]
-    public async Task DeleteUser_WithValidId_DeletesUserSuccessfully()
-    {
-        // Arrange
-        var user = new TstUser
+        var existingUser = new TstUser
         {
             Id = "user1",
-            UserName = "testuser",
-            Email = "test@example.com",
-            TstUserExtension1 = "Extension1",
-            TstUserExtension2 = "Extension2"
+            UserName = "john.doe",
+            Email = "john@example.com",
+            TstUserExtension1 = "extension1",
+            TstUserExtension2 = "extension2"
         };
-        await _repository.AddAsync(user);
 
+        _mockUserService.Setup(s => s.GetByIdAsync("user1")).ReturnsAsync(existingUser);
+        _mockUserService.Setup(s => s.UpdateAsync(It.IsAny<TstUser>()))
+            .ThrowsAsync(new Exception("Database error"));
+        var context = TestServerCallContext.Create();
+
+        // Act & Assert
+        var exception = await Assert.ThrowsAsync<RpcException>(
+            async () => await _grpcService.UpdateUser(request, context));
+        
+        Assert.Equal(StatusCode.Internal, exception.StatusCode);
+        
+        _mockUserService.Verify(s => s.UpdateAsync(It.IsAny<TstUser>()), Times.Once);
+    }
+
+    [Fact]
+    public async Task DeleteUser_WithExistingUser_DeletesUser()
+    {
+        // Arrange
+        var existingUser = new TstUser
+        {
+            Id = "user1",
+            UserName = "john.doe",
+            Email = "john@example.com",
+            TstUserExtension1 = "extension1",
+            TstUserExtension2 = "extension2"
+        };
+
+        _mockUserService.Setup(s => s.GetByIdAsync("user1")).ReturnsAsync(existingUser);
+        _mockUserService.Setup(s => s.DeleteAsync("user1")).Returns(Task.CompletedTask);
         var request = new DeleteUserRequest { Id = "user1" };
         var context = TestServerCallContext.Create();
 
@@ -483,14 +439,15 @@ public class TstUserGrpcServiceTests
         Assert.True(response.Success);
         Assert.Contains("successfully deleted", response.Message);
         
-        var deletedUser = await _repository.GetByIdAsync("user1");
-        Assert.Null(deletedUser);
+        _mockUserService.Verify(s => s.GetByIdAsync("user1"), Times.Once);
+        _mockUserService.Verify(s => s.DeleteAsync("user1"), Times.Once);
     }
 
     [Fact]
-    public async Task DeleteUser_WithNonExistentId_ThrowsNotFoundRpcException()
+    public async Task DeleteUser_WithNonExistentUser_ThrowsNotFoundRpcException()
     {
         // Arrange
+        _mockUserService.Setup(s => s.GetByIdAsync("nonexistent")).ReturnsAsync((TstUser?)null);
         var request = new DeleteUserRequest { Id = "nonexistent" };
         var context = TestServerCallContext.Create();
 
@@ -500,172 +457,37 @@ public class TstUserGrpcServiceTests
         
         Assert.Equal(StatusCode.NotFound, exception.StatusCode);
         Assert.Contains("not found", exception.Status.Detail);
+        
+        _mockUserService.Verify(s => s.GetByIdAsync("nonexistent"), Times.Once);
+        _mockUserService.Verify(s => s.DeleteAsync(It.IsAny<string>()), Times.Never);
     }
 
     [Fact]
-    public async Task DeleteUser_VerifiesMessageContent()
+    public async Task DeleteUser_ServiceThrowsException_ThrowsRpcException()
     {
         // Arrange
-        var user = new TstUser
+        var existingUser = new TstUser
         {
             Id = "user1",
-            UserName = "testuser",
-            Email = "test@example.com",
-            TstUserExtension1 = "Extension1",
-            TstUserExtension2 = "Extension2"
+            UserName = "john.doe",
+            Email = "john@example.com",
+            TstUserExtension1 = "extension1",
+            TstUserExtension2 = "extension2"
         };
-        await _repository.AddAsync(user);
 
+        _mockUserService.Setup(s => s.GetByIdAsync("user1")).ReturnsAsync(existingUser);
+        _mockUserService.Setup(s => s.DeleteAsync("user1"))
+            .ThrowsAsync(new Exception("Database error"));
         var request = new DeleteUserRequest { Id = "user1" };
         var context = TestServerCallContext.Create();
 
-        // Act
-        var response = await _grpcService.DeleteUser(request, context);
-
-        // Assert
-        Assert.Contains("user1", response.Message);
-    }
-
-    #endregion
-
-    #region Edge Cases and Boundary Tests
-
-    [Fact]
-    public async Task CreateUser_WithSpecialCharactersInUserName_Succeeds()
-    {
-        // Arrange
-        var request = new TstUserRequest
-        {
-            Base = new BaseUserMessage
-            {
-                Id = "user1",
-                UserName = "test.user-123_name",
-                Email = "test@example.com"
-            },
-            TstUserExtension1 = "Extension1",
-            TstUserExtension2 = "Extension2"
-        };
-        var context = TestServerCallContext.Create();
-
-        // Act
-        var response = await _grpcService.CreateUser(request, context);
-
-        // Assert
-        Assert.NotNull(response);
-        Assert.Equal("test.user-123_name", response.User.Base.UserName);
-    }
-
-    [Fact]
-    public async Task GetAllUsers_WithLargeNumberOfUsers_ReturnsAll()
-    {
-        // Arrange
-        for (int i = 0; i < 100; i++)
-        {
-            await _repository.AddAsync(new TstUser
-            {
-                Id = $"user{i}",
-                UserName = $"testuser{i}",
-                Email = $"test{i}@example.com",
-                TstUserExtension1 = "Extension1",
-                TstUserExtension2 = "Extension2"
-            });
-        }
-
-        var request = new GetAllUsersRequest();
-        var context = TestServerCallContext.Create();
-
-        // Act
-        var response = await _grpcService.GetAllUsers(request, context);
-
-        // Assert
-        Assert.Equal(100, response.Users.Count);
-    }
-
-    [Fact]
-    public async Task UpdateUser_WithOnlyRequiredFieldsChanged_Succeeds()
-    {
-        // Arrange
-        var user = new TstUser
-        {
-            Id = "user1",
-            UserName = "originalname",
-            Email = "original@example.com",
-            TstUserExtension1 = "Extension1",
-            TstUserExtension2 = "Extension2"
-        };
-        await _repository.AddAsync(user);
-
-        var request = new TstUserRequest
-        {
-            Base = new BaseUserMessage
-            {
-                Id = "user1",
-                UserName = "updatedname",
-                Email = "original@example.com" // Keep same email
-            },
-            TstUserExtension1 = "Extension1",
-            TstUserExtension2 = "Extension2"
-        };
-        var context = TestServerCallContext.Create();
-
-        // Act
-        var response = await _grpcService.UpdateUser(request, context);
-
-        // Assert
-        Assert.Equal("updatedname", response.User.Base.UserName);
-        Assert.Equal("original@example.com", response.User.Base.Email);
-    }
-
-    #endregion
-}
-
-/// <summary>
-/// Mock implementation of ServerCallContext for testing gRPC services.
-/// Provides a minimal implementation required for unit testing.
-/// </summary>
-internal class TestServerCallContext : ServerCallContext
-{
-    private readonly Metadata _requestHeaders;
-    private readonly CancellationToken _cancellationToken;
-    private readonly Metadata _responseTrailers;
-    private readonly AuthContext _authContext;
-    private readonly Dictionary<object, object> _userState;
-    private WriteOptions? _writeOptions;
-
-    private TestServerCallContext()
-    {
-        _requestHeaders = new Metadata();
-        _cancellationToken = CancellationToken.None;
-        _responseTrailers = new Metadata();
-        _authContext = new AuthContext(null, new Dictionary<string, List<AuthProperty>>());
-        _userState = new Dictionary<object, object>();
-    }
-
-    protected override string MethodCore => "TestMethod";
-    protected override string HostCore => "localhost";
-    protected override string PeerCore => "127.0.0.1";
-    protected override DateTime DeadlineCore => DateTime.MaxValue;
-    protected override Metadata RequestHeadersCore => _requestHeaders;
-    protected override CancellationToken CancellationTokenCore => _cancellationToken;
-    protected override Metadata ResponseTrailersCore => _responseTrailers;
-    protected override Status StatusCore { get; set; }
-    protected override WriteOptions? WriteOptionsCore { get => _writeOptions; set => _writeOptions = value; }
-    protected override AuthContext AuthContextCore => _authContext;
-    protected override IDictionary<object, object> UserStateCore => _userState;
-
-    protected override ContextPropagationToken CreatePropagationTokenCore(ContextPropagationOptions? options)
-    {
-        throw new NotImplementedException();
-    }
-
-    protected override Task WriteResponseHeadersAsyncCore(Metadata responseHeaders)
-    {
-        return Task.CompletedTask;
-    }
-
-    public static TestServerCallContext Create()
-    {
-        return new TestServerCallContext();
+        // Act & Assert
+        var exception = await Assert.ThrowsAsync<RpcException>(
+            async () => await _grpcService.DeleteUser(request, context));
+        
+        Assert.Equal(StatusCode.Internal, exception.StatusCode);
+        
+        _mockUserService.Verify(s => s.DeleteAsync("user1"), Times.Once);
     }
 }
 

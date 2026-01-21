@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
-        <TargetFramework>net10.0</TargetFramework>
+        <TargetFramework>net9.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
@@ -24,9 +24,5 @@
       <_ContentIncludedByDefault Remove="Infrastructure\Resources\GroupsMockData.json" />
       <_ContentIncludedByDefault Remove="Infrastructure\Resources\UsersMockData.json" />
     </ItemGroup>
-
-    <ItemGroup>
-      <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
-    </ItemGroup>
-
+    
 </Project>

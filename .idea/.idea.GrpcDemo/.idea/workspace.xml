@@ -10,12 +10,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1f7adc3-5d58-4e06-9035-12df0221d91c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/OPENAPI_MIGRATION_SUMMARY.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OPENAPI_QUICK_REFERENCE.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GrpcServer.Tests/Tests/GrpcServices/TST/TestServerCallContext.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GrpcDemo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GrpcDemo/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcDemo.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcDemo.sln.DotSettings.user" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/GrpcServer.Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer.Tests/GrpcServer.Tests.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Tests/GrpcServices/TST/TstGroupGrpcServiceTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer.Tests/Tests/GrpcServices/TST/TstGroupGrpcServiceTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Tests/GrpcServices/TST/TstUserGroupRelationGrpcServiceTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer.Tests/Tests/GrpcServices/TST/TstUserGroupRelationGrpcServiceTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer.Tests/Tests/GrpcServices/TST/TstUserGrpcServiceTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer.Tests/Tests/GrpcServices/TST/TstUserGrpcServiceTests.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GrpcServer/GrpcServer.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/GrpcServer.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrpcServer/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TstWebServiceTargetApplication/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TstWebServiceTargetApplication/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TstWebServiceTargetApplication/TstWebServiceTargetApplication.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TstWebServiceTargetApplication/TstWebServiceTargetApplication.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,6 +87,7 @@
     <setting file="file://$PROJECT_DIR$/GrpcServer.Tests/Tests/Controllers/TST/TstGroupControllerTests.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/GrpcServer.Tests/Tests/Controllers/TST/TstUserControllerTests.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/GrpcServer.Tests/Tests/Controllers/TST/TstUserGroupRelationControllerTests.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrpcServer.Tests/Tests/GrpcServices/TST/TestServerCallContext.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/GrpcServer.Tests/Tests/GrpcServices/TST/TstGroupGrpcServiceTests.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/GrpcServer.Tests/Tests/GrpcServices/TST/TstUserGroupRelationGrpcServiceTests.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/GrpcServer.Tests/Tests/GrpcServices/TST/TstUserGrpcServiceTests.cs" root0="FORCE_HIGHLIGHTING" />
@@ -344,7 +349,8 @@
       <workItem from="1768399961580" duration="3450000" />
       <workItem from="1768407608201" duration="3544000" />
       <workItem from="1768516895961" duration="22068000" />
-      <workItem from="1768832540336" duration="10435000" />
+      <workItem from="1768832540336" duration="20001000" />
+      <workItem from="1768941856149" duration="7741000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit, contains partial implmentation of create user workflow">
       <option name="closed" value="true" />
@@ -578,7 +584,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768837539726</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="feat: migrate from Swashbuckle to ASP.NET Core OpenAPI with Scalar for enhanced documentation">
+      <option name="closed" value="true" />
+      <created>1768854581857</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1768854581857</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -599,7 +613,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="refactor: rename generic models and update namespaces to common structure; add mappers and validators for ABC and INM" />
     <MESSAGE value="feat: add initial project structure with configuration files, Docker setup, and a sample WeatherForecast API" />
     <MESSAGE value="feat: implement user and group repositories with CRUD operations and mock data" />
     <MESSAGE value="feat: update user and group models to use string IDs; add TST DTOs and repositories" />
@@ -624,7 +637,8 @@
     <MESSAGE value="feat: implement gRPC services for TST user and group management with proto definitions" />
     <MESSAGE value="feat: refactor TST DTOs to introduce BaseGroupDto and BaseUserDto for improved structure and maintainability" />
     <MESSAGE value="refactor: clean up TST controller and test files by removing unnecessary whitespace" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: clean up TST controller and test files by removing unnecessary whitespace" />
+    <MESSAGE value="feat: migrate from Swashbuckle to ASP.NET Core OpenAPI with Scalar for enhanced documentation" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: migrate from Swashbuckle to ASP.NET Core OpenAPI with Scalar for enhanced documentation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
