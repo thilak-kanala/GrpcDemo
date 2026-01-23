@@ -31,15 +31,6 @@ public sealed class TstMapper :
         };
     }
 
-    public void ApplyPatch(TstUser entity, TstUserRequestDto dto)
-    {
-        entity.Id = dto.BaseUser.Id;
-        entity.UserName = dto.BaseUser.UserName;
-        entity.Email = dto.BaseUser.Email;
-        entity.TstUserExtension1 = dto.TstUserExtension1;
-        entity.TstUserExtension2 = dto.TstUserExtension2;
-    }
-
     public TstGroupResponseDto ToResponseDto(TstGroup entity)
     {
         var baseGroup = new BaseGroupDto(entity.Id, entity.DisplayName);
