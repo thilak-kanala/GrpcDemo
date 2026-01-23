@@ -7,7 +7,7 @@ public interface IUserGroupRelationRepository
 {
     /// <summary>
     /// Retrieves all group IDs that a user belongs to.
-    /// </summary>
+    // / </summary>
     /// <param name="userId">The unique identifier of the user. Cannot be null or empty.</param>
     /// <returns>A collection of group IDs. Returns an empty collection if the user belongs to no groups.</returns>
     Task<IEnumerable<string>> GetGroupIdsByUserIdAsync(string userId);
