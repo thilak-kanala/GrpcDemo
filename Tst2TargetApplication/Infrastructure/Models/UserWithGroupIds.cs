@@ -1,6 +1,6 @@
-namespace TstTargetApplication.Infrastructure.Models;
+namespace Tst2TargetApplication.Infrastructure.Models;
 
-public class User
+public class UserWithGroupIds
 {
     public int Id { get; set; }
     public string Username { get; set; } = string.Empty;
@@ -8,4 +8,6 @@ public class User
     public string FirstName { get; set; } = string.Empty;
     public string LastName { get; set; } = string.Empty;
     public string PreferredLanguage { get; set; } = string.Empty;
+    public List<int> GroupIds { get; set; } = new();
 }
+

@@ -3,8 +3,8 @@
     "Id": 1,
     "Username": "alice",
     "Email": "alice@example.com",
-    "FirstName": "Alice",
-    "LastName": "Smith",
+    "IsActive": "false",
+    "Devices": ["iPhone 13", "MacBook Pro"],
     "PreferredLanguage": "en",
     "GroupIds": [1, 2]
   },
@@ -12,54 +12,45 @@
     "Id": 2,
     "Username": "bob",
     "Email": "bob@example.com",
-    "FirstName": "Bob",
-    "LastName": "Johnson",
+    "IsActive": "true",
+    "Devices": ["Samsung Galaxy S21", "Windows Laptop"],
     "PreferredLanguage": "fr",
-    "GroupIds": [2, 3]
+    "GroupIds": [2]
   },
   {
     "Id": 3,
     "Username": "carol",
     "Email": "carol@example.com",
-    "FirstName": "Carol",
-    "LastName": "Williams",
+    "IsActive": "true",
+    "Devices": ["iPad Pro", "Dell XPS"],
     "PreferredLanguage": "es",
-    "GroupIds": [1, 4]
+    "GroupIds": [1, 3]
   },
   {
     "Id": 4,
     "Username": "dave",
     "Email": "dave@example.com",
-    "FirstName": "Dave",
-    "LastName": "Brown",
+    "IsActive": "false",
+    "Devices": ["Google Pixel 6", "Chromebook"],
     "PreferredLanguage": "de",
-    "GroupIds": [3, 4]
+    "GroupIds": [3]
   },
   {
     "Id": 5,
     "Username": "eve",
     "Email": "eve@example.com",
-    "FirstName": "Eve",
-    "LastName": "Davis",
+    "IsActive": "true",
+    "Devices": ["iPhone SE", "Surface Pro"],
     "PreferredLanguage": "it",
-    "GroupIds": [2, 4]
+    "GroupIds": [1, 2, 3]
   },
   {
     "Id": 6,
     "Username": "frank",
     "Email": "frank@example.com",
-    "FirstName": "Frank",
-    "LastName": "Miller",
+    "IsActive": "false",
+    "Devices": ["OnePlus 9", "HP Pavilion"],
     "PreferredLanguage": "pt",
-    "GroupIds": [4]
-  },
-  {
-    "Id": 7,
-    "Username": "grace",
-    "Email": "grace@example.com",
-    "FirstName": "Grace",
-    "LastName": "Wilson",
-    "PreferredLanguage": "ru",
-    "GroupIds": [1, 3, 4]
+    "GroupIds": [2, 3]
   }
 ]

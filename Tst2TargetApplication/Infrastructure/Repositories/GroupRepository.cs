@@ -1,7 +1,7 @@
 using System.Text.Json;
-using TstTargetApplication.Infrastructure.Models;
+using Tst2TargetApplication.Infrastructure.Models;
 
-namespace TstTargetApplication.Infrastructure.Repositories;
+namespace Tst2TargetApplication.Infrastructure.Repositories;
 
 public class GroupRepository : IGroupRepository
 {

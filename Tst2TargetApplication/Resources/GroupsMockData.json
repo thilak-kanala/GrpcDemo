@@ -3,24 +3,28 @@
     "Id": 1,
     "Name": "Admins",
     "Description": "System administrators with full access",
-    "Priority": "High"
+    "Priority": "High",
+    "NotificationChannels": ["Email", "SMS", "Slack"]
   },
   {
     "Id": 2,
     "Name": "Users",
     "Description": "Regular users with limited access",
-    "Priority": "Medium"
+    "Priority": "Medium",
+    "NotificationChannels": ["Email", "Discord"]
   },
   {
     "Id": 3,
     "Name": "Editors",
     "Description": "Content editors with publishing rights",
-    "Priority": "Medium"
+    "Priority": "Medium",
+    "NotificationChannels": ["Email", "Push", "Slack"]
   },
   {
     "Id": 4,
     "Name": "Guests",
     "Description": "Guest users with read-only access",
-    "Priority": "Low"
+    "Priority": "Low",
+    "NotificationChannels": ["Email"]
   }
 ]
