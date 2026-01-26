@@ -8,9 +8,9 @@ public class User
     public string IsActive { get; set; } = string.Empty;
     public string[] Devices { get; set; } = [];
     public string PreferredLanguage { get; set; } = string.Empty;
-    public string[]
-
+    public int[] GroupIds { get; set;  } = [];
 }
+
 /*
    "Id": 1,
    "Username": "alice",

@@ -4,11 +4,12 @@ namespace Tst2TargetApplication.Infrastructure.Repositories;
 
 public interface IGroupRepository
 {
-    Task<IEnumerable<Group>> GetAllGroupsAsync();
-    Task<Group?> GetGroupByIdAsync(int id);
-    Task<Group> CreateGroupAsync(Group group);
-    Task<Group?> ReplaceGroupAsync(int id, Group group);
-    Task<Group?> UpdateGroupAsync(int id, Group group);
-    Task<bool> DeleteGroupAsync(int id);
+    Task<IEnumerable<Group>> GetAllAsync();
+    Task<Group?> GetByIdAsync(int id);
+    Task<Group?> GetByNameAsync(string name);
+    Task<IEnumerable<Group>> GetByPriorityAsync(string priority);
+    Task<Group> CreateAsync(Group group);
+    Task<Group?> UpdateAsync(int id, Group group);
+    Task<bool> DeleteAsync(int id);
+    Task<bool> ExistsAsync(int id);
 }
-

@@ -4,12 +4,12 @@ namespace Tst2TargetApplication.Infrastructure.Repositories;
 
 public interface IUserRepository
 {
-    Task<IEnumerable<User>> GetAllUsersAsync();
-    Task<User?> GetUserByIdAsync(int id);
-    Task<User> CreateUserAsync(User user);
-    Task<User?> ReplaceUserAsync(int id, User user);
-    Task<User?> UpdateUserAsync(int id, User user);
-    Task<bool> DeleteUserAsync(int id);
-    Task<IEnumerable<int>> GetUserGroupIdsAsync(int userId);
+    Task<IEnumerable<User>> GetAllAsync();
+    Task<User?> GetByIdAsync(int id);
+    Task<User?> GetByUsernameAsync(string username);
+    Task<IEnumerable<User>> GetByGroupIdAsync(int groupId);
+    Task<User> CreateAsync(User user);
+    Task<User?> UpdateAsync(int id, User user);
+    Task<bool> DeleteAsync(int id);
+    Task<bool> ExistsAsync(int id);
 }
-

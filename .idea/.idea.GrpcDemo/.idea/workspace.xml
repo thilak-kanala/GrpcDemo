@@ -13,6 +13,15 @@
   <component name="ChangeListManager">
     <list default="true" id="d1f7adc3-5d58-4e06-9035-12df0221d91c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GrpcDemo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GrpcDemo/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcDemo.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcDemo.sln.DotSettings.user" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tst2TargetApplication/Infrastructure/Models/Group.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tst2TargetApplication/Infrastructure/Models/Group.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tst2TargetApplication/Infrastructure/Models/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tst2TargetApplication/Infrastructure/Models/User.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tst2TargetApplication/Infrastructure/Models/UserWithGroupIds.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tst2TargetApplication/Infrastructure/Repositories/GroupRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tst2TargetApplication/Infrastructure/Repositories/GroupRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tst2TargetApplication/Infrastructure/Repositories/IGroupRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tst2TargetApplication/Infrastructure/Repositories/IGroupRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tst2TargetApplication/Infrastructure/Repositories/IUserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tst2TargetApplication/Infrastructure/Repositories/IUserRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tst2TargetApplication/Infrastructure/Repositories/UserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tst2TargetApplication/Infrastructure/Repositories/UserRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tst2TargetApplication/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tst2TargetApplication/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -542,7 +551,7 @@
       <workItem from="1769005611579" duration="4661000" />
       <workItem from="1769111661265" duration="5125000" />
       <workItem from="1769177915671" duration="10228000" />
-      <workItem from="1769379508859" duration="5124000" />
+      <workItem from="1769379508859" duration="4008000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit, contains partial implmentation of create user workflow">
       <option name="closed" value="true" />
@@ -824,15 +833,7 @@
       <option name="project" value="LOCAL" />
       <updated>1769181588473</updated>
     </task>
-    <task id="LOCAL-00036" summary="a baaad commit, stuff still in progress">
-      <option name="closed" value="true" />
-      <created>1769393497704</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1769393497704</updated>
-    </task>
-    <option name="localTasksCounter" value="37" />
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -853,6 +854,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="feat: add unit tests for TstGroupRepository and TstUserRepository; include validation for non-Tst instances and duplicate entries" />
     <MESSAGE value="feat: implement TST-specific services and validators for user and group management; add AppCode enum entry" />
     <MESSAGE value="feat: add TODO file for upcoming tasks; rename mock data files for consistency" />
     <MESSAGE value="chore: rename README file for consistency" />
@@ -877,8 +879,7 @@
     <MESSAGE value="refactor: remove unused ApplyPatch method from TstMapper for cleaner code" />
     <MESSAGE value="feat: add TstProtoMapperTests for comprehensive mapping validation of TST models" />
     <MESSAGE value="refactor: simplify Protobuf item configurations in GrpcServer.csproj for cleaner project structure" />
-    <MESSAGE value="a baaad commit, stuff still in progress" />
-    <option name="LAST_COMMIT_MESSAGE" value="a baaad commit, stuff still in progress" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: simplify Protobuf item configurations in GrpcServer.csproj for cleaner project structure" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

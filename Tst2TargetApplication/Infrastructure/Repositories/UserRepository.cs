@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using System.Text.Json;
 using Tst2TargetApplication.Infrastructure.Models;
 
@@ -6,157 +7,106 @@ namespace Tst2TargetApplication.Infrastructure.Repositories;
 public class UserRepository : IUserRepository
 {
     private readonly string _dataFilePath;
-    private List<UserWithGroupIds> _users;
+    private readonly ConcurrentDictionary<int, User> _users;
+    private readonly SemaphoreSlim _fileLock = new(1, 1);
 
     public UserRepository(IWebHostEnvironment environment)
     {
-        _dataFilePath = Path.Combine(environment.ContentRootPath, "Infrastructure", "Util", "UsersMockData.json");
-        _users = LoadUsersFromFile();
+        _dataFilePath = Path.Combine(environment.ContentRootPath, "Resources", "UsersMockData.json");
+        _users = new ConcurrentDictionary<int, User>(LoadUsersFromFile().ToDictionary(u => u.Id));
     }
 
-    private List<UserWithGroupIds> LoadUsersFromFile()
+    private List<User> LoadUsersFromFile()
     {
         if (!File.Exists(_dataFilePath))
         {
-            return new List<UserWithGroupIds>();
+            return new List<User>();
         }
 
         var json = File.ReadAllText(_dataFilePath);
-        return JsonSerializer.Deserialize<List<UserWithGroupIds>>(json) ?? new List<UserWithGroupIds>();
+        return JsonSerializer.Deserialize<List<User>>(json) ?? new List<User>();
     }
 
     private async Task SaveUsersToFileAsync()
     {
-        var options = new JsonSerializerOptions { WriteIndented = true };
-        var json = JsonSerializer.Serialize(_users, options);
-        await File.WriteAllTextAsync(_dataFilePath, json);
+        await _fileLock.WaitAsync();
+        try
+        {
+            var json = JsonSerializer.Serialize(_users.Values.OrderBy(u => u.Id), new JsonSerializerOptions
+            {
+                WriteIndented = true
+            });
+            await File.WriteAllTextAsync(_dataFilePath, json);
+        }
+        finally
+        {
+            _fileLock.Release();
+        }
     }
 
-    public async Task<IEnumerable<User>> GetAllUsersAsync()
+    public Task<IEnumerable<User>> GetAllAsync()
     {
-        return _users.Select(u => new User
-        {
-            Id = u.Id,
-            Username = u.Username,
-            Email = u.Email,
-            FirstName = u.FirstName,
-            LastName = u.LastName,
-            PreferredLanguage = u.PreferredLanguage
-        }).ToList();
+        return Task.FromResult(_users.Values.AsEnumerable());
     }
 
-    public async Task<User?> GetUserByIdAsync(int id)
+    public Task<User?> GetByIdAsync(int id)
     {
-        var user = _users.FirstOrDefault(u => u.Id == id);
-        if (user == null) return null;
-
-        return new User
-        {
-            Id = user.Id,
-            Username = user.Username,
-            Email = user.Email,
-            FirstName = user.FirstName,
-            LastName = user.LastName,
-            PreferredLanguage = user.PreferredLanguage
-        };
+        _users.TryGetValue(id, out var user);
+        return Task.FromResult(user);
     }
 
-    public async Task<User> CreateUserAsync(User user)
+    public Task<User?> GetByUsernameAsync(string username)
     {
-        var newId = _users.Any() ? _users.Max(u => u.Id) + 1 : 1;
-        var newUser = new UserWithGroupIds
-        {
-            Id = newId,
-            Username = user.Username,
-            Email = user.Email,
-            FirstName = user.FirstName,
-            LastName = user.LastName,
-            PreferredLanguage = user.PreferredLanguage,
-            GroupIds = new List<int>()
-        };
+        var user = _users.Values.FirstOrDefault(u => u.Username.Equals(username, StringComparison.OrdinalIgnoreCase));
+        return Task.FromResult(user);
+    }
 
-        _users.Add(newUser);
+    public Task<IEnumerable<User>> GetByGroupIdAsync(int groupId)
+    {
+        var users = _users.Values.Where(u => u.GroupIds.Contains(groupId));
+        return Task.FromResult(users.AsEnumerable());
+    }
+
+    public async Task<User> CreateAsync(User user)
+    {
+        var maxId = _users.Keys.Any() ? _users.Keys.Max() : 0;
+        user.Id = maxId + 1;
+        _users[user.Id] = user;
         await SaveUsersToFileAsync();
-
-        return new User
-        {
-            Id = newUser.Id,
-            Username = newUser.Username,
-            Email = newUser.Email,
-            FirstName = newUser.FirstName,
-            LastName = newUser.LastName,
-            PreferredLanguage = newUser.PreferredLanguage
-        };
+        return user;
     }
 
-    public async Task<User?> ReplaceUserAsync(int id, User user)
+    public async Task<User?> UpdateAsync(int id, User user)
     {
-        var existingUser = _users.FirstOrDefault(u => u.Id == id);
-        if (existingUser == null) return null;
+        if (!_users.TryGetValue(id, out var existingUser))
+        {
+            return null;
+        }
 
         existingUser.Username = user.Username;
         existingUser.Email = user.Email;
-        existingUser.FirstName = user.FirstName;
-        existingUser.LastName = user.LastName;
+        existingUser.IsActive = user.IsActive;
+        existingUser.Devices = user.Devices;
         existingUser.PreferredLanguage = user.PreferredLanguage;
+        existingUser.GroupIds = user.GroupIds;
 
         await SaveUsersToFileAsync();
-
-        return new User
-        {
-            Id = existingUser.Id,
-            Username = existingUser.Username,
-            Email = existingUser.Email,
-            FirstName = existingUser.FirstName,
-            LastName = existingUser.LastName,
-            PreferredLanguage = existingUser.PreferredLanguage
-        };
+        return existingUser;
     }
 
-    public async Task<User?> UpdateUserAsync(int id, User user)
+    public async Task<bool> DeleteAsync(int id)
     {
-        var existingUser = _users.FirstOrDefault(u => u.Id == id);
-        if (existingUser == null) return null;
-
-        // PATCH - only update non-null/non-default values
-        if (!string.IsNullOrEmpty(user.Username))
-            existingUser.Username = user.Username;
-        if (!string.IsNullOrEmpty(user.Email))
-            existingUser.Email = user.Email;
-        if (!string.IsNullOrEmpty(user.FirstName))
-            existingUser.FirstName = user.FirstName;
-        if (!string.IsNullOrEmpty(user.LastName))
-            existingUser.LastName = user.LastName;
-        if (!string.IsNullOrEmpty(user.PreferredLanguage))
-            existingUser.PreferredLanguage = user.PreferredLanguage;
-
-        await SaveUsersToFileAsync();
-
-        return new User
+        if (!_users.TryRemove(id, out _))
         {
-            Id = existingUser.Id,
-            Username = existingUser.Username,
-            Email = existingUser.Email,
-            FirstName = existingUser.FirstName,
-            LastName = existingUser.LastName,
-            PreferredLanguage = existingUser.PreferredLanguage
-        };
-    }
+            return false;
+        }
 
-    public async Task<bool> DeleteUserAsync(int id)
-    {
-        var user = _users.FirstOrDefault(u => u.Id == id);
-        if (user == null) return false;
-
-        _users.Remove(user);
         await SaveUsersToFileAsync();
         return true;
     }
 
-    public async Task<IEnumerable<int>> GetUserGroupIdsAsync(int userId)
+    public Task<bool> ExistsAsync(int id)
     {
-        var user = _users.FirstOrDefault(u => u.Id == userId);
-        return user?.GroupIds ?? new List<int>();
+        return Task.FromResult(_users.ContainsKey(id));
     }
 }
-
