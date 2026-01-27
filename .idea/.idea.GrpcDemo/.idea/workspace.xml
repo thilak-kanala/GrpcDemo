@@ -9,19 +9,14 @@
     <projectFile profileName="https">TstTargetApplication/TstTargetApplication.csproj</projectFile>
     <projectFile profileName="http">TstWebServiceTargetApplication/TstWebServiceTargetApplication.csproj</projectFile>
     <projectFile profileName="https">TstWebServiceTargetApplication/TstWebServiceTargetApplication.csproj</projectFile>
+    <projectFile>WSTCConsumer/WSTCConsumer.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1f7adc3-5d58-4e06-9035-12df0221d91c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GrpcDemo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GrpcDemo/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcDemo.sln" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcDemo.sln" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GrpcDemo.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcDemo.sln.DotSettings.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tst2TargetApplication/Infrastructure/Models/Group.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tst2TargetApplication/Infrastructure/Models/Group.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tst2TargetApplication/Infrastructure/Models/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tst2TargetApplication/Infrastructure/Models/User.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tst2TargetApplication/Infrastructure/Models/UserWithGroupIds.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tst2TargetApplication/Infrastructure/Repositories/GroupRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tst2TargetApplication/Infrastructure/Repositories/GroupRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tst2TargetApplication/Infrastructure/Repositories/IGroupRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tst2TargetApplication/Infrastructure/Repositories/IGroupRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tst2TargetApplication/Infrastructure/Repositories/IUserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tst2TargetApplication/Infrastructure/Repositories/IUserRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tst2TargetApplication/Infrastructure/Repositories/UserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tst2TargetApplication/Infrastructure/Repositories/UserRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tst2TargetApplication/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tst2TargetApplication/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/Common/IUserGroupRelationRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GrpcServer/Infrastructure/Repositories/Common/IUserGroupRelationRepository.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +107,17 @@
     <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Services/Common/IUserGroupRelationService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/GrpcServer/Infrastructure/Services/TST/TstDataSeeder.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/GrpcServer/obj/project.assets.json" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Tst2WebServiceTargetApplication/appsettings.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Tst2TargetApplication/Infrastructure/Models/Group.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Tst2TargetApplication/Infrastructure/Models/User.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Tst2TargetApplication/Infrastructure/Repositories/GroupRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Tst2TargetApplication/Infrastructure/Repositories/UserRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Tst2TargetApplication/Program.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Tst2TargetApplication/Resources/UsersMockData.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WSTCConsumer/Models/BaseGroupDto.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WSTCConsumer/Models/BaseUserDto.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WSTCConsumer/Models/TstUserResponseDto.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WSTCConsumer/Program.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WSTCConsumer/Services/TstApiClient.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/global.json" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="HttpClientOnboardingState">{
@@ -124,7 +129,7 @@
 }</component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="Toolset" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
@@ -138,6 +143,7 @@
   &quot;keyToString&quot;: {
     &quot;.NET Launch Settings Profile.GrpcServer: http.executor&quot;: &quot;Run&quot;,
     &quot;.NET Launch Settings Profile.GrpcServer: https.executor&quot;: &quot;Debug&quot;,
+    &quot;.NET Launch Settings Profile.Tst2TargetApplication: http.executor&quot;: &quot;Run&quot;,
     &quot;2fa62e94-19a3-42dc-8576-b007770b8f15.executor&quot;: &quot;Debug&quot;,
     &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;Docker.GrpcServer/Dockerfile final.executor&quot;: &quot;Run&quot;,
@@ -151,7 +157,7 @@
     &quot;SHELLCHECK.PATH&quot;: &quot;/Users/thilakkanala/Library/Application Support/JetBrains/Rider2025.3/plugins/Shell Script/shellcheck&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.grazie&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -160,7 +166,7 @@
     ]
   }
 }</component>
-  <component name="RunManager" selected=".NET Launch Settings Profile.GrpcServer: https">
+  <component name="RunManager" selected=".NET Launch Settings Profile.Tst2TargetApplication: http">
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
       <deployment type="docker-compose.yml">
         <settings />
@@ -174,6 +180,27 @@
       </deployment>
       <EXTENSION ID="com.jetbrains.rider.docker.debug" isFastModeEnabled="true" isSslEnabled="false" />
       <method v="2" />
+    </configuration>
+    <configuration name="WSTCConsumer" type="DotNetProject" factoryName=".NET Project">
+      <option name="EXE_PATH" value="" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="ENV_FILE_PATHS" value="" />
+      <option name="REDIRECT_INPUT_PATH" value="" />
+      <option name="MIXED_MODE_DEBUG" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="AUTO_ATTACH_CHILDREN" value="0" />
+      <option name="PROJECT_PATH" value="$PROJECT_DIR$/WSTCConsumer/WSTCConsumer.csproj" />
+      <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
+      <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
+      <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
+      <option name="PROJECT_KIND" value="DotNetCore" />
+      <option name="PROJECT_TFM" value="" />
+      <method v="2">
+        <option name="Build" />
+      </method>
     </configuration>
     <configuration name="generated-requests | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#1" runType="Run single request">
       <method v="2" />
@@ -478,6 +505,18 @@
       <EXTENSION ID="com.jetbrains.rider.docker.debug" isFastModeEnabled="true" isSslEnabled="false" />
       <method v="2" />
     </configuration>
+    <configuration name="WSTCConsumer/Dockerfile" type="docker-deploy" factoryName="dockerfile" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="imageTag" value="wstcconsumer" />
+          <option name="containerName" value="wstcconsumer" />
+          <option name="contextFolderPath" value="$PROJECT_DIR$" />
+          <option name="sourceFilePath" value="WSTCConsumer/Dockerfile" />
+        </settings>
+      </deployment>
+      <EXTENSION ID="com.jetbrains.rider.docker.debug" isFastModeEnabled="true" isSslEnabled="false" />
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
       <deployment type="docker-compose.yml">
         <settings />
@@ -552,6 +591,10 @@
       <workItem from="1769111661265" duration="5125000" />
       <workItem from="1769177915671" duration="10228000" />
       <workItem from="1769379508859" duration="4008000" />
+      <workItem from="1769477836245" duration="1605000" />
+      <workItem from="1769479467929" duration="150000" />
+      <workItem from="1769524828458" duration="5562000" />
+      <workItem from="1769553713751" duration="57000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit, contains partial implmentation of create user workflow">
       <option name="closed" value="true" />
@@ -833,7 +876,15 @@
       <option name="project" value="LOCAL" />
       <updated>1769181588473</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="in progress - web service target connector consumer sample project">
+      <option name="closed" value="true" />
+      <created>1769553675626</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1769553675626</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -854,7 +905,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="feat: add unit tests for TstGroupRepository and TstUserRepository; include validation for non-Tst instances and duplicate entries" />
     <MESSAGE value="feat: implement TST-specific services and validators for user and group management; add AppCode enum entry" />
     <MESSAGE value="feat: add TODO file for upcoming tasks; rename mock data files for consistency" />
     <MESSAGE value="chore: rename README file for consistency" />
@@ -879,7 +929,8 @@
     <MESSAGE value="refactor: remove unused ApplyPatch method from TstMapper for cleaner code" />
     <MESSAGE value="feat: add TstProtoMapperTests for comprehensive mapping validation of TST models" />
     <MESSAGE value="refactor: simplify Protobuf item configurations in GrpcServer.csproj for cleaner project structure" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: simplify Protobuf item configurations in GrpcServer.csproj for cleaner project structure" />
+    <MESSAGE value="in progress - web service target connector consumer sample project" />
+    <option name="LAST_COMMIT_MESSAGE" value="in progress - web service target connector consumer sample project" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
